@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+<mapper namespace="com.backend.hyunfit.domain.exercise.mapper.ExerciseMapper">
+
+    <insert id="insertOneExercise">
+        INSERT INTO EXERCISE (
+            ADM_SEQ, EXC_NAME, EXC_TYPE, EXC_CONTENT,
+            EXC_DIFFICULTY, EXC_CALORIES_PER_REP, EXC_SET_COUNT,
+            EXC_TIME_PER_SET_IN_SEC, EXC_URL
+        ) VALUES (
+             #{admSeq}, #{excName}, #{excType}, #{excContent},
+             #{excDifficulty}, #{excCaloriesPerRep}, #{excSetCount},
+             #{excTimePerSetInSec}, #{excUrl}
+                 )
+    </insert>
+
+</mapper>
