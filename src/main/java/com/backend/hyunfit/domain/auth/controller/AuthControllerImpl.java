@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthControllerImpl implements AuthController {
     private final AuthService authService;
 
-    @PostMapping("member")
-    public ResponseEntity<AuthDTO> createMemberAuth(@RequestBody AuthDTO authVO) {
-        AuthDTO authResponse = authService.createMemberAuth(authVO);
+    @PostMapping("/member")
+    public ResponseEntity<AuthDTO> createMemberAuth(@RequestBody AuthDTO authDTO) {
+        AuthDTO authResponse = authService.createMemberAuth(authDTO);
         return ResponseEntity.ok(authResponse);
     }
 }
