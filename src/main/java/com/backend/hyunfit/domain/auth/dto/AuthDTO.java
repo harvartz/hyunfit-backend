@@ -7,5 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class AuthDTO {
-    String id;
+    String mbrId;
+    String mbrPw;
+    boolean authenticated;
 }
