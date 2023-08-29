@@ -1,7 +1,7 @@
 package com.backend.hyunfit.domain.auth.service;
 
-import com.backend.hyunfit.domain.auth.dto.AuthVO;
+import com.backend.hyunfit.domain.auth.dto.AuthDTO;
 
 public interface AuthService {
-    AuthVO createMemberAuth(AuthVO authVO);
+    AuthDTO createMemberAuth(AuthDTO authDTO);
 }

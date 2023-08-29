@@ -1,7 +1,7 @@
 package com.backend.hyunfit.domain.auth.controller;
 
 
-import com.backend.hyunfit.domain.auth.dto.AuthVO;
+import com.backend.hyunfit.domain.auth.dto.AuthDTO;
 import com.backend.hyunfit.domain.auth.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/auth")
-public class AuthController {
+public class AuthControllerImpl implements AuthController {
     private final AuthService authService;
 
     @PostMapping("member")
-    public ResponseEntity<AuthVO> createMemberAuth(@RequestBody AuthVO authVO) {
-        AuthVO authResponse = authService.createMemberAuth(authVO);
+    public ResponseEntity<AuthDTO> createMemberAuth(@RequestBody AuthDTO authVO) {
+        AuthDTO authResponse = authService.createMemberAuth(authVO);
         return ResponseEntity.ok(authResponse);
     }
 }

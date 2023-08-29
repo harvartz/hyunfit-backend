@@ -6,5 +6,6 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class AuthVO {
+public class AuthDTO {
+    String id;
 }
