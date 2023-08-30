@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 
-<mapper namespace="com.backend.hyunfit.domain.trainer.mapper.TrainerMapper">
+<mapper namespace="com.backend.hyunfit.domain.trn.mapper.TrainerMapper">
 
     <select id="selectOneTrainerByTrnId" parameterType="String" resultType="TrainerDTO">
         SELECT trn_id, trn_pw

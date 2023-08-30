@@ -1,7 +1,7 @@
-package com.backend.hyunfit.domain.trainer.mapper;
+package com.backend.hyunfit.domain.trn.mapper;
 
 import com.backend.hyunfit.domain.auth.dto.AuthDTO;
-import com.backend.hyunfit.domain.trainer.dto.TrainerDTO;
+import com.backend.hyunfit.domain.trn.dto.TrainerDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Optional;

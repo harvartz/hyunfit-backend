@@ -14,7 +14,7 @@ public enum ErrorCode {
     TYPE_MISMATCH(HttpStatus.BAD_REQUEST, "입력된 enum값이 유효하지 않습니다."),
 
     // 401 UNAUTHORIZED
-    UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "비밀번호가 올바르지 않거나 존재하지 않는 사용자입니다."),
+    USER_UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "비밀번호가 올바르지 않거나 존재하지 않는 사용자입니다."),
 
     // 403 FORBIDDEN
 
@@ -29,7 +29,8 @@ public enum ErrorCode {
     // 406 Not Acceptable
 
     // 500 INTERNAL SERVER ERROR
-    DB_QUERY_EXECUTION_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "쿼리가 정상적으로 완료되지 않았습니다."),
+    DB_QUERY_UPDATE_EXCEPTION(HttpStatus.INTERNAL_SERVER_ERROR, "Update 쿼리가 정상적으로 완료되지 않았습니다."),
+    DB_QUERY_INSERT_EXCEPTION(HttpStatus.INTERNAL_SERVER_ERROR, "Insert 쿼리가 정상적으로 완료되지 않았습니다."),
 
     /* Spring Basic Exceptions */
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "서버 오류가 발생했습니다.");

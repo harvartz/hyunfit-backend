@@ -1,6 +1,6 @@
-package com.backend.hyunfit.domain.admin.mapper;
+package com.backend.hyunfit.domain.adm.mapper;
 
-import com.backend.hyunfit.domain.admin.dto.AdminDTO;
+import com.backend.hyunfit.domain.adm.dto.AdminDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Optional;
