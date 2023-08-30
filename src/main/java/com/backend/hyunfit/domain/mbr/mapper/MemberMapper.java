@@ -7,6 +7,6 @@ import java.util.Optional;
 
 @Mapper
 public interface MemberMapper {
-    Optional<MemberDTO> selectOneMemberByMbrId(String mbrId);
+    Optional<MemberDTO> selectOneMemberById(String mbrId);
     int updateOneMemberById(MemberDTO memberDTO);
 }
