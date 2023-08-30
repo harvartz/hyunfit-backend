@@ -5,15 +5,16 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Timestamp;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class PtDTO {
-
-    /* 멤버 시퀀스, 트레이너 시퀀스, 예약 시간(날짜, 시간),
-        트레이너가 알아야 하는 사항
-    */
-    private Integer mbrSeq;
-    private Integer trainerSeq;
+    private long mbrSeq;
+    private long trnSeq;
+    private Timestamp ptReservationDate;
+    // private Integer ptLessonDuration;
+    private Integer ptReservationStatus;
 }

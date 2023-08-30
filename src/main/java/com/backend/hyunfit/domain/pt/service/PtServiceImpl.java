@@ -11,8 +11,8 @@ public class PtServiceImpl implements PtService{
 
     private final PtMapper ptMapper;
     @Override
-    public PtDTO createPt(PtDTO ptDTO) {
-
+    public int createPt(PtDTO ptDTO) {
+        // validation 처리
         return ptMapper.insertOnePt(ptDTO);
     }
 }
