@@ -25,7 +25,7 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public AuthDTO createMemberAuth(AuthDTO authDTO) {
         MemberDTO memberDTO = memberMapper.selectOneMemberByMbrId(authDTO.getUsername())
-                .orElseThrow(() -> new BusinessException(ErrorCode.MEMBER_NOT_FOUND));
+                .orElseThrow(() -> new BusinessException(ErrorCode.UNAUTHORIZED));
         validate(authDTO, memberDTO.getMbrPw());
         return authDTO;
     }
@@ -33,7 +33,7 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public AuthDTO createTrainerAuth(AuthDTO authDTO) {
         TrainerDTO trainerDTO = trainerMapper.selectOneTrainerByTrnId(authDTO)
-                .orElseThrow(() -> new BusinessException(ErrorCode.MEMBER_NOT_FOUND));
+                .orElseThrow(() -> new BusinessException(ErrorCode.UNAUTHORIZED));
         validate(authDTO, trainerDTO.getTrnPw());
         return authDTO;
     }
@@ -41,7 +41,7 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public AuthDTO createAdminAuth(AuthDTO authDTO) {
         AdminDTO adminDTO = adminMapper.selectOneAdminByAdmId(authDTO.getUsername())
-                .orElseThrow(() -> new BusinessException(ErrorCode.MEMBER_NOT_FOUND));
+                .orElseThrow(() -> new BusinessException(ErrorCode.UNAUTHORIZED));
         validate(authDTO, adminDTO.getAdmPw());
         return authDTO;
     }
@@ -49,7 +49,7 @@ public class AuthServiceImpl implements AuthService {
     public void validate(AuthDTO authDTO, String password) {
         authDTO.setAuthenticated(false); // 인증에 실패해도 Authenticated가 true일 경우를 방지하기 위함. 필수코드는 아님
         if (!bCryptPasswordEncoder.matches(authDTO.getPassword(), password)) {
-            throw new BusinessException(ErrorCode.MEMBER_NOT_FOUND);
+            throw new BusinessException(ErrorCode.UNAUTHORIZED);
         }
         authDTO.setAuthenticated(true);
         authDTO.setPassword(null);
