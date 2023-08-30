@@ -24,7 +24,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public AuthDTO createMemberAuth(AuthDTO authDTO) {
-        MemberDTO memberDTO = memberMapper.selectOneMemberByMbrId(authDTO.getUsername())
+        MemberDTO memberDTO = memberMapper.selectOneMemberById(authDTO.getUsername())
                 .orElseThrow(() -> new BusinessException(ErrorCode.USER_UNAUTHORIZED));
         validate(authDTO, memberDTO.getMbrPw());
         return authDTO;
