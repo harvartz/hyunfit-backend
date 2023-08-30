@@ -8,7 +8,7 @@ import java.util.Optional;
 
 @Mapper
 public interface ExerciseMapper {
-    Optional<List<ExerciseDTO>> getAllExercises();
+    List<ExerciseDTO> selectAllExercises();
 
     ExerciseDTO getExerciseById(Long excSeq);
 

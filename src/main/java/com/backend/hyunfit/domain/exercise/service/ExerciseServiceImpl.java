@@ -7,6 +7,8 @@ import com.backend.hyunfit.global.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ExerciseServiceImpl implements ExerciseService{
@@ -16,5 +18,11 @@ public class ExerciseServiceImpl implements ExerciseService{
     @Override
     public int createExercise(ExerciseDTO exerciseDTO) {
         return exerciseMapper.insertOneExercise(exerciseDTO);
+    }
+
+
+    @Override
+    public List<ExerciseDTO> getAllExercises() {
+        return exerciseMapper.selectAllExercises();
     }
 }

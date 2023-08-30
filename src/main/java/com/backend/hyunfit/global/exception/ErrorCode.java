@@ -23,6 +23,7 @@ public enum ErrorCode {
     CURATION_NOT_FOUND("CURATION_NOT_FOUND", "존재하지 않는 더펫박스 ID입니다.", 404),
     CM_CODE_NOT_FOUND("CM_CODE_NOT_FOUND", "존재하지 않는 공통코드값입니다.", 404),
     RESERVATION_NOT_FOUND("RESERVATION_NOT_FOUND", "존재하지 않는 예약 ID입니다.", 404),
+    EXERCISE_ALL_NOT_FOUND("EXERCISE_ALL_NOT_FOUND", "운동 목록이 없습니다.", 404),
 
     // 406 Not Acceptable
     NO_HEENDYCAR_AVAILABLE("NO_HEENDYCAR_AVAILABLE", "잔여 흰디카가 없습니다.", 406),

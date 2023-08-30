@@ -7,6 +7,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
+
 @Tag(name = "Excercise Controller" , description = "운동(동작)관련 컨트롤러")
 public interface ExerciseController {
 
@@ -18,4 +20,6 @@ public interface ExerciseController {
             @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
     })
     ResponseEntity<ExerciseDTO> createExcercise(ExerciseDTO exerciseDTO);
+
+    ResponseEntity<List<ExerciseDTO>> getAllExercises();
 }
