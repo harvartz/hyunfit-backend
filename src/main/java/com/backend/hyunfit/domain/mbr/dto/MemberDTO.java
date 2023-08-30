@@ -1,4 +1,4 @@
-package com.backend.hyunfit.domain.member.dto;
+package com.backend.hyunfit.domain.mbr.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,5 +29,4 @@ public class MemberDTO {
     private String mbrNoiseConsideration;
     private int mbrSittingDuration;
     private String mbrNeckShoulderFocused;
-
 }

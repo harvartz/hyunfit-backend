@@ -1,4 +1,4 @@
-package com.backend.hyunfit.domain.admin.dto;
+package com.backend.hyunfit.domain.adm.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
