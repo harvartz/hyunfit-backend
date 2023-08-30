@@ -23,4 +23,16 @@ public class AuthControllerImpl implements AuthController {
         AuthDTO authResponse = authService.createMemberAuth(authDTO);
         return ResponseEntity.ok(authResponse);
     }
+
+    @PostMapping("/admin")
+    public ResponseEntity<AuthDTO> createAdminAuth(@RequestBody AuthDTO authDTO) {
+        AuthDTO authResponse = authService.createAdminAuth(authDTO);
+        return ResponseEntity.ok(authResponse);
+    }
+  
+    @PostMapping("/trainer")
+    public ResponseEntity<AuthDTO> createTrainerAuth(@RequestBody AuthDTO authDTO) {
+        AuthDTO authResponse = authService.createTrainerAuth(authDTO);
+        return ResponseEntity.ok(authResponse);
+    }
 }
