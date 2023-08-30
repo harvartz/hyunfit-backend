@@ -21,5 +21,11 @@ public class MemberControllerImpl implements MemberController {
         memberService.updateOneMemberById(memberDTO);
         return ResponseEntity.ok(memberDTO);
     }
+
+    @Override
+    @GetMapping("/{mbrId}")
+    public ResponseEntity<MemberDTO> selectOneMemberById(@PathVariable String mbrId) {
+        return ResponseEntity.ok(memberService.selectOneMemberById(mbrId));
+    }
 }
 

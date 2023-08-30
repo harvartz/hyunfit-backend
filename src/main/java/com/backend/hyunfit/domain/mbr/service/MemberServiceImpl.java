@@ -16,9 +16,23 @@ public class MemberServiceImpl implements MemberService {
     @Transactional
     @Override
     public void updateOneMemberById(MemberDTO memberDTO) {
+        // 멤버 mbrId 조회 검증
+        memberMapper.selectOneMemberById(memberDTO.getMbrId())
+                .orElseThrow(() -> new BusinessException(ErrorCode.USERID_NOT_FOUND));
+
         int updateResult = memberMapper.updateOneMemberById(memberDTO);
         if (updateResult == 0) {
             throw new BusinessException(ErrorCode.DB_QUERY_UPDATE_EXCEPTION);
         }
+    }
+
+    @Override
+    public MemberDTO selectOneMemberById(String mbrId) {
+        MemberDTO memberDTO = memberMapper.selectOneMemberById(mbrId)
+                .orElseThrow(() -> new BusinessException(ErrorCode.USERID_NOT_FOUND));
+        
+        // 사용자 암호 null 처리
+        memberDTO.setMbrPw(null);
+        return memberDTO;
     }
 }
