@@ -25,11 +25,8 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleBusinessException(final BusinessException e) {
         log.error("[BUSINESS EXCEPTION HANDLING] ", e);
         final ErrorCode errorCode = e.getErrorCode();
-        final ErrorResponse response = new ErrorResponse(errorCode);
-        return new ResponseEntity<>(response, HttpStatus.valueOf(errorCode.getStatus()));
+        return ErrorResponse.toResponseEntity(errorCode);
     }
-
-    // ---------------------------------------------------------------------------------------------------------------
 
     /**
      *  javax.validation.Valid or @Validated 으로 binding error 발생시 발생한다.
@@ -40,7 +37,7 @@ public class GlobalExceptionHandler {
     protected ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
         log.error("[ARGUMENT NOT VALID EXCEPTION HANDLING] ", e);
         final ErrorCode errorCode = ErrorCode.INVALID_INPUT_VALUE;
-        return new ResponseEntity<>(new ErrorResponse(errorCode), HttpStatus.valueOf(errorCode.getStatus()));
+        return ErrorResponse.toResponseEntity(errorCode);
     }
 
     /**
@@ -51,7 +48,7 @@ public class GlobalExceptionHandler {
     protected ResponseEntity<ErrorResponse> handleBindException(BindException e) {
         log.error("[BIND EXCEPTION HANDLING] ", e);
         final ErrorCode errorCode = ErrorCode.INVALID_INPUT_VALUE;
-        return new ResponseEntity<>(new ErrorResponse(errorCode), HttpStatus.valueOf(errorCode.getStatus()));
+        return ErrorResponse.toResponseEntity(errorCode);
     }
 
     /**
@@ -62,7 +59,7 @@ public class GlobalExceptionHandler {
     protected ResponseEntity<ErrorResponse> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e) {
         log.error("[ARGUMENT TYPE MISMATCH EXCEPTION HANDLING] ", e);
         final ErrorCode errorCode = ErrorCode.TYPE_MISMATCH;
-        return new ResponseEntity<>(new ErrorResponse(errorCode), HttpStatus.valueOf(errorCode.getStatus()));
+        return ErrorResponse.toResponseEntity(errorCode);
 
     }
 
@@ -73,7 +70,7 @@ public class GlobalExceptionHandler {
     protected ResponseEntity<ErrorResponse> handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
         log.error("[HTTP REQUEST METHOD NOT SUPPORTED EXCEPTION HANDLING] ", e);
         final ErrorCode errorCode = ErrorCode.METHOD_NOT_ALLOWED;
-        return new ResponseEntity<>(new ErrorResponse(errorCode), HttpStatus.valueOf(errorCode.getStatus()));
+        return ErrorResponse.toResponseEntity(errorCode);
     }
 
     /**
@@ -83,7 +80,7 @@ public class GlobalExceptionHandler {
     protected ResponseEntity<ErrorResponse> handleInteralServerException(Exception e) {
         log.error("[INTERNAL SERVER EXCEPTION EXCEPTION HANDLING] ", e);
         final ErrorCode errorCode = ErrorCode.INTERNAL_SERVER_ERROR;
-        return new ResponseEntity<>(new ErrorResponse(errorCode), HttpStatus.valueOf(errorCode.getStatus()));
+        return ErrorResponse.toResponseEntity(errorCode);
     }
 
     /** 잘못된 URL 요청시 - 404 Not Found
@@ -95,7 +92,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handle404(NoHandlerFoundException e){
         log.error("[NO HANDLER EXCEPTION HANDLING] ", e);
         final ErrorCode errorCode = ErrorCode.URL_NOT_FOUND;
-        return new ResponseEntity<>(new ErrorResponse(errorCode), HttpStatus.valueOf(errorCode.getStatus()));
+        return ErrorResponse.toResponseEntity(errorCode);
     }
 
 }
