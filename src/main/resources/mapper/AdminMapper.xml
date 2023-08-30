@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+<mapper namespace="com.backend.hyunfit.domain.admin.mapper.AdminMapper">
+
+    <select id="selectOneAdminByAdmId" parameterType="String" resultType="AdminDTO">
+        SELECT adm_id, adm_pw
+        FROM ADMINISTRATOR
+        WHERE adm_id = #{admId}
+    </select>
+
+</mapper>
