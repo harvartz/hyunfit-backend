@@ -28,11 +28,6 @@ public class ExerciseServiceImpl implements ExerciseService{
         return exerciseMapper.selectAllExercises();
     }
 
-//    @Override
-//    public int removeExercise(Long excSeq) {
-//        return exerciseMapper.deleteExercise(excSeq);
-//    }
-
     @Transactional
     @Override
     public int removeExercise(Long excSeq) {
