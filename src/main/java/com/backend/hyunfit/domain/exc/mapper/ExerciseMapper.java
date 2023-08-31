@@ -13,5 +13,5 @@ public interface ExerciseMapper {
 
     int insertOneExercise(ExerciseDTO exercise);
 
-    void deleteExercise(Long excSeq);
+    int deleteExercise(Long excSeq);
 }

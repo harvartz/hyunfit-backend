@@ -11,4 +11,5 @@ public interface ExerciseService {
 
     List<ExerciseDTO> getAllExercises();
 
+    int removeExercise(Long excSeq);
 }

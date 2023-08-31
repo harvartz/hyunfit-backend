@@ -20,4 +20,8 @@
         SELECT * FROM EXERCISE
     </select>
 
+    <delete id="deleteExercise">
+        DELETE FROM EXERCISE WHERE EXC_SEQ = #{excSeq}
+    </delete>
+
 </mapper>
