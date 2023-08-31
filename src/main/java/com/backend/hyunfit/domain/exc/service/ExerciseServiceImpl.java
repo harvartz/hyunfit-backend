@@ -37,4 +37,10 @@ public class ExerciseServiceImpl implements ExerciseService{
         }
         return affectedRows;
     }
+
+    @Override
+    public ExerciseDTO selectOneExercise(Long excSeq) {
+        return exerciseMapper.selectOneExercise(excSeq)
+                .orElseThrow(BusinessException.supplierOf(ErrorCode.USERID_NOT_FOUND));
+    }
 }

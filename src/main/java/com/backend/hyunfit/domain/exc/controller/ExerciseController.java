@@ -26,11 +26,18 @@ public interface ExerciseController {
     @ApiResponse(responseCode = "404", description = "NOT FOUND")
     @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
     ResponseEntity<List<ExerciseDTO>> getAllExercises();
+
+    @Operation(summary="Exercise 한가지 운동 목록 불러오기", description = "시퀀스로 해당하는 하나의 운동 정보 조회")
+    @ApiResponse(responseCode = "200", description = "OK")
+    @ApiResponse(responseCode = "400", description = "BAD REQUEST")
+    @ApiResponse(responseCode = "404", description = "NOT FOUND")
+    @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
+    ResponseEntity<ExerciseDTO> getOneExercises(@PathVariable Long excSeq);
     
     @Operation(summary="특정 Exercise 삭제", description = "입력한 exc_seq 운동 정보 삭제")
     @ApiResponse(responseCode = "200", description = "OK")
     @ApiResponse(responseCode = "400", description = "BAD REQUEST")
     @ApiResponse(responseCode = "404", description = "NOT FOUND")
     @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
-    ResponseEntity<Void> removeExercise(@PathVariable Long id);
+    ResponseEntity<Void> removeExercise(@PathVariable Long excSeq);
 }

@@ -20,6 +20,10 @@
         SELECT * FROM EXERCISE
     </select>
 
+    <select id="selectOneExercise" resultType="ExerciseDTO">
+        SELECT * FROM EXERCISE WHERE EXC_SEQ = #{excSeq}
+    </select>
+
     <delete id="deleteExercise">
         DELETE FROM EXERCISE WHERE EXC_SEQ = #{excSeq}
     </delete>
