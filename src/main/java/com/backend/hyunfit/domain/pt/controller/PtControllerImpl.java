@@ -30,4 +30,12 @@ public class PtControllerImpl implements PtController {
         ptService.modifyPt(ptDTO);
         return ResponseEntity.ok(ptDTO);
     }
+
+    @Override
+    @PostMapping(value = "/{ptSeq}/review")
+    public ResponseEntity<PtDTO> createPtReview(long ptSeq, @RequestBody PtDTO ptDTO) {
+        ptDTO.setPtSeq(ptSeq);
+        ptService.createPtReview(ptDTO);
+        return ResponseEntity.ok(ptDTO);
+    }
 }

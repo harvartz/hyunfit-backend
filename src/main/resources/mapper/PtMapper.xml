@@ -17,4 +17,14 @@
         WHERE PT_SEQ = #{ptSeq}
     </update>
 
+    <insert id="insertOnePtReview" parameterType="PtDTO">
+        INSERT INTO FIREMEN.PERSONAL_TRAINING_REVIEW
+            (PT_SEQ, PTR_CONTENT, PTR_RATING)
+        VALUES (#{ptSeq}, #{ptrContent}, #{ptrRating})
+    </insert>
+
+    <select id="selectOnePtBySeq">
+        SELECT * FROM FIREMEN.PERSONAL_TRAINING WHERE PT_SEQ = #{ptSeq}
+    </select>
+
 </mapper>

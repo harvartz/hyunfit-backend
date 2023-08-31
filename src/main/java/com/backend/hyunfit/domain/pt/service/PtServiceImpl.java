@@ -14,9 +14,12 @@ public class PtServiceImpl implements PtService {
     private final PtMapper ptMapper;
 
     @Override
-    public int createPt(PtDTO ptDTO) {
+    public void createPt(PtDTO ptDTO) {
         // validation 처리
-        return ptMapper.insertOnePt(ptDTO);
+        int insertResult = ptMapper.insertOnePt(ptDTO);
+        if (insertResult == 0) {
+            throw BusinessException.of(ErrorCode.DB_QUERY_INSERT_EXCEPTION);
+        }
     }
 
 
@@ -26,5 +29,24 @@ public class PtServiceImpl implements PtService {
         if (updateResult == 0) {
             throw BusinessException.of(ErrorCode.DB_QUERY_UPDATE_EXCEPTION);
         }
+    }
+
+    @Override
+    public void createPtReview(PtDTO ptDTO) {
+        ptMapper.selectOnePtBySeq(ptDTO.getPtSeq())
+                .orElseThrow(() -> BusinessException.of(ErrorCode.RESERVATION_NOT_FOUND));
+
+        int insertResult = ptMapper.insertOnePtReview(ptDTO);
+        if (insertResult == 0) {
+            throw BusinessException.of(ErrorCode.DB_QUERY_INSERT_EXCEPTION);
+        }
+    }
+
+    @Override
+    public PtDTO selectOnePtBySeq(Long ptSeq) {
+        PtDTO ptDTO = ptMapper.selectOnePtBySeq(ptSeq)
+                .orElseThrow(() -> BusinessException.of(ErrorCode.RESERVATION_NOT_FOUND));
+        ptDTO.setPtSeq(null);
+        return ptDTO;
     }
 }
