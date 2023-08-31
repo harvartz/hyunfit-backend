@@ -1,4 +1,4 @@
-package com.backend.hyunfit.domain.exercise.dto;
+package com.backend.hyunfit.domain.exc.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

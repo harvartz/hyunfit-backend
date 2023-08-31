@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 
-<mapper namespace="com.backend.hyunfit.domain.exercise.mapper.ExerciseMapper">
+<mapper namespace="com.backend.hyunfit.domain.exc.mapper.ExerciseMapper">
 
     <insert id="insertOneExercise">
         INSERT INTO EXERCISE (
@@ -16,8 +16,16 @@
                  )
     </insert>
 
-<!--    <select id="selectAllExercises" resultType="com.backend.hyunfit.domain.exercise.mapper.ExerciseMapper.selectAllExercises">-->
-<!--        SELECT * FROM EXERCISE-->
-<!--    </select>-->
+    <select id="selectAllExercises" resultType="ExerciseDTO">
+        SELECT * FROM EXERCISE
+    </select>
+
+    <select id="selectOneExercise" resultType="ExerciseDTO">
+        SELECT * FROM EXERCISE WHERE EXC_SEQ = #{excSeq}
+    </select>
+
+    <delete id="deleteExercise">
+        DELETE FROM EXERCISE WHERE EXC_SEQ = #{excSeq}
+    </delete>
 
 </mapper>

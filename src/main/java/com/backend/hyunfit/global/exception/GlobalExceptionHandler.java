@@ -33,12 +33,12 @@ public class GlobalExceptionHandler {
      *  HttpMessageConverter 에서 등록한 HttpMessageConverter binding 못할경우 발생
      *  주로 @RequestBody, @RequestPart 어노테이션에서 발생
      */
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    protected ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
-        log.error("[ARGUMENT NOT VALID EXCEPTION HANDLING] ", e);
-        final ErrorCode errorCode = ErrorCode.INVALID_INPUT_VALUE;
-        return ErrorResponse.toResponseEntity(errorCode);
-    }
+//    @ExceptionHandler(MethodArgumentNotValidException.class)
+//    protected ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
+//        log.error("[ARGUMENT NOT VALID EXCEPTION HANDLING] ", e);
+//        final ErrorCode errorCode = ErrorCode.INVALID_INPUT_VALUE;
+//        return ErrorResponse.toResponseEntity(errorCode);
+//    }
 
     /**
      * @ModelAttribute 으로 binding error 발생시 BindException 발생한다.
