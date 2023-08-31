@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class PtDTO {
+public class PersonalTrainingDTO {
     private Long ptSeq;
     private Long mbrSeq;
     private Long trnSeq;

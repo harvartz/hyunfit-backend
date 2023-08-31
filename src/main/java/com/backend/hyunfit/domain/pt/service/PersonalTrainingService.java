@@ -1,9 +1,9 @@
 package com.backend.hyunfit.domain.pt.service;
 
-import com.backend.hyunfit.domain.pt.dto.PtDTO;
+import com.backend.hyunfit.domain.pt.dto.PersonalTrainingDTO;
 import com.backend.hyunfit.global.exception.BusinessException;
 
-public interface PtService {
+public interface PersonalTrainingService {
 
     /**
      * Pt 예약 정보를 생성하는 메서드입니다.
@@ -12,7 +12,7 @@ public interface PtService {
      * @throws BusinessException 예약이 생성되지 않을 때 발생하는 예외입니다.
      *                          이 예외는ErrorCode.DB_QUERY_INSERT_EXCEPTION 에러 코드와 함께 발생합니다.
      */
-    void createPt(PtDTO ptDTO);
+    void createPt(PersonalTrainingDTO ptDTO);
 
     /**
      * Pt 예약 정보를 수정하는 메서드입니다.
@@ -21,7 +21,7 @@ public interface PtService {
      * @throws BusinessException 예약이 수정되지 않을 때 발생하는 예외입니다.
      *                          이 예외는ErrorCode.DB_QUERY_UPDATE_EXCEPTION 에러 코드와 함께 발생합니다.
      */
-    void modifyPt(PtDTO ptDTO);
+    void modifyPt(PersonalTrainingDTO ptDTO);
 
 
     /**
@@ -31,7 +31,7 @@ public interface PtService {
      * @throws BusinessException 예약이 생성되지 않을 때 발생하는 예외입니다.
      *                          이 예외는ErrorCode.DB_QUERY_INSERT_EXCEPTION 에러 코드와 함께 발생합니다.
      */
-    void createPtReview(PtDTO ptDTO);
+    void createPtReview(PersonalTrainingDTO ptDTO);
 
 
     /**
@@ -41,5 +41,5 @@ public interface PtService {
      * @throws BusinessException 예약이 생성되지 않을 때 발생하는 예외입니다.
      *                          이 예외는ErrorCode.DB_QUERY_INSERT_EXCEPTION 에러 코드와 함께 발생합니다.
      */
-    PtDTO selectOnePtBySeq(Long ptSeq);
+    PersonalTrainingDTO selectOnePtBySeq(Long ptSeq);
 }

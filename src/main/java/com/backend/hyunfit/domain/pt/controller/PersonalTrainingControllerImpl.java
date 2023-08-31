@@ -1,7 +1,7 @@
 package com.backend.hyunfit.domain.pt.controller;
 
-import com.backend.hyunfit.domain.pt.dto.PtDTO;
-import com.backend.hyunfit.domain.pt.service.PtService;
+import com.backend.hyunfit.domain.pt.dto.PersonalTrainingDTO;
+import com.backend.hyunfit.domain.pt.service.PersonalTrainingService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
@@ -12,30 +12,30 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/personal-trainings")
-public class PtControllerImpl implements PtController {
+public class PersonalTrainingControllerImpl implements PersonalTrainingController {
 
-    private final PtService ptService;
+    private final PersonalTrainingService personalTrainingService;
 
     @Override
     @PostMapping
-    public ResponseEntity<PtDTO> createPt(@RequestBody PtDTO ptDTO) {
-        ptService.createPt(ptDTO);
+    public ResponseEntity<PersonalTrainingDTO> createPt(@RequestBody PersonalTrainingDTO ptDTO) {
+        personalTrainingService.createPt(ptDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(ptDTO);
     }
 
     @Override
     @PutMapping(value = "/{ptSeq}")
-    public ResponseEntity<PtDTO> modifyPt(@PathVariable long ptSeq, @RequestBody PtDTO ptDTO) {
+    public ResponseEntity<PersonalTrainingDTO> modifyPt(@PathVariable long ptSeq, @RequestBody PersonalTrainingDTO ptDTO) {
         ptDTO.setPtSeq(ptSeq);
-        ptService.modifyPt(ptDTO);
+        personalTrainingService.modifyPt(ptDTO);
         return ResponseEntity.ok(ptDTO);
     }
 
     @Override
     @PostMapping(value = "/{ptSeq}/review")
-    public ResponseEntity<PtDTO> createPtReview(long ptSeq, @RequestBody PtDTO ptDTO) {
+    public ResponseEntity<PersonalTrainingDTO> createPtReview(long ptSeq, @RequestBody PersonalTrainingDTO ptDTO) {
         ptDTO.setPtSeq(ptSeq);
-        ptService.createPtReview(ptDTO);
+        personalTrainingService.createPtReview(ptDTO);
         return ResponseEntity.ok(ptDTO);
     }
 }

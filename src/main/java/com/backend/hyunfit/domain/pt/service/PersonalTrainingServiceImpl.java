@@ -1,7 +1,7 @@
 package com.backend.hyunfit.domain.pt.service;
 
-import com.backend.hyunfit.domain.pt.dto.PtDTO;
-import com.backend.hyunfit.domain.pt.mapper.PtMapper;
+import com.backend.hyunfit.domain.pt.dto.PersonalTrainingDTO;
+import com.backend.hyunfit.domain.pt.mapper.PersonalTrainingMapper;
 import com.backend.hyunfit.global.exception.BusinessException;
 import com.backend.hyunfit.global.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
@@ -9,14 +9,14 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class PtServiceImpl implements PtService {
+public class PersonalTrainingServiceImpl implements PersonalTrainingService {
 
-    private final PtMapper ptMapper;
+    private final PersonalTrainingMapper personalTrainingMapper;
 
     @Override
-    public void createPt(PtDTO ptDTO) {
+    public void createPt(PersonalTrainingDTO ptDTO) {
         // validation 처리
-        int insertResult = ptMapper.insertOnePt(ptDTO);
+        int insertResult = personalTrainingMapper.insertOnePt(ptDTO);
         if (insertResult == 0) {
             throw BusinessException.of(ErrorCode.DB_QUERY_INSERT_EXCEPTION);
         }
@@ -24,27 +24,27 @@ public class PtServiceImpl implements PtService {
 
 
     @Override
-    public void modifyPt(PtDTO ptDTO) {
-        int updateResult = ptMapper.updateOnePt(ptDTO);
+    public void modifyPt(PersonalTrainingDTO ptDTO) {
+        int updateResult = personalTrainingMapper.updateOnePt(ptDTO);
         if (updateResult == 0) {
             throw BusinessException.of(ErrorCode.DB_QUERY_UPDATE_EXCEPTION);
         }
     }
 
     @Override
-    public void createPtReview(PtDTO ptDTO) {
-        ptMapper.selectOnePtBySeq(ptDTO.getPtSeq())
+    public void createPtReview(PersonalTrainingDTO ptDTO) {
+        personalTrainingMapper.selectOnePtBySeq(ptDTO.getPtSeq())
                 .orElseThrow(() -> BusinessException.of(ErrorCode.RESERVATION_NOT_FOUND));
 
-        int insertResult = ptMapper.insertOnePtReview(ptDTO);
+        int insertResult = personalTrainingMapper.insertOnePtReview(ptDTO);
         if (insertResult == 0) {
             throw BusinessException.of(ErrorCode.DB_QUERY_INSERT_EXCEPTION);
         }
     }
 
     @Override
-    public PtDTO selectOnePtBySeq(Long ptSeq) {
-        PtDTO ptDTO = ptMapper.selectOnePtBySeq(ptSeq)
+    public PersonalTrainingDTO selectOnePtBySeq(Long ptSeq) {
+        PersonalTrainingDTO ptDTO = personalTrainingMapper.selectOnePtBySeq(ptSeq)
                 .orElseThrow(() -> BusinessException.of(ErrorCode.RESERVATION_NOT_FOUND));
         ptDTO.setPtSeq(null);
         return ptDTO;
