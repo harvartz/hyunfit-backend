@@ -1,6 +1,6 @@
-package com.backend.hyunfit.domain.exercise.controller;
+package com.backend.hyunfit.domain.exc.controller;
 
-import com.backend.hyunfit.domain.exercise.dto.ExerciseDTO;
+import com.backend.hyunfit.domain.exc.dto.ExerciseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;

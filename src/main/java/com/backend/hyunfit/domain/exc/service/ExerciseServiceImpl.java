@@ -1,9 +1,7 @@
-package com.backend.hyunfit.domain.exercise.service;
+package com.backend.hyunfit.domain.exc.service;
 
-import com.backend.hyunfit.domain.exercise.dto.ExerciseDTO;
-import com.backend.hyunfit.domain.exercise.mapper.ExerciseMapper;
-import com.backend.hyunfit.global.exception.BusinessException;
-import com.backend.hyunfit.global.exception.ErrorCode;
+import com.backend.hyunfit.domain.exc.dto.ExerciseDTO;
+import com.backend.hyunfit.domain.exc.mapper.ExerciseMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

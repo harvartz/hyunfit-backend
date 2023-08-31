@@ -1,7 +1,7 @@
-package com.backend.hyunfit.domain.exercise.controller;
+package com.backend.hyunfit.domain.exc.controller;
 
-import com.backend.hyunfit.domain.exercise.dto.ExerciseDTO;
-import com.backend.hyunfit.domain.exercise.service.ExerciseServiceImpl;
+import com.backend.hyunfit.domain.exc.dto.ExerciseDTO;
+import com.backend.hyunfit.domain.exc.service.ExerciseServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
