@@ -1,14 +1,11 @@
-package com.backend.hyunfit.domain.exercise.controller;
+package com.backend.hyunfit.domain.exc.controller;
 
-import com.backend.hyunfit.domain.exercise.dto.ExerciseDTO;
-import com.backend.hyunfit.domain.exercise.service.ExerciseServiceImpl;
+import com.backend.hyunfit.domain.exc.dto.ExerciseDTO;
+import com.backend.hyunfit.domain.exc.service.ExerciseServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,7 +18,7 @@ public class ExerciseControllerImpl implements ExerciseController {
 
     @Override
     @PostMapping
-    public ResponseEntity<ExerciseDTO> createExcercise(ExerciseDTO exerciseDTO) {
+    public ResponseEntity<ExerciseDTO> createExercise(ExerciseDTO exerciseDTO) {
         exerciseService.createExercise(exerciseDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build(); // 201 Created 응답 반환
     }
@@ -31,4 +28,11 @@ public class ExerciseControllerImpl implements ExerciseController {
         List<ExerciseDTO> exercises = exerciseService.getAllExercises();
         return new ResponseEntity<>(exercises, HttpStatus.OK);
     }
+    
+    @DeleteMapping("/{excSeq}")
+    public ResponseEntity<Void> removeExercise(@PathVariable Long excSeq) {
+        exerciseService.removeExercise(excSeq);
+        return ResponseEntity.noContent().build();
+    }
+
 }

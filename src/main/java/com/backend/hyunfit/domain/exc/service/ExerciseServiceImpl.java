@@ -1,11 +1,13 @@
-package com.backend.hyunfit.domain.exercise.service;
+package com.backend.hyunfit.domain.exc.service;
 
-import com.backend.hyunfit.domain.exercise.dto.ExerciseDTO;
-import com.backend.hyunfit.domain.exercise.mapper.ExerciseMapper;
+import com.backend.hyunfit.domain.exc.dto.ExerciseDTO;
+import com.backend.hyunfit.domain.exc.mapper.ExerciseMapper;
 import com.backend.hyunfit.global.exception.BusinessException;
 import com.backend.hyunfit.global.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.List;
 
@@ -24,5 +26,15 @@ public class ExerciseServiceImpl implements ExerciseService{
     @Override
     public List<ExerciseDTO> getAllExercises() {
         return exerciseMapper.selectAllExercises();
+    }
+
+    @Transactional
+    @Override
+    public int removeExercise(Long excSeq) {
+        int affectedRows = exerciseMapper.deleteExercise(excSeq);
+        if (affectedRows == 0) {
+            throw BusinessException.of(ErrorCode.URL_NOT_FOUND);
+        }
+        return affectedRows;
     }
 }

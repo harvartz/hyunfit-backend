@@ -1,6 +1,6 @@
-package com.backend.hyunfit.domain.exercise.service;
+package com.backend.hyunfit.domain.exc.service;
 
-import com.backend.hyunfit.domain.exercise.dto.ExerciseDTO;
+import com.backend.hyunfit.domain.exc.dto.ExerciseDTO;
 
 import java.util.List;
 
@@ -11,4 +11,5 @@ public interface ExerciseService {
 
     List<ExerciseDTO> getAllExercises();
 
+    int removeExercise(Long excSeq);
 }

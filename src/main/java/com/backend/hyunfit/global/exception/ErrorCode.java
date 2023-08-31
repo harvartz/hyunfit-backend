@@ -20,8 +20,6 @@ public enum ErrorCode {
 
     // 404 NOT FOUND
 
-    EXERCISE_ALL_NOT_FOUND("EXERCISE_ALL_NOT_FOUND", "운동 목록이 없습니다.", 404),
-
     USERID_NOT_FOUND(HttpStatus.NOT_FOUND, "해당 ID의 사용자를 찾을 수 없습니다."),
     URL_NOT_FOUND(HttpStatus.NOT_FOUND, "URL을 찾을 수 없습니다."),
     CM_CODE_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 공통코드값입니다."),
