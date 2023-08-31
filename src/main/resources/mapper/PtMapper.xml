@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<mapper namespace="com.backend.hyunfit.domain.pt.mapper.PtMapper">
+<mapper namespace="com.backend.hyunfit.domain.pt.mapper.PersonalTrainingMapper">
     <insert id="insertOnePt" parameterType="PtDTO">
         INSERT INTO FIREMEN.PERSONAL_TRAINING
             (MBR_SEQ, TRN_SEQ, PT_RESERVATION_DATE, PT_RESERVATION_STATUS)
@@ -16,5 +16,15 @@
         </set>
         WHERE PT_SEQ = #{ptSeq}
     </update>
+
+    <insert id="insertOnePtReview" parameterType="PtDTO">
+        INSERT INTO FIREMEN.PERSONAL_TRAINING_REVIEW
+            (PT_SEQ, PTR_CONTENT, PTR_RATING)
+        VALUES (#{ptSeq}, #{ptrContent}, #{ptrRating})
+    </insert>
+
+    <select id="selectOnePtBySeq">
+        SELECT * FROM FIREMEN.PERSONAL_TRAINING WHERE PT_SEQ = #{ptSeq}
+    </select>
 
 </mapper>

@@ -11,10 +11,12 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class PtDTO {
-    private long ptSeq;
-    private long mbrSeq;
-    private long trnSeq;
+public class PersonalTrainingDTO {
+    private Long ptSeq;
+    private Long mbrSeq;
+    private Long trnSeq;
     private Timestamp ptReservationDate;
     private Integer ptReservationStatus;
+    private String ptrContent;
+    private Double ptrRating;
 }
