@@ -6,5 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface PtMapper {
     int insertOnePt(PtDTO ptDTO);
+    int updateOnePt(PtDTO ptDTO);
 
 }

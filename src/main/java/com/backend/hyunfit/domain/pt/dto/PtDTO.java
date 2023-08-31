@@ -12,9 +12,9 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @Builder
 public class PtDTO {
+    private long ptSeq;
     private long mbrSeq;
     private long trnSeq;
     private Timestamp ptReservationDate;
-    // private Integer ptLessonDuration;
     private Integer ptReservationStatus;
 }

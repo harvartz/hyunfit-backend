@@ -6,10 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Log4j2
 @RestController
@@ -24,6 +21,13 @@ public class PtControllerImpl implements PtController {
     public ResponseEntity<PtDTO> createPt(@RequestBody PtDTO ptDTO) {
         ptService.createPt(ptDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(ptDTO);
+    }
 
+    @Override
+    @PutMapping(value = "/{ptSeq}")
+    public ResponseEntity<PtDTO> modifyPt(@PathVariable long ptSeq, @RequestBody PtDTO ptDTO) {
+        ptDTO.setPtSeq(ptSeq);
+        ptService.modifyPt(ptDTO);
+        return ResponseEntity.ok(ptDTO);
     }
 }

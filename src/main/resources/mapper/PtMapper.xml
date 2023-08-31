@@ -5,8 +5,16 @@
     <insert id="insertOnePt" parameterType="PtDTO">
         INSERT INTO FIREMEN.PERSONAL_TRAINING
             (MBR_SEQ, TRN_SEQ, PT_RESERVATION_DATE, PT_RESERVATION_STATUS)
-        VALUES (
-                #{mbrSeq}, #{trnSeq}, #{ptReservationDate}, #{ptReservationStatus}
-               )
+        VALUES (#{mbrSeq}, #{trnSeq}, #{ptReservationDate}, #{ptReservationStatus})
     </insert>
+
+    <update id="updateOnePt" parameterType="PtDTO">
+        UPDATE FIREMEN.PERSONAL_TRAINING
+        <set>
+            <if test="ptReservationDate != null">PT_RESERVATION_DATE = #{ptReservationDate},</if>
+            <if test="ptReservationStatus != null">PT_RESERVATION_STATUS = #{ptReservationStatus},</if>
+        </set>
+        WHERE PT_SEQ = #{ptSeq}
+    </update>
+
 </mapper>
