@@ -16,7 +16,7 @@
                  )
     </insert>
 
-    <select id="selectAllExercises" resultType="com.backend.hyunfit.domain.exc.mapper.ExerciseMapper.selectAllExercises">
+    <select id="selectAllExercises" resultType="ExerciseDTO">
         SELECT * FROM EXERCISE
     </select>
 
