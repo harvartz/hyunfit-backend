@@ -7,8 +7,10 @@ import java.util.Optional;
 
 @Mapper
 public interface PersonalTrainingMapper {
-    int insertOnePt(PersonalTrainingDTO ptDTO);
-    int updateOnePt(PersonalTrainingDTO ptDTO);
-    int insertOnePtReview(PersonalTrainingDTO ptDTO);
+    int insertOnePt(PersonalTrainingDTO personalTrainingDTO);
+    int updateOnePt(PersonalTrainingDTO personalTrainingDTO);
+    int insertOnePtReview(PersonalTrainingDTO personalTrainingDTO);
     Optional<PersonalTrainingDTO> selectOnePtBySeq(Long ptSeq);
+
+    PersonalTrainingDTO selectAllPt();
 }

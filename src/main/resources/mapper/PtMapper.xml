@@ -2,13 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="com.backend.hyunfit.domain.pt.mapper.PersonalTrainingMapper">
-    <insert id="insertOnePt" parameterType="PtDTO">
+    <insert id="insertOnePt" parameterType="PersonalTrainingDTO">
         INSERT INTO FIREMEN.PERSONAL_TRAINING
             (MBR_SEQ, TRN_SEQ, PT_RESERVATION_DATE, PT_RESERVATION_STATUS)
         VALUES (#{mbrSeq}, #{trnSeq}, #{ptReservationDate}, #{ptReservationStatus})
     </insert>
 
-    <update id="updateOnePt" parameterType="PtDTO">
+    <update id="updateOnePt" parameterType="PersonalTrainingDTO">
         UPDATE FIREMEN.PERSONAL_TRAINING
         <set>
             <if test="ptReservationDate != null">PT_RESERVATION_DATE = #{ptReservationDate},</if>
@@ -17,7 +17,7 @@
         WHERE PT_SEQ = #{ptSeq}
     </update>
 
-    <insert id="insertOnePtReview" parameterType="PtDTO">
+    <insert id="insertOnePtReview" parameterType="PersonalTrainingDTO">
         INSERT INTO FIREMEN.PERSONAL_TRAINING_REVIEW
             (PT_SEQ, PTR_CONTENT, PTR_RATING)
         VALUES (#{ptSeq}, #{ptrContent}, #{ptrRating})
@@ -25,6 +25,21 @@
 
     <select id="selectOnePtBySeq">
         SELECT * FROM FIREMEN.PERSONAL_TRAINING WHERE PT_SEQ = #{ptSeq}
+    </select>
+
+    <select id="selectAllPtBytrnSeq" parameterType="long" resultType="PersonalTrainingDTO">
+        SELECT *
+        FROM PERSONAL_TRAINING
+        WHERE TRN_SEQ = #{trnSeq}
+    </select>
+
+    <select id="selectManyPt" resultType="PersonalTrainingDTO">
+        SELECT * FROM FIREMEN.PERSONAL_TRAINING
+                 WHERE
+                     <set>
+                         <if test="ptrSeq != null">PTR_SEQ. = #{ptrSeq},</if>
+                         <if test="ptrSeq != null">PTR_SEQ. = #{mbrSeq},</if>
+                     </set>
     </select>
 
 </mapper>
