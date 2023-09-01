@@ -16,4 +16,10 @@
         WHERE TRN_SEQ = #{trnSeq}
     </select>
 
+    <select id="selectNoFeedbackBytrnSeq" parameterType="long" resultType="FeedbackDTO">
+        SELECT MBR_NAME , TO_CHAR(TRNF_FEEDBACK_PERIOD, 'YYYY-MM') AS FEEDBACK_TARGET_DATE
+        FROM MEMBER JOIN TRAINER_FEEDBACK ON MEMBER.MBR_SEQ = TRAINER_FEEDBACK.MBR_SEQ
+        WHERE TRN_SEQ = #{trnSeq} AND TRNF_WRITTEN_DATE IS NULL
+    </select>
+
 </mapper>

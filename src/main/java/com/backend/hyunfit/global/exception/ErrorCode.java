@@ -24,6 +24,8 @@ public enum ErrorCode {
     URL_NOT_FOUND(HttpStatus.NOT_FOUND, "URL을 찾을 수 없습니다."),
     CM_CODE_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 공통코드값입니다."),
     RESERVATION_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 예약 ID입니다."),
+    RESERVATIONLIST_NOT_FOUND(HttpStatus.NOT_FOUND, "예약현황이 존재하지않습니다."),
+    NO_FEEDBACK_NOT_FOUND(HttpStatus.NOT_FOUND, "모든 피드백이 작성되었습니다."),
 
     // 405 Method Not Allowed
     METHOD_NOT_ALLOWED(HttpStatus.METHOD_NOT_ALLOWED, "유효하지 않은 HTTP method입니다."),

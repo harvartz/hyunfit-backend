@@ -1,5 +1,6 @@
 package com.backend.hyunfit.domain.trn.dto;
 
+
 import com.backend.hyunfit.domain.pt.dto.PtDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,4 +19,5 @@ public class TrainerDTO {
     private String trnPw;
     private String trnName;
     private List<PtDTO> ptList;
+    private List<FeedbackDTO> noFeedbackList;
 }
