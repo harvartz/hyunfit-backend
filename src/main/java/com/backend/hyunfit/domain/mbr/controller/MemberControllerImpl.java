@@ -38,7 +38,6 @@ public class MemberControllerImpl implements MemberController {
                                                                @RequestParam Timestamp startDate,
                                                                @RequestParam Timestamp endDate) {
         SearchDTO searchDTO = SearchDTO.of(mbrSeq, startDate, endDate);
-        System.out.println(searchDTO);
         MemberDTO memberDTO = memberService.selectOneMemberReportById(searchDTO);
         return ResponseEntity.ok(memberDTO);
     }
