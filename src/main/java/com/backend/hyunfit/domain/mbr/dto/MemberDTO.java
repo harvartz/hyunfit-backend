@@ -1,5 +1,6 @@
 package com.backend.hyunfit.domain.mbr.dto;
 
+import com.backend.hyunfit.domain.exch.dto.ExerciseHistorySummaryDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -29,4 +30,5 @@ public class MemberDTO {
     private String mbrNoiseConsideration;
     private int mbrSittingDuration;
     private String mbrNeckShoulderFocused;
+    private ExerciseHistorySummaryDTO exerciseHistory;
 }

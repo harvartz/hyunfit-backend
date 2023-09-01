@@ -7,6 +7,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.sql.Timestamp;
 
 @Tag(name = "Member Controller", description = "멤버관련 컨트롤러")
 public interface MemberController {
@@ -26,4 +29,15 @@ public interface MemberController {
     @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
 
     ResponseEntity<MemberDTO> selectOneMemberById(String mbrId);
+
+    @Operation(summary="Member의 데이터 조회", description = "Member의 전체 데이터를 조회합니다. 암호 제외")
+
+    @ApiResponse(responseCode = "200", description = "OK")
+    @ApiResponse(responseCode = "404", description = "NOT FOUND")
+    @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
+
+    ResponseEntity<MemberDTO> selectOneMemberReportById(@PathVariable long mbrSeq,
+                                                        @RequestParam Timestamp startDate,
+                                                        @RequestParam Timestamp endDate);
+
 }

@@ -10,7 +10,7 @@
         WHERE trn_id = #{trnId}
     </select>
 
-    <select id="selectAllPtBytrnSeq" parameterType="long" resultType="PtDTO">
+    <select id="selectAllPtBytrnSeq" parameterType="long" resultType="PersonalTrainingDTO">
         SELECT *
         FROM PERSONAL_TRAINING
         WHERE TRN_SEQ = #{trnSeq}

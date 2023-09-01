@@ -1,11 +1,8 @@
 package com.backend.hyunfit.domain.trn.service;
 
-import com.backend.hyunfit.domain.mbr.dto.MemberDTO;
-import com.backend.hyunfit.domain.pt.dto.PtDTO;
 import com.backend.hyunfit.domain.trn.dto.TrainerDTO;
 import com.backend.hyunfit.global.exception.BusinessException;
 
-import java.util.List;
 
 public interface TrainerService {
     /**
