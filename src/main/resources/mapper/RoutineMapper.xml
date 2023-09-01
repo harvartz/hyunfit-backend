@@ -26,6 +26,12 @@
         </selectKey>
     </insert>
 
+    <select id="selectOneRoutineByRtnSeq" parameterType="_long" resultType="RoutineDTO">
+        SELECT *
+        FROM ROUTINE
+        WHERE RTN_SEQ = #{rtnSeq}
+    </select>
+
     <delete id="deleteOneRoutineByRtnSeq" parameterType="_long">
         DELETE ROUTINE
         WHERE RTN_SEQ = #{rtnSeq}
