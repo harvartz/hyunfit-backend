@@ -9,4 +9,6 @@ import java.util.List;
 public interface RoutineMapper {
     List<RoutineDTO> selectAllRoutineFilteredSearch(RoutineDTO routineDTO);
     int insertOneRoutine(RoutineDTO routineDTO);
+
+    int deleteOneRoutine(long rtnSeq);
 }

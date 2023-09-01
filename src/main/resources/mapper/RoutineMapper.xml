@@ -25,4 +25,10 @@
             SELECT RTN_SEQ_PK.CURRVAL FROM DUAL
         </selectKey>
     </insert>
+
+    <delete id="deleteOneRoutine" parameterType="_long">
+        DELETE ROUTINE
+        WHERE RTN_SEQ = #{rtnSeq}
+    </delete>
+
 </mapper>

@@ -47,4 +47,9 @@ public class RoutineServiceImpl implements RoutineService {
 
         return insertResult;
     }
+
+    @Override
+    public int deleteOneRoutine(long rtnSeq) {
+        return routineMapper.deleteOneRoutine(rtnSeq);
+    }
 }

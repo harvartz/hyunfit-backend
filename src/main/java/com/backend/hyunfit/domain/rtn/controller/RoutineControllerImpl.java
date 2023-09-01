@@ -32,4 +32,13 @@ public class RoutineControllerImpl implements RoutineController {
                 .status(HttpStatus.CREATED)
                 .body(routineDTO);
     }
+
+    @Override
+    @DeleteMapping("/{rtnSeq}")
+    public ResponseEntity<RoutineDTO> deleteOneRoutine(@PathVariable long rtnSeq) {
+
+        routineService.deleteOneRoutine(rtnSeq);
+        return ResponseEntity.noContent().build();
+
+    }
 }

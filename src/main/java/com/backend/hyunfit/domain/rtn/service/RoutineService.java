@@ -15,5 +15,18 @@ public interface RoutineService {
      */
     List<RoutineDTO> selectAllRoutineFilteredSearch(RoutineDTO routineDTO);
 
+    /**
+     * 루틴을 추가하는 메서드입니다.
+     *
+     * @param routineDTO 추가될 루틴의 데이터를 가지고 있습니다.
+     */
     int insertOneRoutine(RoutineDTO routineDTO);
+
+    /**
+     * 루틴 검색 결과를 반환하는 메서드입니다.
+     *
+     * @param rtnSeq 루틴의 고유 Seq값입니다.
+     * @throws BusinessException 삭제할 대상 루틴이 없을 때 ROUTINE_NOT_FOUND 예외가 발생합니다.
+     */
+    int deleteOneRoutine(long rtnSeq);
 }
