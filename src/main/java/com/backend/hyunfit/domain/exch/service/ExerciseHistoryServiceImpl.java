@@ -14,9 +14,9 @@ public class ExerciseHistoryServiceImpl implements ExerciseHistoryService{
     private final ExerciseHistoryMapper exerciseHistoryMapper;
     @Override
     public void createExerciseHistory(ExerciseHistoryDTO exerciseHistoryDTO) {
-        int updateResult = exerciseHistoryMapper.insertOneExerciseHistory(exerciseHistoryDTO);
-        if (updateResult == 0) {
-            throw BusinessException.of(ErrorCode.DB_QUERY_UPDATE_EXCEPTION);
+        int insertResult = exerciseHistoryMapper.insertOneExerciseHistory(exerciseHistoryDTO);
+        if (insertResult == 0) {
+            throw BusinessException.of(ErrorCode.DB_QUERY_INSERT_EXCEPTION);
         }
     }
 }
