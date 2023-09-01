@@ -22,7 +22,7 @@
         INSERT INTO ROUTINE (adm_seq, rtn_name, rtn_content, rtn_created_date, rtn_url, rtn_target, rtn_duration, rtn_difficulty)
         VALUES (#{admSeq}, #{rtnName}, #{rtnContent}, CURRENT_TIMESTAMP, #{rtnUrl}, #{rtnTarget}, #{rtnDuration}, #{rtnDifficulty})
         <selectKey resultType="_long" keyProperty="rtnSeq" order="AFTER">
-            SELECT RTN_SEQ.CURRVAL FROM DUAL
+            SELECT RTN_SEQ_PK.CURRVAL FROM DUAL
         </selectKey>
     </insert>
 </mapper>

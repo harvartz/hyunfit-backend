@@ -38,9 +38,11 @@ public class RoutineServiceImpl implements RoutineService {
                 routineDTO.getExercises()
         );
 
-        int ermResult = ermMapper.insertBulkErm(erms);
-        if (ermResult == 0 || routineDTO.getRtnSeq() == 0) {
-            throw BusinessException.of(ErrorCode.DB_QUERY_INSERT_EXCEPTION);
+        for (ErmDTO erm: erms) {
+            int ermResult = ermMapper.insertOneErm(erm);
+            if (ermResult == 0) {
+                throw BusinessException.of(ErrorCode.DB_QUERY_INSERT_EXCEPTION);
+            }
         }
 
         return insertResult;
