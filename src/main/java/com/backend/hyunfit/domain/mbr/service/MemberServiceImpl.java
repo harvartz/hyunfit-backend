@@ -66,6 +66,8 @@ public class MemberServiceImpl implements MemberService {
 
         memberDTO.setExerciseHistory(exerciseHistorySummaryDTO);
 
+        // 사용자 암호 null 처리
+        memberDTO.setMbrPw(null);
         return memberDTO;
     }
 }

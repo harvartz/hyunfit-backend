@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 @Log4j2
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/member")
+@RequestMapping(value = "/members")
 public class MemberControllerImpl implements MemberController {
     private final MemberService memberService;
 

@@ -6,7 +6,7 @@
 
     <select id="selectAllExerciseTargetByMbrIdRanged" parameterType="SearchDTO" resultType="ExerciseTargetDTO">
         <![CDATA[
-        SELECT ET.EXCTG_AREA,
+        SELECT ET.EXCTG_AREA as target_area,
                SUM(EXCH_TOTAL_CALORIES * ET.EXCTG_WEIGHT) as total_calories
         FROM FIREMEN.EXERCISE_HISTORY EH
                  JOIN FIREMEN.EXERCISE_TARGET ET on EH.EXC_SEQ = ET.EXC_SEQ
