@@ -23,4 +23,11 @@ public class TrainerControllerImpl implements TrainerController {
         return ResponseEntity.ok(trainerDTO);
     }
 
+    @GetMapping("{trnSeq}/nofeedback")
+    @Override
+    public ResponseEntity<TrainerDTO> findNoFeedbackBytrnSeq(@PathVariable String trnSeq){
+        TrainerDTO trainerDTO = new TrainerDTO();
+        trainerDTO = trainerService.selectNoFeedbackBytrnSeq(trnSeq);
+        return ResponseEntity.ok(trainerDTO);
+    }
 }
