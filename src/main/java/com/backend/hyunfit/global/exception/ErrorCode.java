@@ -20,6 +20,7 @@ public enum ErrorCode {
 
     // 404 NOT FOUND
     USERID_NOT_FOUND(HttpStatus.NOT_FOUND, "해당 ID의 사용자를 찾을 수 없습니다."),
+    USERSEQ_NOT_FOUND(HttpStatus.NOT_FOUND, "해당 Sequence의 사용자를 찾을 수 없습니다."),
     URL_NOT_FOUND(HttpStatus.NOT_FOUND, "URL을 찾을 수 없습니다."),
     CM_CODE_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 공통코드값입니다."),
     RESERVATION_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 예약 ID입니다."),
