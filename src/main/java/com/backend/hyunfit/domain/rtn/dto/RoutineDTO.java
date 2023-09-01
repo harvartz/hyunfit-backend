@@ -1,10 +1,12 @@
 package com.backend.hyunfit.domain.rtn.dto;
 
+import com.backend.hyunfit.domain.exc.dto.ExerciseDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -19,4 +21,11 @@ public class RoutineDTO {
     private Integer rtnTarget;
     private Integer rtnDuration;
     private Integer rtnDifficulty;
+    private List<ExerciseDTO> exercises;
+
+    public boolean hasMissingSearchCriteria() {
+        return rtnTarget == null ||
+                rtnDuration == null ||
+                rtnDifficulty == null;
+    }
 }

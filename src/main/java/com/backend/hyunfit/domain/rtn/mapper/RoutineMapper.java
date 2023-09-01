@@ -8,4 +8,5 @@ import java.util.List;
 @Mapper
 public interface RoutineMapper {
     List<RoutineDTO> selectAllRoutineFilteredSearch(RoutineDTO routineDTO);
+    int insertOneRoutine(RoutineDTO routineDTO);
 }

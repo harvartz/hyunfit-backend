@@ -18,4 +18,11 @@
         WHERE RTN_TARGET = #{rtnTarget} AND RTN_DURATION = #{rtnDuration} AND RTN_DIFFICULTY = #{rtnDifficulty}
     </select>
 
+    <insert id="insertOneRoutine" parameterType="RoutineDTO">
+        INSERT INTO ROUTINE (adm_seq, rtn_name, rtn_content, rtn_created_date, rtn_url, rtn_target, rtn_duration, rtn_difficulty)
+        VALUES (#{admSeq}, #{rtnName}, #{rtnContent}, CURRENT_TIMESTAMP, #{rtnUrl}, #{rtnTarget}, #{rtnDuration}, #{rtnDifficulty})
+        <selectKey resultType="_long" keyProperty="rtnSeq" order="AFTER">
+            SELECT RTN_SEQ.CURRVAL FROM DUAL
+        </selectKey>
+    </insert>
 </mapper>
