@@ -15,21 +15,28 @@ public interface PersonalTrainingController {
     @ApiResponse(responseCode = "400", description = "BAD REQUEST")
     @ApiResponse(responseCode = "404", description = "NOT FOUND")
     @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
-    ResponseEntity<PersonalTrainingDTO> createPt(PersonalTrainingDTO ptDTO);
+    ResponseEntity<PersonalTrainingDTO> createPt(PersonalTrainingDTO personalTrainingDTO);
 
     @Operation(summary = "Pt의 개인레슨 정보를 수정하는 과정입니다", description = "개인 레슨을 수정하는 과정 중에서 비어있는 값이 있으면 다음과 같은 에러를 반환합니다")
     @ApiResponse(responseCode = "200", description = "OK")
     @ApiResponse(responseCode = "400", description = "BAD REQUEST")
     @ApiResponse(responseCode = "404", description = "NOT FOUND")
     @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
-    ResponseEntity<PersonalTrainingDTO> modifyPt(@PathVariable long ptSeq, PersonalTrainingDTO ptDTO);
+    ResponseEntity<PersonalTrainingDTO> modifyPt(@PathVariable long ptSeq, PersonalTrainingDTO personalTrainingDTO);
 
     @Operation(summary = "Pt의 개인레슨 리뷰를 등록하는 과정입니다", description = "개인 레슨에 대한 리뷰를 작성하는 중에 비어있는 값이 있으면 다음과 같은 에러를 반환합니다")
     @ApiResponse(responseCode = "200", description = "OK")
     @ApiResponse(responseCode = "400", description = "BAD REQUEST")
     @ApiResponse(responseCode = "404", description = "NOT FOUND")
     @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
-    ResponseEntity<PersonalTrainingDTO> createPtReview(@PathVariable long ptSeq, PersonalTrainingDTO ptDTO);
+    ResponseEntity<PersonalTrainingDTO> createPtReview(@PathVariable long ptSeq, PersonalTrainingDTO personalTrainingDTO);
+
+    @Operation(summary = "유저가 개인 레슨을 조회하는 과정입니다", description = "유저에 해당하는 다음과 같은 에러를 반환합니다")
+    @ApiResponse(responseCode = "200", description = "OK")
+    @ApiResponse(responseCode = "400", description = "BAD REQUEST")
+    @ApiResponse(responseCode = "404", description = "NOT FOUND")
+    @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
+    ResponseEntity<PersonalTrainingDTO> selectPt(PersonalTrainingDTO personalTrainingDTO);
 
 
 }

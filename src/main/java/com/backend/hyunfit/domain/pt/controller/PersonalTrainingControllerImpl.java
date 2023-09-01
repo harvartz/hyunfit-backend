@@ -18,24 +18,32 @@ public class PersonalTrainingControllerImpl implements PersonalTrainingControlle
 
     @Override
     @PostMapping
-    public ResponseEntity<PersonalTrainingDTO> createPt(@RequestBody PersonalTrainingDTO ptDTO) {
-        personalTrainingService.createPt(ptDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(ptDTO);
+    public ResponseEntity<PersonalTrainingDTO> createPt(@RequestBody PersonalTrainingDTO personalTrainingDTO) {
+        personalTrainingService.createPt(personalTrainingDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(personalTrainingDTO);
     }
 
     @Override
     @PutMapping(value = "/{ptSeq}")
-    public ResponseEntity<PersonalTrainingDTO> modifyPt(@PathVariable long ptSeq, @RequestBody PersonalTrainingDTO ptDTO) {
-        ptDTO.setPtSeq(ptSeq);
-        personalTrainingService.modifyPt(ptDTO);
-        return ResponseEntity.ok(ptDTO);
+    public ResponseEntity<PersonalTrainingDTO> modifyPt(@PathVariable long ptSeq, @RequestBody PersonalTrainingDTO personalTrainingDTO) {
+        personalTrainingDTO.setPtSeq(ptSeq);
+        personalTrainingService.modifyPt(personalTrainingDTO);
+        return ResponseEntity.ok(personalTrainingDTO);
     }
 
     @Override
     @PostMapping(value = "/{ptSeq}/review")
-    public ResponseEntity<PersonalTrainingDTO> createPtReview(long ptSeq, @RequestBody PersonalTrainingDTO ptDTO) {
-        ptDTO.setPtSeq(ptSeq);
-        personalTrainingService.createPtReview(ptDTO);
-        return ResponseEntity.ok(ptDTO);
+    public ResponseEntity<PersonalTrainingDTO> createPtReview(long ptSeq, @RequestBody PersonalTrainingDTO personalTrainingDTO) {
+        personalTrainingDTO.setPtSeq(ptSeq);
+        personalTrainingService.createPtReview(personalTrainingDTO);
+        return ResponseEntity.ok(personalTrainingDTO);
+    }
+
+
+    @Override
+    @GetMapping
+    public ResponseEntity<PersonalTrainingDTO> selectPt(PersonalTrainingDTO personalTrainingDTO) {
+        personalTrainingService.selectPt(personalTrainingDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(personalTrainingDTO);
     }
 }
