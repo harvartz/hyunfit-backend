@@ -19,6 +19,7 @@ public enum ErrorCode {
     // 403 FORBIDDEN
 
     // 404 NOT FOUND
+
     USERID_NOT_FOUND(HttpStatus.NOT_FOUND, "해당 ID의 사용자를 찾을 수 없습니다."),
     USERSEQ_NOT_FOUND(HttpStatus.NOT_FOUND, "해당 Sequence의 사용자를 찾을 수 없습니다."),
     URL_NOT_FOUND(HttpStatus.NOT_FOUND, "URL을 찾을 수 없습니다."),
@@ -27,6 +28,7 @@ public enum ErrorCode {
 
     // 405 Method Not Allowed
     METHOD_NOT_ALLOWED(HttpStatus.METHOD_NOT_ALLOWED, "유효하지 않은 HTTP method입니다."),
+
 
     // 406 Not Acceptable
 

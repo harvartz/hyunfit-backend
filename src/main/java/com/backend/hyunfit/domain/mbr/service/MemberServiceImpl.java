@@ -30,6 +30,7 @@ public class MemberServiceImpl implements MemberService {
         // 멤버 mbrId 조회 검증
         selectOneMemberById(memberDTO);
 
+
         int updateResult = memberMapper.updateOneMemberById(memberDTO);
         if (updateResult == 0) {
             throw BusinessException.of(ErrorCode.DB_QUERY_UPDATE_EXCEPTION);
@@ -44,7 +45,6 @@ public class MemberServiceImpl implements MemberService {
     public MemberDTO selectOneMemberById(String mbrId) {
         MemberDTO memberDTO = memberMapper.selectOneMemberById(mbrId)
                 .orElseThrow(BusinessException.supplierOf(ErrorCode.USERID_NOT_FOUND));
-        
         // 사용자 암호 null 처리
         memberDTO.setMbrPw(null);
         return memberDTO;
