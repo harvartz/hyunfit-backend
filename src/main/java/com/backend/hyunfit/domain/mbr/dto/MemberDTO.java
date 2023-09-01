@@ -1,12 +1,14 @@
 package com.backend.hyunfit.domain.mbr.dto;
 
 import com.backend.hyunfit.domain.exch.dto.ExerciseHistorySummaryDTO;
+import com.backend.hyunfit.domain.trnf.dto.TrainerFeedbackDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -31,4 +33,5 @@ public class MemberDTO {
     private int mbrSittingDuration;
     private String mbrNeckShoulderFocused;
     private ExerciseHistorySummaryDTO exerciseHistory;
+    private List<TrainerFeedbackDTO> trainerFeedbacks;
 }

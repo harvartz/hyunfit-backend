@@ -40,4 +40,12 @@ public interface MemberController {
                                                         @RequestParam Timestamp startDate,
                                                         @RequestParam Timestamp endDate);
 
+    @Operation(summary="Member의 피드백 데이터 전체 조회", description = "트레이너가 멤버에게 써준 피드백 전체 조회")
+
+    @ApiResponse(responseCode = "200", description = "OK")
+    @ApiResponse(responseCode = "404", description = "NOT FOUND")
+    @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
+
+    ResponseEntity<MemberDTO> selectAllMemberTrnfByMbrSeq(@PathVariable long mbrSeq);
+
 }

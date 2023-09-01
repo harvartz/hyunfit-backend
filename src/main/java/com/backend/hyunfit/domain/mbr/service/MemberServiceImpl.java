@@ -7,6 +7,8 @@ import com.backend.hyunfit.domain.mbr.dto.MemberDTO;
 import com.backend.hyunfit.domain.mbr.mapper.MemberMapper;
 import com.backend.hyunfit.domain.exch.dto.ExerciseHistorySummaryDTO;
 import com.backend.hyunfit.domain.exch.mapper.ExerciseHistoryMapper;
+import com.backend.hyunfit.domain.trnf.dto.TrainerFeedbackDTO;
+import com.backend.hyunfit.domain.trnf.mapper.TrainerFeedbackMapper;
 import com.backend.hyunfit.global.dto.SearchDTO;
 import com.backend.hyunfit.global.exception.BusinessException;
 import com.backend.hyunfit.global.exception.ErrorCode;
@@ -23,6 +25,7 @@ public class MemberServiceImpl implements MemberService {
     private final MemberMapper memberMapper;
     private final ExerciseHistoryMapper exerciseHistoryMapper;
     private final ExerciseTargetMapper exerciseTargetMapper;
+    private final TrainerFeedbackMapper trainerFeedbackMapper;
 
     @Transactional
     @Override
@@ -68,6 +71,17 @@ public class MemberServiceImpl implements MemberService {
 
         // 사용자 암호 null 처리
         memberDTO.setMbrPw(null);
+        return memberDTO;
+    }
+
+    public MemberDTO selectAllMemberTrnfByMbrSeq(long mbrSeq) {
+        MemberDTO memberDTO = memberMapper.selectOneMemberBySeq(mbrSeq)
+                .orElseThrow(BusinessException.supplierOf(ErrorCode.USERSEQ_NOT_FOUND));
+        memberDTO.setMbrPw(null);
+
+        List<TrainerFeedbackDTO> trainerFeedbacks = trainerFeedbackMapper.selectAllTrainerFeedbackByMbrSeq(mbrSeq);
+
+        memberDTO.setTrainerFeedbacks(trainerFeedbacks);
         return memberDTO;
     }
 }
