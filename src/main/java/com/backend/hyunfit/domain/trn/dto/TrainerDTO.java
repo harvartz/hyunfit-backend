@@ -17,5 +17,6 @@ public class TrainerDTO {
     private String trnId;
     private String trnPw;
     private String trnName;
+    private List<FeedbackDTO> noFeedbackList;
     private List<PersonalTrainingDTO> ptList;
 }

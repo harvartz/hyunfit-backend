@@ -1,5 +1,6 @@
 package com.backend.hyunfit.domain.exch.mapper;
 
+import com.backend.hyunfit.domain.exch.dto.ExerciseHistoryDTO;
 import com.backend.hyunfit.domain.exch.dto.ExerciseHistorySummaryDTO;
 import com.backend.hyunfit.domain.exch.dto.PeriodicRecordDTO;
 import com.backend.hyunfit.global.dto.SearchDTO;
@@ -13,5 +14,5 @@ public interface ExerciseHistoryMapper {
     ExerciseHistorySummaryDTO selectOneExchSummaryByMbrIdRanged(SearchDTO searchDTO);
     List<PeriodicRecordDTO> selectAllPeriodicRecordsByMbrIdRanged(SearchDTO searchDTO);
     List<Timestamp> selectAllExercisedDaysByMbrIdRanged(SearchDTO searchDTO);
-
+    int insertOneExerciseHistory(ExerciseHistoryDTO exerciseHistoryDTO);
 }
