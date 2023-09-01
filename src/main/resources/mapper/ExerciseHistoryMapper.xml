@@ -55,4 +55,16 @@
         ]]>
     </select>
 
+    <insert id="insertOneExerciseHistory" parameterType="ExerciseHistoryDTO">
+        {call INSERT_EXERCISE_HISTORY(
+                #{excSeq, mode=IN, jdbcType=NUMERIC},
+                #{mbrSeq, mode=IN, jdbcType=NUMERIC},
+                #{exchStartTime, mode=IN, jdbcType=TIMESTAMP},
+                #{exchEndTime, mode=IN, jdbcType=TIMESTAMP},
+                #{exchExcelentCnt, mode=IN, jdbcType=NUMERIC},
+                #{exchGoodCnt, mode=IN, jdbcType=NUMERIC},
+                #{exchBadCnt, mode=IN, jdbcType=NUMERIC}
+        )}
+    </insert>
+
 </mapper>
