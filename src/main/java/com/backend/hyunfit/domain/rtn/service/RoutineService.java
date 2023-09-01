@@ -28,5 +28,5 @@ public interface RoutineService {
      * @param rtnSeq 루틴의 고유 Seq값입니다.
      * @throws BusinessException 삭제할 대상 루틴이 없을 때 ROUTINE_NOT_FOUND 예외가 발생합니다.
      */
-    int deleteOneRoutine(long rtnSeq);
+    int deleteOneRoutineByRtnSeq(long rtnSeq);
 }

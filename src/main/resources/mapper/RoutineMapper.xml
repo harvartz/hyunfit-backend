@@ -26,7 +26,7 @@
         </selectKey>
     </insert>
 
-    <delete id="deleteOneRoutine" parameterType="_long">
+    <delete id="deleteOneRoutineByRtnSeq" parameterType="_long">
         DELETE ROUTINE
         WHERE RTN_SEQ = #{rtnSeq}
     </delete>

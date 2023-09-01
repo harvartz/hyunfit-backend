@@ -49,7 +49,7 @@ public class RoutineServiceImpl implements RoutineService {
     }
 
     @Override
-    public int deleteOneRoutine(long rtnSeq) {
-        return routineMapper.deleteOneRoutine(rtnSeq);
+    public int deleteOneRoutineByRtnSeq(long rtnSeq) {
+        return routineMapper.deleteOneRoutineByRtnSeq(rtnSeq);
     }
 }

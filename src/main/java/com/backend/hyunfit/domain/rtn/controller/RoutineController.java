@@ -28,6 +28,6 @@ public interface RoutineController {
     @ApiResponse(responseCode = "200", description = "OK")
     @ApiResponse(responseCode = "404", description = "NOT FOUND, 삭제 대상 루틴이 없음")
     @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
-    ResponseEntity<RoutineDTO> deleteOneRoutine(@PathVariable long rtnSeq);
+    ResponseEntity<RoutineDTO> deleteOneRoutineByRtnSeq(@PathVariable long rtnSeq);
 
 }

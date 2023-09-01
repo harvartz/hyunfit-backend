@@ -10,5 +10,5 @@ public interface RoutineMapper {
     List<RoutineDTO> selectAllRoutineFilteredSearch(RoutineDTO routineDTO);
     int insertOneRoutine(RoutineDTO routineDTO);
 
-    int deleteOneRoutine(long rtnSeq);
+    int deleteOneRoutineByRtnSeq(long rtnSeq);
 }

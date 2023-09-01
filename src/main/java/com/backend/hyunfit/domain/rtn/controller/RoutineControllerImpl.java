@@ -35,9 +35,9 @@ public class RoutineControllerImpl implements RoutineController {
 
     @Override
     @DeleteMapping("/{rtnSeq}")
-    public ResponseEntity<RoutineDTO> deleteOneRoutine(@PathVariable long rtnSeq) {
+    public ResponseEntity<RoutineDTO> deleteOneRoutineByRtnSeq(@PathVariable long rtnSeq) {
 
-        routineService.deleteOneRoutine(rtnSeq);
+        routineService.deleteOneRoutineByRtnSeq(rtnSeq);
         return ResponseEntity.noContent().build();
 
     }
