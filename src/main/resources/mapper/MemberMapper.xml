@@ -24,7 +24,26 @@
         FROM member
         WHERE mbr_id = #{mbrId}
     </select>
-
+    <select id="selectOneMemberBySeq" parameterType="_long" resultType="MemberDTO">
+        SELECT mbr_id,
+               mbr_pw,
+               mbr_name,
+               mbr_total_point,
+               mbr_total_exp,
+               mbr_birthdate,
+               mbr_gender,
+               mbr_height,
+               mbr_weight,
+               mbr_exercise_goal,
+               mbr_exercise_experience_level,
+               mbr_exercise_preference,
+               mbr_knee_health,
+               mbr_noise_consideration,
+               mbr_sitting_duration,
+               mbr_neck_shoulder_focused
+        FROM member
+        WHERE mbr_seq = #{mbrSeq}
+    </select>
     <update id="updateOneMemberById" parameterType="MemberDTO">
         UPDATE MEMBER
         <set>

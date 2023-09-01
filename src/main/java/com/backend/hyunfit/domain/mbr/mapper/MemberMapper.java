@@ -8,5 +8,6 @@ import java.util.Optional;
 @Mapper
 public interface MemberMapper {
     Optional<MemberDTO> selectOneMemberById(String mbrId);
+    Optional<MemberDTO> selectOneMemberBySeq(long mbrSeq);
     int updateOneMemberById(MemberDTO memberDTO);
 }
