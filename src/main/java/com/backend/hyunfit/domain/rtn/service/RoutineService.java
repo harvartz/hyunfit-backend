@@ -14,4 +14,6 @@ public interface RoutineService {
      * @throws BusinessException 루틴 검색 조건이 하나라도 없을 때 INVALID_INPUT_VALUE 예외가 발생합니다.
      */
     List<RoutineDTO> selectAllRoutineFilteredSearch(RoutineDTO routineDTO);
+
+    int insertOneRoutine(RoutineDTO routineDTO);
 }
