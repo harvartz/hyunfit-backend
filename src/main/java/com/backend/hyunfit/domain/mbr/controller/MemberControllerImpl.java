@@ -41,5 +41,12 @@ public class MemberControllerImpl implements MemberController {
         MemberDTO memberDTO = memberService.selectOneMemberReportById(searchDTO);
         return ResponseEntity.ok(memberDTO);
     }
+
+    @Override
+    @GetMapping("/{mbrSeq}/feedbacks")
+    public ResponseEntity<MemberDTO> selectAllMemberTrnfByMbrSeq(@PathVariable long mbrSeq) {
+        MemberDTO memberDTO = memberService.selectAllMemberTrnfByMbrSeq(mbrSeq);
+        return ResponseEntity.ok(memberDTO);
+    }
 }
 

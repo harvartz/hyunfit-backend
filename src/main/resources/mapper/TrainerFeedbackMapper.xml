@@ -22,4 +22,11 @@
         )
     </insert>
 
+
+    <select id="selectAllTrainerFeedbackByMbrSeq" parameterType="long" resultType="TrainerFeedbackDTO">
+        SELECT TRN_SEQ, MBR_SEQ, TRNF_CONTENT, TRNF_WRITTEN_DATE, TRNF_SUBMISSION_DUE
+        FROM TRAINER_FEEDBACK
+        WHERE MBR_SEQ = #{mbrSeq}
+    </select>
+
 </mapper>

@@ -34,4 +34,14 @@ public interface MemberService {
      *                          이 예외는 ErrorCode.USERID_NOT_FOUND 에러 코드와 함께 발생합니다.
      */
     MemberDTO selectOneMemberReportById(SearchDTO searchDTO);
+
+    /**
+     * Member가 받은 전체 피드백을 조회하는 메서드입니다.
+     *
+     * @param mbrSeq Member의 Seq 값.
+     * @return 피드백 정보를 MemberDTO 객체에 담아 반환합니다.
+     * @throws BusinessException 입력된 사용자 이름에 해당하는 회원 정보가 없을 경우 발생하는 예외입니다.
+     *                          이 예외는 ErrorCode.USERID_NOT_FOUND 에러 코드와 함께 발생합니다.
+     */
+    MemberDTO selectAllMemberTrnfByMbrSeq(long mbrSeq);
 }
