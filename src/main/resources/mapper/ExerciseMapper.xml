@@ -28,4 +28,12 @@
         DELETE FROM EXERCISE WHERE EXC_SEQ = #{excSeq}
     </delete>
 
+    <select id="selectAllExercisesOfRoutineByRtnSeq" parameterType="_long" resultType="ExerciseDTO">
+        Select E.EXC_SEQ, E.ADM_SEQ, E.EXC_NAME, E.EXC_TYPE, E.EXC_CONTENT, E.EXC_DIFFICULTY, E.EXC_CALORIES_PER_REP, E.EXC_SET_COUNT, E.EXC_TIME_PER_SET_IN_SEC, E.EXC_URL, E.EXC_CREATED_DATE
+        FROM ROUTINE
+                 JOIN FIREMEN.EXERCISE_ROUTINE_MAPPING ERM on ROUTINE.RTN_SEQ = ERM.RTN_SEQ
+                 JOIN FIREMEN.EXERCISE E on ERM.EXC_SEQ = E.EXC_SEQ
+        WHERE ERM.RTN_SEQ = #{rtnSeq}
+    </select>
+
 </mapper>
