@@ -15,8 +15,16 @@ public class PersonalTrainingDTO {
     private Long ptSeq;
     private Long mbrSeq;
     private Long trnSeq;
+    private Integer ptCount;
     private Timestamp ptReservationDate;
+    private Timestamp ptLessonDuration;
+    private Timestamp ptLessonStartDate;
+    private Timestamp ptLessonEndDate;
     private Integer ptReservationStatus;
+    private String ptCancellationReason;
+    private String ptNotes;
     private String ptrContent;
     private Double ptrRating;
+    private String trnName;
+    private String trnType;
 }

@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 
 @Tag(name = "Pt Controller", description = "pt관련 컨트롤러")
@@ -31,12 +32,12 @@ public interface PersonalTrainingController {
     @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
     ResponseEntity<PersonalTrainingDTO> createPtReview(@PathVariable long ptSeq, PersonalTrainingDTO personalTrainingDTO);
 
-    @Operation(summary = "유저가 개인 레슨을 조회하는 과정입니다", description = "유저에 해당하는 다음과 같은 에러를 반환합니다")
+    @Operation(summary = "유저 혹은 트레이너의 개인 레슨을 조회하는 과정입니다", description = "유저에 해당하는 다음과 같은 에러를 반환합니다")
     @ApiResponse(responseCode = "200", description = "OK")
     @ApiResponse(responseCode = "400", description = "BAD REQUEST")
     @ApiResponse(responseCode = "404", description = "NOT FOUND")
     @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
-    ResponseEntity<PersonalTrainingDTO> selectPt(PersonalTrainingDTO personalTrainingDTO);
+    ResponseEntity<PersonalTrainingDTO> selectOnePtByPtrSeq(long ptSeq);
 
 
 }

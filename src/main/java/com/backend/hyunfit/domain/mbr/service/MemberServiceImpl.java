@@ -2,12 +2,19 @@ package com.backend.hyunfit.domain.mbr.service;
 
 import com.backend.hyunfit.domain.mbr.dto.MemberDTO;
 import com.backend.hyunfit.domain.mbr.mapper.MemberMapper;
+import com.backend.hyunfit.domain.pt.dto.PersonalTrainingDTO;
 import com.backend.hyunfit.global.exception.BusinessException;
 import com.backend.hyunfit.global.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.logging.Logger;
+
+@Log4j2
 @Service
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
@@ -33,6 +40,19 @@ public class MemberServiceImpl implements MemberService {
                 .orElseThrow(() -> BusinessException.of(ErrorCode.USERID_NOT_FOUND));
         // 사용자 암호 null 처리
         memberDTO.setMbrPw(null);
+        return memberDTO;
+    }
+
+
+    @Override
+    public MemberDTO selectAllMemberPtBySeq(String mbrSeq) {
+        log.info("=============== selectAllMemberPtBySeq : Sevice " + mbrSeq);
+        MemberDTO memberDTO = memberMapper.selectOneMemberById(mbrSeq)
+                .orElseThrow(() -> BusinessException.of(ErrorCode.USERID_NOT_FOUND));
+
+
+        List<PersonalTrainingDTO> personalTrainingDTO = memberMapper.selectAllMemberPtBySeq(mbrSeq);
+        memberDTO.setPersonalTrainingDTOList(personalTrainingDTO);
         return memberDTO;
     }
 }

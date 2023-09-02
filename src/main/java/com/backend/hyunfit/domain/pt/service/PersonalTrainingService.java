@@ -2,6 +2,7 @@ package com.backend.hyunfit.domain.pt.service;
 
 import com.backend.hyunfit.domain.pt.dto.PersonalTrainingDTO;
 import com.backend.hyunfit.global.exception.BusinessException;
+import org.springframework.http.ResponseEntity;
 
 public interface PersonalTrainingService {
 
@@ -41,14 +42,6 @@ public interface PersonalTrainingService {
      * @throws BusinessException 예약이 생성되지 않을 때 발생하는 예외입니다.
      *                          이 예외는ErrorCode.DB_QUERY_INSERT_EXCEPTION 에러 코드와 함께 발생합니다.
      */
-    PersonalTrainingDTO selectOnePtBySeq(Long ptSeq);
+    PersonalTrainingDTO selectOnePtByPtrSeq(Long ptSeq);
 
-    /**
-     * 트레이너 혹은 사용자에 해당하는 레슨 예약을 확인하는 과정입니다.
-     *
-     * @param personalTrainingDTO Pt 예약 조회합니다.
-     * @throws BusinessException 예약이 생성되지 않을 때 발생하는 예외입니다.
-     *                          이 예외는ErrorCode.DB_QUERY_INSERT_EXCEPTION 에러 코드와 함께 발생합니다.
-     */
-    PersonalTrainingDTO selectPt(PersonalTrainingDTO personalTrainingDTO);
 }

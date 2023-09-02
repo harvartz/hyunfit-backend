@@ -10,7 +10,6 @@ public interface PersonalTrainingMapper {
     int insertOnePt(PersonalTrainingDTO personalTrainingDTO);
     int updateOnePt(PersonalTrainingDTO personalTrainingDTO);
     int insertOnePtReview(PersonalTrainingDTO personalTrainingDTO);
-    Optional<PersonalTrainingDTO> selectOnePtBySeq(Long ptSeq);
+    Optional<PersonalTrainingDTO> selectOnePtByPtrSeq(Long ptSeq);
 
-    PersonalTrainingDTO selectAllPt();
 }

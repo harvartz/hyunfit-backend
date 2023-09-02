@@ -4,6 +4,7 @@ import com.backend.hyunfit.domain.mbr.dto.MemberDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,4 +27,11 @@ public interface MemberController {
     @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
 
     ResponseEntity<MemberDTO> selectOneMemberById(String mbrId);
+
+    @Operation(summary="Member의 예약 데이터 조회", description = "Member의 전체 예약 데이터를 조회합니다.")
+
+    @ApiResponse(responseCode = "200", description = "OK")
+    @ApiResponse(responseCode = "404", description = "NOT FOUND")
+    @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
+    ResponseEntity<MemberDTO> selectAllMemberPtBySeq(String mbrSeq);
 }

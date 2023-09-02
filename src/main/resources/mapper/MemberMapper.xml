@@ -41,4 +41,39 @@
         </set>
         WHERE mbr_id = #{mbrId}
     </update>
+
+    <select id="selectAllMemberPtById" parameterType="String">
+        SELECT PT_SEQ,
+               tr.TRN_SEQ,
+               MBR_SEQ,
+               PT_CREATION_DATE,
+               PT_RESERVATION_DATE,
+               PT_LESSON_DURATION,
+               PT_LESSON_START_DATE,
+               PT_LESSON_END_DATE,
+               PT_RESERVATION_STATUS,
+               PT_CANCELLATION_REASON,
+               PT_NOTES,
+               PT_COUNTS,
+               tr.TRN_NAME,
+               tr.TRN_TYPE
+        FROM (SELECT PERSONAL_TRAINING.PT_SEQ,
+                     TRN_SEQ,
+                     MBR_SEQ,
+                     PT_CREATION_DATE,
+                     PT_RESERVATION_DATE,
+                     PT_LESSON_DURATION,
+                     PT_LESSON_START_DATE,
+                     PT_LESSON_END_DATE,
+                     PT_RESERVATION_STATUS,
+                     PT_CANCELLATION_REASON,
+                     PT_NOTES,
+                     ROW_NUMBER() OVER (PARTITION BY TRN_SEQ ORDER BY PT_RESERVATION_DATE ASC) AS PT_COUNTS,
+                      PTR_RATING
+              FROM PERSONAL_TRAINING
+                       LEFT JOIN FIREMEN.PERSONAL_TRAINING_REVIEW ON PERSONAL_TRAINING.PT_SEQ = PERSONAL_TRAINING_REVIEW.PT_SEQ
+              WHERE MBR_SEQ = 1) re
+                 LEFT JOIN TRAINER tr
+                           ON re.TRN_SEQ = tr.TRN_SEQ
+    </select>
 </mapper>
