@@ -45,13 +45,13 @@ public class MemberServiceImpl implements MemberService {
 
 
     @Override
-    public MemberDTO selectAllMemberPtBySeq(String mbrSeq) {
+    public MemberDTO selectAllMemberPtBySeq(String mbrSeq, int offSet, int limit) {
         log.info("=============== selectAllMemberPtBySeq : Sevice " + mbrSeq);
-        MemberDTO memberDTO = memberMapper.selectOneMemberById(mbrSeq)
+        MemberDTO memberDTO = memberMapper.selectOneMemberBySeq(mbrSeq)
                 .orElseThrow(() -> BusinessException.of(ErrorCode.USERID_NOT_FOUND));
 
 
-        List<PersonalTrainingDTO> personalTrainingDTO = memberMapper.selectAllMemberPtBySeq(mbrSeq);
+        List<PersonalTrainingDTO> personalTrainingDTO = memberMapper.selectAllMemberPtBySeq(mbrSeq, offSet, limit);
         memberDTO.setPersonalTrainingDTOList(personalTrainingDTO);
         return memberDTO;
     }

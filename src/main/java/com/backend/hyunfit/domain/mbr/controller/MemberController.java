@@ -33,5 +33,5 @@ public interface MemberController {
     @ApiResponse(responseCode = "200", description = "OK")
     @ApiResponse(responseCode = "404", description = "NOT FOUND")
     @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
-    ResponseEntity<MemberDTO> selectAllMemberPtBySeq(String mbrSeq);
+    ResponseEntity<MemberDTO> selectAllMemberPtBySeq(String mbrSeq, int offSet, int limit);
 }

@@ -4,7 +4,6 @@ import com.backend.hyunfit.domain.mbr.dto.MemberDTO;
 import com.backend.hyunfit.domain.mbr.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.apache.logging.log4j.Logger;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,9 +30,11 @@ public class MemberControllerImpl implements MemberController {
 
     @Override
     @GetMapping("/{mbrId}/personal-trainings")
-    public ResponseEntity<MemberDTO> selectAllMemberPtBySeq(@PathVariable String mbrId) {
+    public ResponseEntity<MemberDTO> selectAllMemberPtBySeq(@PathVariable String mbrId,
+                                                            @RequestParam int offset,
+                                                            @RequestParam int limit) {
         log.info("=============== selectAllMemberPtBySeq : controller");
-        return ResponseEntity.ok(memberService.selectAllMemberPtBySeq(mbrId));
+        return ResponseEntity.ok(memberService.selectAllMemberPtBySeq(mbrId, offset, limit));
     }
 }
 
