@@ -2,7 +2,6 @@ package com.backend.hyunfit.domain.pt.service;
 
 import com.backend.hyunfit.domain.pt.dto.PersonalTrainingDTO;
 import com.backend.hyunfit.global.exception.BusinessException;
-import org.springframework.http.ResponseEntity;
 
 public interface PersonalTrainingService {
 
