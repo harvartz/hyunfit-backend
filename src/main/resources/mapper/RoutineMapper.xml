@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+<mapper namespace="com.backend.hyunfit.domain.rtn.mapper.RoutineMapper">
+    <select id="selectAllRoutineFilteredSearch" parameterType="RoutineDTO" resultType="RoutineDTO">
+        SELECT
+            RTN_SEQ,
+            ADM_SEQ,
+            RTN_NAME,
+            RTN_CONTENT,
+            RTN_CREATED_DATE,
+            RTN_URL,
+            RTN_TARGET,
+            RTN_DURATION,
+            RTN_DIFFICULTY
+        FROM ROUTINE
+        WHERE RTN_TARGET = #{rtnTarget} AND RTN_DURATION = #{rtnDuration} AND RTN_DIFFICULTY = #{rtnDifficulty}
+    </select>
+
+    <insert id="insertOneRoutine" parameterType="RoutineDTO">
+        INSERT INTO ROUTINE (adm_seq, rtn_name, rtn_content, rtn_created_date, rtn_url, rtn_target, rtn_duration, rtn_difficulty)
+        VALUES (#{admSeq}, #{rtnName}, #{rtnContent}, CURRENT_TIMESTAMP, #{rtnUrl}, #{rtnTarget}, #{rtnDuration}, #{rtnDifficulty})
+        <selectKey resultType="_long" keyProperty="rtnSeq" order="AFTER">
+            SELECT RTN_SEQ_PK.CURRVAL FROM DUAL
+        </selectKey>
+    </insert>
+
+    <select id="selectOneRoutineByRtnSeq" parameterType="_long" resultType="RoutineDTO">
+        SELECT *
+        FROM ROUTINE
+        WHERE RTN_SEQ = #{rtnSeq}
+    </select>
+
+    <delete id="deleteOneRoutineByRtnSeq" parameterType="_long">
+        DELETE ROUTINE
+        WHERE RTN_SEQ = #{rtnSeq}
+    </delete>
+
+</mapper>

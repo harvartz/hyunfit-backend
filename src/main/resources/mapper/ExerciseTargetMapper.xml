@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+<mapper namespace="com.backend.hyunfit.domain.exctg.mapper.ExerciseTargetMapper">
+
+    <select id="selectAllExerciseTargetByMbrIdRanged" parameterType="SearchDTO" resultType="ExerciseTargetDTO">
+        <![CDATA[
+        SELECT ET.EXCTG_AREA as target_area,
+               SUM(EXCH_TOTAL_CALORIES * ET.EXCTG_WEIGHT) as total_calories
+        FROM FIREMEN.EXERCISE_HISTORY EH
+                 JOIN FIREMEN.EXERCISE_TARGET ET on EH.EXC_SEQ = ET.EXC_SEQ
+        WHERE EH.MBR_SEQ = #{mbrSeq} AND EXCH_START_TIME >= #{startDate} AND EXCH_START_TIME < #{endDate}
+        GROUP BY ET.EXCTG_AREA
+        ]]>
+    </select>
+
+</mapper>

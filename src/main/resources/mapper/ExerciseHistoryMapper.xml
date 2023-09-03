@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+<mapper namespace="com.backend.hyunfit.domain.exch.mapper.ExerciseHistoryMapper">
+
+    <select id="selectOneExchSummaryByMbrIdRanged" parameterType="SearchDTO" resultType="ExerciseHistorySummaryDTO">
+        -- 한달간 전체 누적 통계
+        <![CDATA[
+        SELECT
+            SUM(EXCH_TOTAL_CALORIES) as total_calories,
+            SUM(ROUND((CAST(EXCH_END_TIME as DATE) - CAST(EXCH_START_TIME as DATE))*86400)) as total_exercise_time_seconds,
+            SUM(EXCH_EXCELENT_CNT) as total_excellent_count,
+            SUM(EXCH_GOOD_CNT) as total_good_count,
+            SUM(EXCH_BAD_CNT) as total_bad_count
+        FROM EXERCISE_HISTORY EH
+        WHERE EH.MBR_SEQ = #{mbrSeq} AND EXCH_START_TIME >= #{startDate} AND EXCH_START_TIME < #{endDate}
+        ]]>
+    </select>
+
+    <select id="selectAllPeriodicRecordsByMbrIdRanged" parameterType="SearchDTO" resultType="PeriodicRecordDTO">
+        <![CDATA[
+        WITH calories AS (
+            SELECT TRUNC(EXCH_START_TIME, 'IW') AS stat_period,
+                   SUM(EXCH_TOTAL_CALORIES) AS calories_sum
+            FROM EXERCISE_HISTORY EH
+            WHERE EH.MBR_SEQ = #{mbrSeq} AND EXCH_START_TIME >= #{startDate} AND EXCH_START_TIME < #{endDate}
+            GROUP BY TRUNC(EXCH_START_TIME, 'IW')
+        ), experiences AS (
+            SELECT
+                TRUNC(MEV_CREATION_DATE, 'IW') AS stat_period,
+                SUM(MEV_AMOUNT) as exp_sum
+            FROM MEMBER_EVENT ME
+            WHERE ME.MBR_SEQ = #{mbrSeq} AND MEV_CREATION_DATE >= #{startDate} AND MEV_CREATION_DATE < #{endDate}
+            GROUP BY TRUNC(MEV_CREATION_DATE, 'IW')
+        )
+        SELECT c.stat_period,
+               c.calories_sum,
+               e.exp_sum,
+               SUM(e.exp_sum) OVER (ORDER BY e.stat_period) AS cumulative_exp_sum
+        FROM calories c
+                 JOIN experiences e ON c.stat_period = e.stat_period
+        ORDER BY e.stat_period
+        ]]>
+
+    </select>
+
+    <select id="selectAllExercisedDaysByMbrIdRanged" parameterType="SearchDTO" resultType="Date">
+        <![CDATA[
+        SELECT TRUNC(EXCH_START_TIME) AS exercised_days
+        FROM EXERCISE_HISTORY EH
+        WHERE EH.MBR_SEQ = #{mbrSeq} AND EXCH_START_TIME >= #{startDate} AND EXCH_START_TIME < #{endDate}
+        GROUP BY TRUNC(EXCH_START_TIME)
+        ORDER BY exercised_days
+        ]]>
+    </select>
+
+    <insert id="insertOneExerciseHistory" parameterType="ExerciseHistoryDTO">
+        {call INSERT_EXERCISE_HISTORY(
+                #{excSeq, mode=IN, jdbcType=NUMERIC},
+                #{mbrSeq, mode=IN, jdbcType=NUMERIC},
+                #{exchStartTime, mode=IN, jdbcType=TIMESTAMP},
+                #{exchEndTime, mode=IN, jdbcType=TIMESTAMP},
+                #{exchExcelentCnt, mode=IN, jdbcType=NUMERIC},
+                #{exchGoodCnt, mode=IN, jdbcType=NUMERIC},
+                #{exchBadCnt, mode=IN, jdbcType=NUMERIC}
+        )}
+    </insert>
+
+</mapper>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.backend.hyunfit.domain.trnf.mapper.TrainerFeedbackMapper">
+
+    <insert id="insertFeedback" parameterType="TrainerFeedbackDTO">
+        INSERT INTO TRAINER_FEEDBACK
+        (TRN_SEQ, MBR_SEQ, TRNF_CONTENT, TRNF_WRITTEN_DATE, TRNF_SUBMISSION_DUE)
+        SELECT
+            #{trnSeq} as TRN_SEQ,
+            #{mbrSeq} as MBR_SEQ,
+            #{trnfContent} as TRNF_CONTENT,
+            SYSDATE as TRNF_WRITTEN_DATE,
+            ADD_MONTHS(MAX(PT_LESSON_END_DATE), 1) as TRNF_SUBMISSION_DUE
+        FROM PERSONAL_TRAINING
+        WHERE MBR_SEQ = #{mbrSeq}
+          AND NOT EXISTS (
+            SELECT 1 FROM TRAINER_FEEDBACK
+            WHERE TRN_SEQ = #{trnSeq}
+              AND MBR_SEQ = #{mbrSeq}
+              AND TRNF_SUBMISSION_DUE > SYSDATE
+        )
+    </insert>
+
+
+    <select id="selectAllTrainerFeedbackByMbrSeq" parameterType="long" resultType="TrainerFeedbackDTO">
+        SELECT TRN_SEQ, MBR_SEQ, TRNF_CONTENT, TRNF_WRITTEN_DATE, TRNF_SUBMISSION_DUE
+        FROM TRAINER_FEEDBACK
+        WHERE MBR_SEQ = #{mbrSeq}
+    </select>
+
+</mapper>
