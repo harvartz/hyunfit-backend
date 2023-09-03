@@ -42,8 +42,8 @@ public class PersonalTrainingControllerImpl implements PersonalTrainingControlle
 
     @Override
     @GetMapping
-    public ResponseEntity<PersonalTrainingDTO> selectPt(PersonalTrainingDTO personalTrainingDTO) {
-        personalTrainingService.selectPt(personalTrainingDTO);
+    public ResponseEntity<PersonalTrainingDTO> selectOnePtByPtrSeq(long ptSeq) {
+        PersonalTrainingDTO personalTrainingDTO = personalTrainingService.selectOnePtByPtrSeq(ptSeq);
         return ResponseEntity.status(HttpStatus.CREATED).body(personalTrainingDTO);
     }
 }

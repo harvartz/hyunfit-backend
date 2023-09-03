@@ -30,11 +30,13 @@ public interface MemberController {
 
     ResponseEntity<MemberDTO> selectOneMemberById(String mbrId);
 
-    @Operation(summary="Member의 데이터 조회", description = "Member의 전체 데이터를 조회합니다. 암호 제외")
+  
+    @Operation(summary="Member의 예약 데이터 조회", description = "Member의 전체 예약 데이터를 조회합니다.")
 
     @ApiResponse(responseCode = "200", description = "OK")
     @ApiResponse(responseCode = "404", description = "NOT FOUND")
     @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
+
 
     ResponseEntity<MemberDTO> selectOneMemberReportById(@PathVariable long mbrSeq,
                                                         @RequestParam Timestamp startDate,
