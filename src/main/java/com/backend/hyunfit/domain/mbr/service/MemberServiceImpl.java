@@ -67,7 +67,8 @@ public class MemberServiceImpl implements MemberService {
 
         List<PersonalTrainingDTO> personalTrainingDTO = memberMapper.selectAllMemberPtBySeq(mbrSeq, offSet, limit);
         memberDTO.setPersonalTrainingDTOList(personalTrainingDTO);
-
+        return memberDTO;
+    }
     @Override
     public MemberDTO selectOneMemberReportById(SearchDTO searchDTO) {
         MemberDTO memberDTO = memberMapper.selectOneMemberBySeq(searchDTO.getMbrSeq())
