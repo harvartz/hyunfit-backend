@@ -18,7 +18,8 @@ public class TrainerFeedbackDTO {
     private String trnfContent;
     private Timestamp writtendDate;
     private Timestamp trnfReportModDate;
-    private Timestamp trnfFeedbackPeriod;
+    private Timestamp trnfSubmissionDue;
     private Timestamp ptLessonEndDate;
 
+    private String content;
 }

@@ -6,4 +6,5 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface TrainerFeedbackMapper {
     void insertFeedback(TrainerFeedbackDTO feedbackDTO);
+    void updateFeedback(String content);
 }
