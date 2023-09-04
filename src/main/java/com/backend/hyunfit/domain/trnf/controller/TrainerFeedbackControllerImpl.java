@@ -23,7 +23,6 @@ public class TrainerFeedbackControllerImpl implements TrainerFeedbackController{
     public TrainerFeedbackDTO createFeedback(@RequestBody TrainerFeedbackDTO feedbackDTO) {
         return trainerFeedbackService.insertFeedback(feedbackDTO);
     }
-    ///127.0.0.1:8000
 
     @Override
     @PostMapping("/gpt")

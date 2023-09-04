@@ -3,9 +3,11 @@ package com.backend.hyunfit.domain.trnf.controller;
 import com.backend.hyunfit.domain.trnf.dto.TrainerFeedbackDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 
+@Tag(name = "TrainerFeedback Controller", description = "피드백관련 컨트롤러")
 public interface TrainerFeedbackController {
 
     @Operation(summary="Feedback 등록", description = "PT가 끝나면 피드백DB에 등록")
