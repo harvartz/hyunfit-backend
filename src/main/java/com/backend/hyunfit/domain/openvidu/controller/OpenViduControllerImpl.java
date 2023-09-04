@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import io.openvidu.java.client.OpenViduHttpException;
 import io.openvidu.java.client.OpenViduJavaClientException;
 
-@CrossOrigin(origins = "${vue.url}", methods = RequestMethod.POST)
+@CrossOrigin(origins = "${vue.url}")
 @Log4j2
 @RequiredArgsConstructor
 @RestController
