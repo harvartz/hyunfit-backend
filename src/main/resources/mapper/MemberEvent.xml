@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.backend.hyunfit.domain.mev.mapper.MemberEventMapper">
+
+    <insert id="insertMemberEvent" parameterType="MemberEventDTO">
+        INSERT INTO MEMBER_EVENT (MBR_SEQ, MEV_TYPE, MEV_AMOUNT)
+        VALUES (#{mbrSeq}, #{mevType}, #{mevAmount})
+    </insert>
+
+</mapper>
