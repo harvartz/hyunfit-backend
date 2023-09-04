@@ -1,5 +1,6 @@
 package com.backend.hyunfit.domain.trnf.service;
 
+import com.backend.hyunfit.domain.trn.dto.FeedbackDTO;
 import com.backend.hyunfit.domain.trnf.dto.TrainerFeedbackDTO;
 import com.backend.hyunfit.domain.trnf.mapper.TrainerFeedbackMapper;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,7 @@ public class TrainerFeedbackServiceImpl implements TrainerFeedbackService{
     }
 
     @Override
-    public void updateFeedback(String content) {
+    public TrainerFeedbackDTO getGptFeedback(String content) {
         System.out.println("this is updateFeedback serviceImpl");
         RestTemplate restTemplate = new RestTemplate();
         String fastApiUrl = "http://127.0.0.1:8000/generate-fitness-report/";
@@ -36,7 +37,9 @@ public class TrainerFeedbackServiceImpl implements TrainerFeedbackService{
         String aiMessage = response.getBody().get("ai_message").toString();
 
         System.out.println("### This is GPT response : " + aiMessage);
-
-        trainerFeedbackMapper.updateFeedback(aiMessage);
+        TrainerFeedbackDTO trainerFeedbackDTO = new TrainerFeedbackDTO();
+        trainerFeedbackDTO.setContent(aiMessage);
+//        trainerFeedbackMapper.updateFeedback(aiMessage);
+        return trainerFeedbackDTO;
     }
 }

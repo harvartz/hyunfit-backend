@@ -20,5 +20,5 @@ public interface TrainerFeedbackController {
     @ApiResponse(responseCode = "400", description = "BAD REQUEST")
     @ApiResponse(responseCode = "404", description = "NOT FOUND")
     @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
-    ResponseEntity<String> updateFeedback(@RequestBody TrainerFeedbackDTO dto);
+    ResponseEntity<TrainerFeedbackDTO> getGptFeedback(@RequestBody TrainerFeedbackDTO dto);
 }

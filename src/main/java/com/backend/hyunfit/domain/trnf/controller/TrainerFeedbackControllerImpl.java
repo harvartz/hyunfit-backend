@@ -26,10 +26,10 @@ public class TrainerFeedbackControllerImpl implements TrainerFeedbackController{
     ///127.0.0.1:8000
 
     @Override
-    @PostMapping("/update-feedback")
-    public ResponseEntity<String> updateFeedback(@RequestBody TrainerFeedbackDTO dto) {
-        trainerFeedbackService.updateFeedback(dto.getContent());
-        return new ResponseEntity<>("Feedback Updated Successfully", HttpStatus.OK);
+    @PostMapping("/gpt")
+    public ResponseEntity<TrainerFeedbackDTO> getGptFeedback(@RequestBody TrainerFeedbackDTO dto) {
+        TrainerFeedbackDTO gptResult = trainerFeedbackService.getGptFeedback(dto.getContent());
+        return ResponseEntity.ok(gptResult);
     }
 
 }
