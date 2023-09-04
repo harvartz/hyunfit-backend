@@ -1,0 +1,55 @@
+server:
+  port: 8080
+
+spring:
+  main:
+    banner-mode: off
+  datasource:
+    url: ${db-url}
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    username: ${db-username}
+    password: ${db-password}
+    hikari:
+      connection-timeout: 60000
+      maximum-pool-size: 5
+  profiles:
+    include:
+      - dev
+  jpa:
+    hibernate:
+      ddl-auto: none
+  webflux:
+    cors:
+      allowed-origins: "*"
+
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n"
+  level:
+    org:
+      hibernate:
+        SQL: debug
+
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: com.backend.hyunfit
+  configuration:
+    jdbc-type-for-null: VARCHAR
+    map-underscore-to-camel-case: true
+
+springdoc:
+  packages-to-scan: com.backend.hyunfit.domain
+  default-consumes-media-type: application/json;charset=UTF-8
+  default-produces-media-type: application/json;charset=UTF-8
+  swagger-ui:
+    operations-sorter: alpha # alpha(??? ????), method(HTTP????)
+    tags-sorter: alpha # ?? ?? ??
+    path: /
+    disable-swagger-default-url: true
+
+openvidu:
+  url: ${openvidu-url}
+  secret: ${openvidu-secret}
+
+vue:
+  url: ${vue-url}
