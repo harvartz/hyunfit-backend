@@ -21,4 +21,5 @@ public class TrainerFeedbackDTO {
     private Timestamp trnfSubmissionDue;
     private Timestamp ptLessonEndDate;
 
+    private String content;
 }

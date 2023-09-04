@@ -7,7 +7,10 @@ import java.util.List;
 
 @Mapper
 public interface TrainerFeedbackMapper {
+  
     void insertFeedback(TrainerFeedbackDTO feedbackDTO);
+
+    void updateFeedback(String content);
 
     List<TrainerFeedbackDTO> selectAllTrainerFeedbackByMbrSeq(long mbrSeq);
 }

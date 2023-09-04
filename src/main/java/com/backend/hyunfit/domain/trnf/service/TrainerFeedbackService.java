@@ -4,4 +4,6 @@ import com.backend.hyunfit.domain.trnf.dto.TrainerFeedbackDTO;
 
 public interface TrainerFeedbackService {
     TrainerFeedbackDTO insertFeedback(TrainerFeedbackDTO feedbackDTO);
+
+    TrainerFeedbackDTO getGptFeedback(String content);
 }
