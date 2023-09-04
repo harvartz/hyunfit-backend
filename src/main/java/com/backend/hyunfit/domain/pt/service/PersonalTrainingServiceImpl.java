@@ -35,7 +35,7 @@ public class PersonalTrainingServiceImpl implements PersonalTrainingService {
 
     @Override
     public void createPtReview(PersonalTrainingDTO personalTrainingDTO) {
-        personalTrainingMapper.selectOnePtBySeq(personalTrainingDTO.getPtSeq())
+        personalTrainingMapper.selectOnePtByPtrSeq(personalTrainingDTO.getPtSeq())
                 .orElseThrow(() -> BusinessException.of(ErrorCode.RESERVATION_NOT_FOUND));
 
         int insertResult = personalTrainingMapper.insertOnePtReview(personalTrainingDTO);
@@ -45,24 +45,11 @@ public class PersonalTrainingServiceImpl implements PersonalTrainingService {
     }
 
     @Override
-    public PersonalTrainingDTO selectOnePtBySeq(Long ptSeq) {
-        PersonalTrainingDTO personalTrainingDTO = personalTrainingMapper.selectOnePtBySeq(ptSeq)
+    public PersonalTrainingDTO selectOnePtByPtrSeq(Long ptSeq) {
+        PersonalTrainingDTO personalTrainingDTO = personalTrainingMapper.selectOnePtByPtrSeq(ptSeq)
                 .orElseThrow(() -> BusinessException.of(ErrorCode.RESERVATION_NOT_FOUND));
-        personalTrainingDTO.setPtSeq(null);
+        personalTrainingDTO.setPtSeq(ptSeq);
         return personalTrainingDTO;
     }
 
-    @Override
-    public PersonalTrainingDTO selectPt(PersonalTrainingDTO personalTrainingDTO) {
-        // 1. 트레이너가 없는 경우
-        memberMapper.selectOneMemberById(String.valueOf(personalTrainingDTO.getTrnSeq()))
-                .orElseThrow(() -> BusinessException.of(ErrorCode.USERID_NOT_FOUND));
-
-        // 2. 사용자가 없는 경우
-        memberMapper.selectOneMemberById(String.valueOf(personalTrainingDTO.getMbrSeq()))
-                .orElseThrow(() -> BusinessException.of(ErrorCode.USERID_NOT_FOUND));
-
-        return personalTrainingMapper.selectAllPt();
-
-    }
 }

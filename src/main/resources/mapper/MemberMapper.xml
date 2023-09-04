@@ -24,6 +24,7 @@
         FROM member
         WHERE mbr_id = #{mbrId}
     </select>
+
     <select id="selectOneMemberBySeq" parameterType="_long" resultType="MemberDTO">
         SELECT mbr_id,
                mbr_pw,
@@ -44,6 +45,7 @@
         FROM member
         WHERE mbr_seq = #{mbrSeq}
     </select>
+
     <update id="updateOneMemberById" parameterType="MemberDTO">
         UPDATE MEMBER
         <set>
@@ -60,4 +62,41 @@
         </set>
         WHERE mbr_id = #{mbrId}
     </update>
+
+    <select id="selectAllMemberPtBySeq">
+        SELECT PT_SEQ,
+               tr.TRN_SEQ,
+               MBR_SEQ,
+               PT_RESERVATION_DATE,
+               PT_LESSON_DURATION,
+               PT_LESSON_START_DATE,
+               PT_LESSON_END_DATE,
+               PT_RESERVATION_STATUS,
+               PT_CANCELLATION_REASON,
+               PT_NOTES,
+               PT_COUNTS,
+               tr.TRN_NAME,
+               tr.TRN_TYPE,
+               PTR_RATING
+        FROM (SELECT PERSONAL_TRAINING.PT_SEQ,
+                     TRN_SEQ,
+                     MBR_SEQ,
+                     PT_CREATION_DATE,
+                     PT_RESERVATION_DATE,
+                     PT_LESSON_DURATION,
+                     PT_LESSON_START_DATE,
+                     PT_LESSON_END_DATE,
+                     PT_RESERVATION_STATUS,
+                     PT_CANCELLATION_REASON,
+                     PT_NOTES,
+                     ROW_NUMBER() OVER (PARTITION BY TRN_SEQ ORDER BY PT_RESERVATION_DATE ASC) AS PT_COUNTS,
+                      PTR_RATING
+              FROM PERSONAL_TRAINING
+                       LEFT JOIN FIREMEN.PERSONAL_TRAINING_REVIEW ON PERSONAL_TRAINING.PT_SEQ = PERSONAL_TRAINING_REVIEW.PT_SEQ
+              WHERE MBR_SEQ = #{mbrSeq}) re
+                 LEFT JOIN TRAINER tr
+                           ON re.TRN_SEQ = tr.TRN_SEQ
+        ORDER BY PT_RESERVATION_DATE ASC -- 결과를 어떤 기준으로 정렬할지 지정
+        OFFSET #{offSet} ROWS FETCH NEXT #{limit} ROWS ONLY -- 시작 위치(offset)와 반환할 로우 수(fetch next)를 지정
+    </select>
 </mapper>
