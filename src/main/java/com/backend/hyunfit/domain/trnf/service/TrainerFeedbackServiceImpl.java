@@ -26,7 +26,7 @@ public class TrainerFeedbackServiceImpl implements TrainerFeedbackService{
 
     @Override
     public TrainerFeedbackDTO getGptFeedback(String content) {
-        System.out.println("this is updateFeedback serviceImpl");
+
         RestTemplate restTemplate = new RestTemplate();
         String fastApiUrl = "http://127.0.0.1:8000/generate-fitness-report/";
 
@@ -35,11 +35,10 @@ public class TrainerFeedbackServiceImpl implements TrainerFeedbackService{
 
         ResponseEntity<Map> response = restTemplate.postForEntity(fastApiUrl, requestData, Map.class);
         String aiMessage = response.getBody().get("ai_message").toString();
-
-        System.out.println("### This is GPT response : " + aiMessage);
+        
         TrainerFeedbackDTO trainerFeedbackDTO = new TrainerFeedbackDTO();
         trainerFeedbackDTO.setContent(aiMessage);
-//        trainerFeedbackMapper.updateFeedback(aiMessage);
+
         return trainerFeedbackDTO;
     }
 }
