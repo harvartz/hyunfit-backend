@@ -4,13 +4,19 @@
 
 <mapper namespace="com.backend.hyunfit.domain.erm.mapper.ErmMapper">
 
-    <insert id="insertBulkErm" parameterType="ErmDTO">
-        INSERT ALL
-        <foreach collection="erms" index="index" item="dto" separator=" ">
-             INTO EXERCISE_ROUTINE_MAPPING (ERM_SEQ, RTN_SEQ, EXC_SEQ)
-             VALUES (#{index}+15, #{dto.rtnSeq}, #{dto.excSeq})
-        </foreach>
-        SELECT 1 FROM dual
-    </insert>
+<!--   Insert All에는 PK가 자동으로 증가하지 않기 때문에 사용 불가능-->
+<!--    <insert id="insertBulkErm" parameterType="ErmDTO">-->
+<!--        INSERT ALL-->
+<!--        <foreach collection="erms" index="index" item="dto" separator=" ">-->
+<!--             INTO EXERCISE_ROUTINE_MAPPING (ERM_SEQ, RTN_SEQ, EXC_SEQ)-->
+<!--             VALUES (default, #{dto.rtnSeq}, #{dto.excSeq})-->
+<!--        </foreach>-->
+<!--        SELECT 1 FROM dual-->
+<!--    </insert>-->
+        <insert id="insertOneErm" parameterType="ErmDTO">
+            INSERT INTO EXERCISE_ROUTINE_MAPPING
+                (ERM_SEQ, RTN_SEQ, EXC_SEQ)
+            VALUES (default, #{rtnSeq}, #{excSeq})
+        </insert>
 
 </mapper>

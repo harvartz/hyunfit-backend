@@ -15,4 +15,6 @@ public interface ExerciseMapper {
     int insertOneExercise(ExerciseDTO exercise);
 
     int deleteExercise(Long excSeq);
+
+    List<ExerciseDTO> selectAllExercisesOfRoutineByRtnSeq(long rtnSeq);
 }
