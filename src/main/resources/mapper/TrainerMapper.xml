@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-
 <mapper namespace="com.backend.hyunfit.domain.trn.mapper.TrainerMapper">
 
     <select id="selectOneTrainerByTrnId" parameterType="String" resultType="TrainerDTO">
@@ -16,8 +15,8 @@
         WHERE TRN_SEQ = #{trnSeq}
     </select>
 
-    <select id="selectNoFeedbackBytrnSeq" parameterType="long" resultType="FeedbackDTO">
-        SELECT MBR_NAME , TO_CHAR(TRNF_FEEDBACK_PERIOD, 'YYYY-MM') AS FEEDBACK_TARGET_DATE
+    <select id="selectNoFeedbackBytrnSeq" parameterType="long" resultType="TrainerFeedbackDTO">
+        SELECT MBR_NAME , TO_CHAR(TRNF_SUBMISSION_DUE, 'YYYY-MM') AS targetMonth
         FROM MEMBER JOIN TRAINER_FEEDBACK ON MEMBER.MBR_SEQ = TRAINER_FEEDBACK.MBR_SEQ
         WHERE TRN_SEQ = #{trnSeq} AND TRNF_WRITTEN_DATE IS NULL
     </select>
