@@ -10,4 +10,5 @@ public class AuthDTO {
     String username;
     String password;
     boolean authenticated;
+    String role;
 }
