@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(origins = "${vue.url}")
 @RequestMapping(value = "/exercises")
 @RestController
 @RequiredArgsConstructor
@@ -19,7 +19,10 @@ public class ExerciseControllerImpl implements ExerciseController {
 
     @Override
     @PostMapping
-    public ResponseEntity<ExerciseDTO> createExercise(ExerciseDTO exerciseDTO) {
+    public ResponseEntity<ExerciseDTO> createExercise(@RequestBody ExerciseDTO exerciseDTO) {
+        System.out.println("**************************************");
+        System.out.println(exerciseDTO);
+        System.out.println("**************************************");
         exerciseService.createExercise(exerciseDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build(); // 201 Created 응답 반환
     }
