@@ -17,13 +17,6 @@ public class ExerciseControllerImpl implements ExerciseController {
 
     private final ExerciseService exerciseService;
 
-//    @Override
-//    @PostMapping
-//    public ResponseEntity<ExerciseDTO> createExercise(@RequestBody ExerciseDTO exerciseDTO) {
-//        exerciseService.createExercise(exerciseDTO);
-//        return ResponseEntity.status(HttpStatus.CREATED).build(); // 201 Created 응답 반환
-//    }
-
     @Override
     @PostMapping
     public ResponseEntity<?> insertExercise(@RequestBody ExerciseDTO exerciseDTO) {
