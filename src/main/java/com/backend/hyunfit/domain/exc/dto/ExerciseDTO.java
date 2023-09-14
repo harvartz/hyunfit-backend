@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -23,4 +24,6 @@ public class ExerciseDTO {
     private Integer excTimePerSetInSec;
     private String excUrl;
     private Timestamp excCreatedDate;
+    private List<ExerciseInTargetDTO> exerciseTargets;
 }
+

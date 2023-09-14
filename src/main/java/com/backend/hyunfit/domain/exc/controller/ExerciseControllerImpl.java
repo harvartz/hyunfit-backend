@@ -17,14 +17,18 @@ public class ExerciseControllerImpl implements ExerciseController {
 
     private final ExerciseService exerciseService;
 
+//    @Override
+//    @PostMapping
+//    public ResponseEntity<ExerciseDTO> createExercise(@RequestBody ExerciseDTO exerciseDTO) {
+//        exerciseService.createExercise(exerciseDTO);
+//        return ResponseEntity.status(HttpStatus.CREATED).build(); // 201 Created 응답 반환
+//    }
+
     @Override
     @PostMapping
-    public ResponseEntity<ExerciseDTO> createExercise(@RequestBody ExerciseDTO exerciseDTO) {
-        System.out.println("**************************************");
-        System.out.println(exerciseDTO);
-        System.out.println("**************************************");
-        exerciseService.createExercise(exerciseDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).build(); // 201 Created 응답 반환
+    public ResponseEntity<?> insertExercise(@RequestBody ExerciseDTO exerciseDTO) {
+        long excSeqInserted = exerciseService.insertExerciseAndTarget(exerciseDTO);
+        return new ResponseEntity<>(excSeqInserted, HttpStatus.CREATED);
     }
 
     @Override
