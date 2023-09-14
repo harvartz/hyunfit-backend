@@ -1,6 +1,7 @@
 package com.backend.hyunfit.domain.exc.mapper;
 
 import com.backend.hyunfit.domain.exc.dto.ExerciseDTO;
+import com.backend.hyunfit.domain.exc.dto.ExerciseInTargetDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -12,7 +13,9 @@ public interface ExerciseMapper {
 
     Optional<ExerciseDTO> selectOneExercise(Long excSeq);
 
-    int insertOneExercise(ExerciseDTO exercise);
+    void insertOneExercise(ExerciseDTO exercise);
+
+    void insertExerciseTarget(ExerciseInTargetDTO exerciseInTargetDTO);
 
     int deleteExercise(Long excSeq);
 

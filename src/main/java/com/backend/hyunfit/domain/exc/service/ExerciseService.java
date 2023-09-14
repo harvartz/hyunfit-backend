@@ -7,7 +7,9 @@ import java.util.List;
 
 public interface ExerciseService {
 
-    int createExercise(ExerciseDTO exerciseDTO);
+//    int createExercise(ExerciseDTO exerciseDTO);
+
+    Long insertExerciseAndTarget(ExerciseDTO exerciseDTO);
 
     List<ExerciseDTO> getAllExercises();
 

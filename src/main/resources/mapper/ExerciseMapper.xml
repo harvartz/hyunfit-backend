@@ -14,6 +14,17 @@
              #{excDifficulty}, #{excCaloriesPerRep}, #{excSetCount},
              #{excTimePerSetInSec}, #{excUrl}
                  )
+        <selectKey keyProperty="excSeq" resultType="long" order="AFTER">
+            SELECT EXC_SEQ_PK.CURRVAL FROM DUAL
+        </selectKey>
+    </insert>
+
+    <insert id="insertExerciseTarget">
+        INSERT INTO EXERCISE_TARGET (
+            EXC_SEQ ,EXCTG_AREA, EXCTG_WEIGHT
+        ) VALUES (
+                    #{excSeq}, #{exctgArea}, #{exctgWeight}
+                 )
     </insert>
 
     <select id="selectAllExercises" resultType="ExerciseDTO">
