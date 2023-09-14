@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
 
+@CrossOrigin(origins = "${vue.url}")
 @Log4j2
 @RestController
 @RequiredArgsConstructor
@@ -56,5 +57,12 @@ public class MemberControllerImpl implements MemberController {
         MemberDTO memberDTO = memberService.selectAllMemberTrnfByMbrSeq(mbrSeq);
         return ResponseEntity.ok(memberDTO);
     }
+
+    @Override
+    @GetMapping("/{mbrSeq}/feedback")
+    public ResponseEntity<String> selectOneMemberTrnfByMbrSeq(@PathVariable long mbrSeq, @RequestParam String date) {
+        return ResponseEntity.ok(memberService.selectOneMemberTrnfByMbrSeq(mbrSeq,date));
+    }
+
 }
 

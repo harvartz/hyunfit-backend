@@ -101,4 +101,12 @@ public class MemberServiceImpl implements MemberService {
         memberDTO.setTrainerFeedbacks(trainerFeedbacks);
         return memberDTO;
     }
+
+    @Override
+    public String selectOneMemberTrnfByMbrSeq(long mbrSeq, String date) {
+        TrainerFeedbackDTO trnfDTO = new TrainerFeedbackDTO();
+        trnfDTO.setMbrSeq(mbrSeq);
+        trnfDTO.setTargetMonth(date);
+        return trainerFeedbackMapper.selectOneTrainerFeedbackByMbrSeq(trnfDTO);
+    }
 }
