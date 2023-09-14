@@ -30,4 +30,10 @@
         WHERE MBR_SEQ = #{mbrSeq}
     </select>
 
+    <select id="selectOneTrainerFeedbackByMbrSeq" parameterType="TrainerFeedbackDTO" resultType="String">
+        SELECT TRNF_CONTENT
+        FROM FIREMEN.TRAINER_FEEDBACK JOIN FIREMEN.MEMBER ON MEMBER.MBR_SEQ = TRAINER_FEEDBACK.MBR_SEQ
+        WHERE TRAINER_FEEDBACK.MBR_SEQ = #{mbrSeq} AND TO_CHAR(TRAINER_FEEDBACK.TRNF_SUBMISSION_DUE,'YYYY-MM') = #{targetMonth}
+    </select>
+
 </mapper>

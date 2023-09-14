@@ -13,4 +13,6 @@ public interface TrainerFeedbackMapper {
     void updateFeedback(String content);
 
     List<TrainerFeedbackDTO> selectAllTrainerFeedbackByMbrSeq(long mbrSeq);
+
+    String selectOneTrainerFeedbackByMbrSeq(TrainerFeedbackDTO feedbackDTO);
 }
