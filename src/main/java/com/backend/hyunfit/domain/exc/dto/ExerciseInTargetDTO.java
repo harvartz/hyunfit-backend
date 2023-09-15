@@ -13,6 +13,4 @@ public class ExerciseInTargetDTO {
     private Long excSeq;
     private int exctgArea;
     private float exctgWeight;
-
-    // getters and setters
 }

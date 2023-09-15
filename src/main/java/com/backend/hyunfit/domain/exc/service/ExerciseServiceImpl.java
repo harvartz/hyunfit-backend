@@ -18,11 +18,6 @@ public class ExerciseServiceImpl implements ExerciseService{
 
     private final ExerciseMapper exerciseMapper;
 
-//    @Override
-//    public int createExercise(ExerciseDTO exerciseDTO) {
-//        return exerciseMapper.insertOneExercise(exerciseDTO);
-//    }
-
 
     @Transactional
     @Override

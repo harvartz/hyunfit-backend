@@ -20,7 +20,6 @@ public interface ExerciseController {
     @ApiResponse(responseCode = "404", description = "NOT FOUND")
     @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
     ResponseEntity<?> insertExercise(@RequestBody ExerciseDTO exerciseDTO);
-//    ResponseEntity<ExerciseDTO> createExercise(ExerciseDTO exerciseDTO);
     
     @Operation(summary="Exercise 전체 목록 불러오기", description = "전체 운동 정보 조회")
     @ApiResponse(responseCode = "200", description = "OK")
