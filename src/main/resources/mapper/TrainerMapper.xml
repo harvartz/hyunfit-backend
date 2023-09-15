@@ -9,16 +9,4 @@
         WHERE trn_id = #{trnId}
     </select>
 
-    <select id="selectAllPtBytrnSeq" parameterType="long" resultType="PersonalTrainingDTO">
-        SELECT PT_SEQ,PT_RESERVATION_DATE,PT_RESERVATION_STATUS,MBR_NAME
-        FROM FIREMEN.PERSONAL_TRAINING JOIN FIREMEN.MEMBER ON MEMBER.MBR_SEQ = PERSONAL_TRAINING.MBR_SEQ
-        WHERE TRN_SEQ = #{trnSeq} AND TO_CHAR(PT_RESERVATION_DATE, 'YYYY-MM-DD') = TO_CHAR(SYSDATE, 'YYYY-MM-DD')
-    </select>
-
-    <select id="selectNoFeedbackBytrnSeq" parameterType="long" resultType="TrainerFeedbackDTO">
-        SELECT MBR_NAME , TO_CHAR(TRNF_SUBMISSION_DUE, 'YYYY-MM') AS targetMonth
-        FROM MEMBER JOIN TRAINER_FEEDBACK ON MEMBER.MBR_SEQ = TRAINER_FEEDBACK.MBR_SEQ
-        WHERE TRN_SEQ = #{trnSeq} AND TRNF_WRITTEN_DATE IS NULL
-    </select>
-
 </mapper>

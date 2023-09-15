@@ -59,9 +59,9 @@
     </select>
 
     <select id="selectAllPtBytrnSeq" parameterType="long" resultType="PersonalTrainingDTO">
-        SELECT *
-        FROM FIREMEN.PERSONAL_TRAINING
-        WHERE TRN_SEQ = #{trnSeq}
+        SELECT PT_SEQ,PT_RESERVATION_DATE,PT_RESERVATION_STATUS,MBR_NAME
+        FROM FIREMEN.PERSONAL_TRAINING JOIN FIREMEN.MEMBER ON MEMBER.MBR_SEQ = PERSONAL_TRAINING.MBR_SEQ
+        WHERE TRN_SEQ = #{trnSeqL} AND TO_CHAR(PT_RESERVATION_DATE, 'YYYY-MM-DD') = TO_CHAR(SYSDATE, 'YYYY-MM-DD')
     </select>
 
 </mapper>

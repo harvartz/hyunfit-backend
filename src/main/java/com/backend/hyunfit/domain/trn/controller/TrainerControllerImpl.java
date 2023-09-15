@@ -3,6 +3,7 @@ package com.backend.hyunfit.domain.trn.controller;
 import com.backend.hyunfit.domain.pt.dto.PersonalTrainingDTO;
 import com.backend.hyunfit.domain.trn.dto.TrainerDTO;
 import com.backend.hyunfit.domain.trn.service.TrainerService;
+import com.backend.hyunfit.domain.trnf.dto.TrainerFeedbackDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
@@ -30,9 +31,11 @@ public class TrainerControllerImpl implements TrainerController {
 
     @GetMapping("{trnSeq}/nofeedback")
     @Override
-    public ResponseEntity<TrainerDTO> findNoFeedbackBytrnSeq(@PathVariable String trnSeq){
-        TrainerDTO trainerDTO = new TrainerDTO();
-        trainerDTO = trainerService.selectNoFeedbackBytrnSeq(trnSeq);
-        return ResponseEntity.ok(trainerDTO);
+    public ResponseEntity<List<TrainerFeedbackDTO>> findNoFeedbackBytrnSeq(@PathVariable String trnSeq){
+        System.out.println("cont-"+trnSeq);
+        TrainerDTO trainerDTO = trainerService.selectNoFeedbackBytrnSeq(trnSeq);
+        List<TrainerFeedbackDTO> nfbList = trainerDTO.getNoFeedbackList();
+        System.out.println(nfbList);
+        return ResponseEntity.ok(nfbList);
     }
 }
