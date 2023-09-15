@@ -8,11 +8,11 @@
         INSERT INTO EXERCISE (
             ADM_SEQ, EXC_NAME, EXC_TYPE, EXC_CONTENT,
             EXC_DIFFICULTY, EXC_CALORIES_PER_REP, EXC_SET_COUNT,
-            EXC_TIME_PER_SET_IN_SEC, EXC_URL
+            EXC_REP_COUNT_PER_SET,EXC_TIME_PER_SET_IN_SEC
         ) VALUES (
              #{admSeq}, #{excName}, #{excType}, #{excContent},
              #{excDifficulty}, #{excCaloriesPerRep}, #{excSetCount},
-             #{excTimePerSetInSec}, #{excUrl}
+             #{excRepCountPerSet},#{excTimePerSetInSec}
                  )
         <selectKey keyProperty="excSeq" resultType="long" order="AFTER">
             SELECT EXC_SEQ_PK.CURRVAL FROM DUAL

@@ -21,6 +21,7 @@ public class ExerciseDTO {
     private Integer excDifficulty;
     private Double excCaloriesPerRep;
     private Integer excSetCount;
+    private Integer excRepCountPerSet;
     private Integer excTimePerSetInSec;
     private String excUrl;
     private Timestamp excCreatedDate;
