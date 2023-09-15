@@ -20,7 +20,7 @@ public class ExerciseControllerImpl implements ExerciseController {
     @Override
     @PostMapping
     public ResponseEntity<?> insertExercise(@RequestBody ExerciseDTO exerciseDTO) {
-        long excSeqInserted = exerciseService.insertExerciseAndTarget(exerciseDTO);
+        ExerciseDTO excSeqInserted = exerciseService.insertExerciseAndTarget(exerciseDTO);
         return new ResponseEntity<>(excSeqInserted, HttpStatus.CREATED);
     }
 
