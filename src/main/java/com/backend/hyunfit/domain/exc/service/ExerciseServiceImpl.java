@@ -21,7 +21,7 @@ public class ExerciseServiceImpl implements ExerciseService{
 
     @Transactional
     @Override
-    public Long insertExerciseAndTarget(ExerciseDTO exerciseDTO) {
+    public ExerciseDTO insertExerciseAndTarget(ExerciseDTO exerciseDTO) {
         System.out.println("여기는 서비스 입니다");
         System.out.println("exerciseMapper.insertOneExercise(exerciseDTO); 실행전");
         exerciseMapper.insertOneExercise(exerciseDTO);
@@ -35,7 +35,7 @@ public class ExerciseServiceImpl implements ExerciseService{
             target.setExcSeq(generatedExcSeq);
             exerciseMapper.insertExerciseTarget(target);
         }
-        return generatedExcSeq;
+        return exerciseDTO;
     }
 
     @Override

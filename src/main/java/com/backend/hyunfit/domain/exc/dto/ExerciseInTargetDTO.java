@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ExerciseInTargetDTO {
     private Long excSeq;
-    private int exctgArea;
+    private Integer exctgArea;
     private float exctgWeight;
 }
