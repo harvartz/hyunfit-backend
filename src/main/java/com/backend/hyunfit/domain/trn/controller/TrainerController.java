@@ -2,6 +2,7 @@ package com.backend.hyunfit.domain.trn.controller;
 
 import com.backend.hyunfit.domain.pt.dto.PersonalTrainingDTO;
 import com.backend.hyunfit.domain.trn.dto.TrainerDTO;
+import com.backend.hyunfit.domain.trnf.dto.TrainerFeedbackDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -29,6 +30,6 @@ public interface TrainerController {
             @ApiResponse(responseCode = "404", description = "NOT FOUND"),
             @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
     })
-    ResponseEntity<TrainerDTO> findNoFeedbackBytrnSeq(String trnSeq);
+    ResponseEntity<List<TrainerFeedbackDTO>> findNoFeedbackBytrnSeq(String trnSeq);
 
 }

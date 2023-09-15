@@ -17,6 +17,7 @@ public class TrainerFeedbackDTO {
     private Long mbrSeq;
     private String mbrName;
     private String trnfContent;
+    private Timestamp trnfCreationDate;
     private Timestamp trnfWrittenDate;
     private Timestamp trnfReportModDate;
     private Timestamp trnfSubmissionDue;

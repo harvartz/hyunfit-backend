@@ -15,4 +15,6 @@ public interface TrainerFeedbackMapper {
     List<TrainerFeedbackDTO> selectAllTrainerFeedbackByMbrSeq(long mbrSeq);
 
     String selectOneTrainerFeedbackByMbrSeq(TrainerFeedbackDTO feedbackDTO);
+
+    List<TrainerFeedbackDTO> selectNoFeedbackBytrnSeq(long trnSeqL);
 }
