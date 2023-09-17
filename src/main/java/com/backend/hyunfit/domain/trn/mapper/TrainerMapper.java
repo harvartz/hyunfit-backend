@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Mapper
 public interface TrainerMapper {
-    Optional<TrainerDTO> selectOneTrainerByTrnId(AuthDTO authDTO);
+    Optional<TrainerDTO> selectOneTrainerByTrnId(String trnId);
     List<TrainerFeedbackDTO> selectNoFeedbackBytrnSeq(long trnSeq);
     List<PersonalTrainingDTO> selectAllPtBytrnSeq(long trnSeq);
 }
