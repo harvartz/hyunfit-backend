@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.backend.hyunfit.domain.ptr.mapper.PtrMapper">
+
+    <select id="selectAllReviewsByTrnId" parameterType="String" resultType="PtrDTO">
+        select
+            MASK_NAME(M.MBR_NAME) as MBR_NAME,
+            PTR.PTR_CONTENT,
+            PTR.PTR_STICKERS,
+            PTR.PTR_RATING,
+            PTR.PTR_CREATION_DATE
+        from PERSONAL_TRAINING_REVIEW PTR
+                 join PERSONAL_TRAINING PT on PT.PT_SEQ = PTR.PT_SEQ
+                 join TRAINER T on PT.TRN_SEQ = T.TRN_SEQ
+                 join MEMBER M on PT.MBR_SEQ = M.MBR_SEQ
+        where TRN_ID = #{ptrId}
+    </select>
+
+</mapper>
