@@ -29,7 +29,16 @@
 
     <select id="selectAllExercises" resultMap="ExerciseResultMap">
         SELECT
-            E.*,
+            E.EXC_SEQ,
+            E.ADM_SEQ,
+            E.EXC_NAME,
+            E.EXC_TYPE,
+            E.EXC_CONTENT,
+            E.EXC_DIFFICULTY,
+            E.EXC_CALORIES_PER_REP,
+            E.EXC_SET_COUNT,
+            E.EXC_REP_COUNT_PER_SET,
+            E.EXC_TIME_PER_SET_IN_SEC,
             T.EXCTG_AREA,
             T.EXCTG_WEIGHT
         FROM EXERCISE E
@@ -38,7 +47,16 @@
 
     <select id="selectOneExercise" resultMap="ExerciseResultMap">
         SELECT
-            E.*,
+            E.EXC_SEQ,
+            E.ADM_SEQ,
+            E.EXC_NAME,
+            E.EXC_TYPE,
+            E.EXC_CONTENT,
+            E.EXC_DIFFICULTY,
+            E.EXC_CALORIES_PER_REP,
+            E.EXC_SET_COUNT,
+            E.EXC_REP_COUNT_PER_SET,
+            E.EXC_TIME_PER_SET_IN_SEC,
             T.EXCTG_AREA,
             T.EXCTG_WEIGHT
         FROM EXERCISE E
