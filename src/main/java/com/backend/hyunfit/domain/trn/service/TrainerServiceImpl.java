@@ -1,5 +1,6 @@
 package com.backend.hyunfit.domain.trn.service;
 
+import com.backend.hyunfit.domain.pt.dto.TimeslotDTO;
 import com.backend.hyunfit.domain.pt.mapper.PersonalTrainingMapper;
 import com.backend.hyunfit.domain.ptr.dto.PtrDTO;
 import com.backend.hyunfit.domain.ptr.mapper.PtrMapper;
@@ -7,6 +8,7 @@ import com.backend.hyunfit.domain.trn.dto.TrainerDTO;
 import com.backend.hyunfit.domain.trn.mapper.TrainerMapper;
 import com.backend.hyunfit.domain.trnf.mapper.TrainerFeedbackMapper;
 import com.backend.hyunfit.global.common.Utils;
+import com.backend.hyunfit.global.dto.SearchDTO;
 import com.backend.hyunfit.global.exception.BusinessException;
 import com.backend.hyunfit.global.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
@@ -55,5 +57,15 @@ public class TrainerServiceImpl implements TrainerService {
 
         Utils.maskPassword(trainer);
         return trainer;
+    }
+
+    @Override
+    public TimeslotDTO selectFullyReservedDaysByMonth(SearchDTO searchDTO) {
+        return personalTrainingMapper.selectFullyReservedDaysByMonth(searchDTO);
+    }
+
+    @Override
+    public TimeslotDTO selectAllReservedTimeslotsByDay(SearchDTO searchDTO) {
+        return personalTrainingMapper.selectAllReservedTimeslotsByDay(searchDTO);
     }
 }

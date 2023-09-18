@@ -1,7 +1,11 @@
 package com.backend.hyunfit.domain.trn.service;
 
+import com.backend.hyunfit.domain.pt.dto.TimeslotDTO;
 import com.backend.hyunfit.domain.trn.dto.TrainerDTO;
+import com.backend.hyunfit.global.dto.SearchDTO;
 import com.backend.hyunfit.global.exception.BusinessException;
+
+import java.util.List;
 
 
 public interface TrainerService {
@@ -32,4 +36,7 @@ public interface TrainerService {
      * @throws BusinessException 입력된 trnId에 해당하는 Trainer가 없을 때 Not Found Exception이 발생합니다.
      */
     TrainerDTO selectOneTrnByTrnId(String trnId);
+
+    TimeslotDTO selectFullyReservedDaysByMonth(SearchDTO searchDTO);
+    TimeslotDTO selectAllReservedTimeslotsByDay(SearchDTO searchDTO);
 }
