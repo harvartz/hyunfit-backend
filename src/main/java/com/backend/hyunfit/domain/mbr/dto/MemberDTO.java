@@ -37,4 +37,5 @@ public class MemberDTO {
     private List<PersonalTrainingDTO> personalTrainingDTOList;
     private ExerciseHistorySummaryDTO exerciseHistory;
     private List<TrainerFeedbackDTO> trainerFeedbacks;
+    private TrainerFeedbackDTO trainerFeedback;
 }

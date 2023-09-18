@@ -1,6 +1,5 @@
 package com.backend.hyunfit.domain.trnf.service;
 
-import com.backend.hyunfit.domain.trn.dto.FeedbackDTO;
 import com.backend.hyunfit.domain.trnf.dto.TrainerFeedbackDTO;
 import com.backend.hyunfit.domain.trnf.mapper.TrainerFeedbackMapper;
 import lombok.RequiredArgsConstructor;
@@ -8,8 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.security.Timestamp;
-import java.time.Instant;
 import java.util.Map;
 
 @Service

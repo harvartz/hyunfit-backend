@@ -1,4 +1,4 @@
-package com.backend.hyunfit.domain.trn.dto;
+package com.backend.hyunfit.domain.exc.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class FeedbackDTO {
-    String mbrName;
-    String feedbackTargetDate;
+public class ExerciseInTargetDTO {
+    private Long excSeq;
+    private Integer exctgArea;
+    private float exctgWeight;
 }

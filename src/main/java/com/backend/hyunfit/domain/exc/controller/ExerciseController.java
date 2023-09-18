@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public interface ExerciseController {
     @ApiResponse(responseCode = "400", description = "BAD REQUEST")
     @ApiResponse(responseCode = "404", description = "NOT FOUND")
     @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
-    ResponseEntity<ExerciseDTO> createExercise(ExerciseDTO exerciseDTO);
+    ResponseEntity<?> insertExercise(@RequestBody ExerciseDTO exerciseDTO);
     
     @Operation(summary="Exercise 전체 목록 불러오기", description = "전체 운동 정보 조회")
     @ApiResponse(responseCode = "200", description = "OK")
@@ -40,4 +41,5 @@ public interface ExerciseController {
     @ApiResponse(responseCode = "404", description = "NOT FOUND")
     @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
     ResponseEntity<Void> removeExercise(@PathVariable Long excSeq);
+
 }

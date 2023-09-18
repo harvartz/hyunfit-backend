@@ -17,15 +17,15 @@ public class RoutineDTO {
     private String rtnName;
     private String rtnContent;
     private Timestamp rtnCreatedDate;
-    private String rtnUrl;
+    private String rtnThumbnailUrl;
     private Integer rtnTarget;
     private Integer rtnDuration;
-    private Integer rtnDifficulty;
+    private Integer rtnExperienceLevel;
     private List<ExerciseDTO> exercises;
 
     public boolean hasMissingSearchCriteria() {
         return rtnTarget == null ||
                 rtnDuration == null ||
-                rtnDifficulty == null;
+                rtnExperienceLevel == null;
     }
 }

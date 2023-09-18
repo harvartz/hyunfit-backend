@@ -1,25 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-
 <mapper namespace="com.backend.hyunfit.domain.trn.mapper.TrainerMapper">
 
     <select id="selectOneTrainerByTrnId" parameterType="String" resultType="TrainerDTO">
-        SELECT trn_id, trn_pw
-        FROM TRAINER
+        SELECT trn_id,
+               trn_pw,
+               trn_name,
+               trn_type,
+               C.CODE_NAME as trn_type_name,
+               trn_short_description,
+               trn_about,
+               trn_experience_year,
+               trn_available_time,
+               trn_profile_url,
+               (SELECT COUNT('x') FROM PERSONAL_TRAINING PT WHERE PT.TRN_SEQ = T.TRN_SEQ) as trn_pt_count
+        FROM TRAINER T
+                 JOIN COMMON_CODE C ON CATEGORY = 'TRAINER_TYPE' AND CODE_NUMBER = T.TRN_TYPE
         WHERE trn_id = #{trnId}
-    </select>
-
-    <select id="selectAllPtBytrnSeq" parameterType="long" resultType="PersonalTrainingDTO">
-        SELECT *
-        FROM PERSONAL_TRAINING
-        WHERE TRN_SEQ = #{trnSeq}
-    </select>
-
-    <select id="selectNoFeedbackBytrnSeq" parameterType="long" resultType="FeedbackDTO">
-        SELECT MBR_NAME , TO_CHAR(TRNF_FEEDBACK_PERIOD, 'YYYY-MM') AS FEEDBACK_TARGET_DATE
-        FROM MEMBER JOIN TRAINER_FEEDBACK ON MEMBER.MBR_SEQ = TRAINER_FEEDBACK.MBR_SEQ
-        WHERE TRN_SEQ = #{trnSeq} AND TRNF_WRITTEN_DATE IS NULL
     </select>
 
 </mapper>

@@ -30,4 +30,16 @@
         WHERE MBR_SEQ = #{mbrSeq}
     </select>
 
+    <select id="selectOneTrainerFeedbackByMbrSeq" parameterType="TrainerFeedbackDTO" resultType="String">
+        SELECT TRNF_CONTENT
+        FROM FIREMEN.TRAINER_FEEDBACK JOIN FIREMEN.MEMBER ON MEMBER.MBR_SEQ = TRAINER_FEEDBACK.MBR_SEQ
+        WHERE TRAINER_FEEDBACK.MBR_SEQ = #{mbrSeq} AND TO_CHAR(TRAINER_FEEDBACK.TRNF_SUBMISSION_DUE,'YYYY-MM') = #{targetMonth}
+    </select>
+
+    <select id="selectNoFeedbackBytrnSeq" parameterType="long" resultType="TrainerFeedbackDTO">
+        SELECT MBR_NAME , TRNF_SUBMISSION_DUE , TRNF_SEQ , TRNF_CREATION_DATE, TRNF_CONTENT
+        FROM MEMBER JOIN TRAINER_FEEDBACK ON MEMBER.MBR_SEQ = TRAINER_FEEDBACK.MBR_SEQ
+        WHERE TRN_SEQ = #{trnSeq} AND TRNF_WRITTEN_DATE IS NULL
+    </select>
+
 </mapper>

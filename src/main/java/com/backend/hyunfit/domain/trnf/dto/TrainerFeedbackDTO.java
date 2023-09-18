@@ -15,11 +15,12 @@ public class TrainerFeedbackDTO {
     private Long trnfSeq;
     private Long trnSeq;
     private Long mbrSeq;
+    private String mbrName;
     private String trnfContent;
-    private Timestamp writtendDate;
+    private Timestamp trnfCreationDate;
+    private Timestamp trnfWrittenDate;
     private Timestamp trnfReportModDate;
     private Timestamp trnfSubmissionDue;
-    private Timestamp ptLessonEndDate;
-
+    private String targetMonth;
     private String content;
 }
