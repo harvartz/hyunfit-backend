@@ -18,6 +18,8 @@ public class PersonalTrainingServiceImpl implements PersonalTrainingService {
     @Override
     public void createPt(PersonalTrainingDTO personalTrainingDTO) {
         // validation 처리
+        // 같은 시각에 예약이 있으면 오류 발생
+        
         int insertResult = personalTrainingMapper.insertOnePt(personalTrainingDTO);
         if (insertResult == 0) {
             throw BusinessException.of(ErrorCode.DB_QUERY_INSERT_EXCEPTION);
@@ -35,7 +37,7 @@ public class PersonalTrainingServiceImpl implements PersonalTrainingService {
 
     @Override
     public void createPtReview(PersonalTrainingDTO personalTrainingDTO) {
-        personalTrainingMapper.selectOnePtByPtrSeq(personalTrainingDTO.getPtSeq())
+        personalTrainingMapper.selectOnePtByPtSeq(personalTrainingDTO.getPtSeq())
                 .orElseThrow(() -> BusinessException.of(ErrorCode.RESERVATION_NOT_FOUND));
 
         int insertResult = personalTrainingMapper.insertOnePtReview(personalTrainingDTO);
@@ -45,11 +47,9 @@ public class PersonalTrainingServiceImpl implements PersonalTrainingService {
     }
 
     @Override
-    public PersonalTrainingDTO selectOnePtByPtrSeq(Long ptSeq) {
-        PersonalTrainingDTO personalTrainingDTO = personalTrainingMapper.selectOnePtByPtrSeq(ptSeq)
+    public PersonalTrainingDTO selectOnePtByPtSeq(Long ptSeq) {
+        return personalTrainingMapper.selectOnePtByPtSeq(ptSeq)
                 .orElseThrow(() -> BusinessException.of(ErrorCode.RESERVATION_NOT_FOUND));
-        personalTrainingDTO.setPtSeq(ptSeq);
-        return personalTrainingDTO;
     }
 
 }

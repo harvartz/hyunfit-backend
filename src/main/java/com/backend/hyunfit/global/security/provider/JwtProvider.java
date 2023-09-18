@@ -1,6 +1,7 @@
 package com.backend.hyunfit.global.security.provider;
 
 import io.jsonwebtoken.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,6 +20,7 @@ import java.util.stream.Stream;
 
 import static io.jsonwebtoken.security.Keys.secretKeyFor;
 
+@Slf4j
 @Component
 public class JwtProvider implements InitializingBean {
     private static final String AUTHORITIES_KEY = "auth";
@@ -36,14 +38,10 @@ public class JwtProvider implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() {
-        System.out.println("afterPropertiesSet");
-
         this.key = secretKeyFor(SignatureAlgorithm.HS512);
     }
 
     public String createToken(Authentication authentication,AuthDTO authDTO){//토큰생성
-        System.out.println("createToken");
-
         long now = (new Date()).getTime();
         Date validity = new Date(now + this.tokenValidityInMilliseconds);
 
@@ -62,8 +60,6 @@ public class JwtProvider implements InitializingBean {
                 .compact();
     }
     public Authentication getAuthentication(String token){// Authentication 리턴
-        System.out.println("getAuthentication");
-
         Claims claims = Jwts
                 .parserBuilder()
                 .setSigningKey(key)
@@ -75,7 +71,6 @@ public class JwtProvider implements InitializingBean {
                 authorityOf(claims.get("role", String.class));
 
         User principal = new User(claims.getSubject(), "", authorities);
-        System.out.println("Authorities : " + authorities);
         return new UsernamePasswordAuthenticationToken(principal, token, authorities);
     }
     public List<GrantedAuthority> authorityOf(String role) {
@@ -83,16 +78,15 @@ public class JwtProvider implements InitializingBean {
         return Stream.of(new SimpleGrantedAuthority(role)).collect(Collectors.toList());
     }
     public boolean validateToken(String token){//만료 체크
-        System.out.println("validateToken");
-
         try{
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
             return true;
         }
-        catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) { System.out.println("잘못된 JWT 토큰 서명");
-            e.printStackTrace();}
-        catch (ExpiredJwtException e) { System.out.println("만료된 JWT 토큰"); }
-        catch (IllegalArgumentException e) { System.out.println("잘못된 JWT 토큰"); }
+        catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
+            log.debug("Invalid JWT Signature");
+        }
+        catch (ExpiredJwtException e) { log.debug("JWT expired"); }
+        catch (IllegalArgumentException e) { log.debug("Illegal JWT"); }
         return false;
     }
 }
