@@ -6,7 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 
-@OpenAPIDefinition(servers = {@Server(url = "${backend-hyunfit-url}", description = "Default Server URL")})
+@OpenAPIDefinition(servers = {@Server(url = "/", description = "Default Server URL")})
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
 public class HyunfitBackendApplication {
 
