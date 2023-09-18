@@ -32,7 +32,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public AuthDTO createTrainerAuth(AuthDTO authDTO) {
-        TrainerDTO trainerDTO = trainerMapper.selectOneTrainerByTrnId(authDTO)
+        TrainerDTO trainerDTO = trainerMapper.selectOneTrainerByTrnId(authDTO.getUsername())
                 .orElseThrow(() -> BusinessException.of(ErrorCode.USERID_NOT_FOUND));
         validate(authDTO, trainerDTO.getTrnPw());
         return authDTO;

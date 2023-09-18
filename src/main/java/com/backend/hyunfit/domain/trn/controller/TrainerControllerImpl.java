@@ -25,17 +25,21 @@ public class TrainerControllerImpl implements TrainerController {
         TrainerDTO trainerDTO = new TrainerDTO();
         trainerDTO = trainerService.selectAllPtBytrnSeq(trnSeq);
         List<PersonalTrainingDTO> ptList = trainerDTO.getPtList();
-        System.out.println(ptList);
         return ResponseEntity.ok(ptList);
     }
 
     @GetMapping("{trnSeq}/nofeedback")
     @Override
     public ResponseEntity<List<TrainerFeedbackDTO>> findNoFeedbackBytrnSeq(@PathVariable String trnSeq){
-        System.out.println("cont-"+trnSeq);
         TrainerDTO trainerDTO = trainerService.selectNoFeedbackBytrnSeq(trnSeq);
         List<TrainerFeedbackDTO> nfbList = trainerDTO.getNoFeedbackList();
-        System.out.println(nfbList);
         return ResponseEntity.ok(nfbList);
+    }
+
+    @GetMapping("/{trnId}")
+    @Override
+    public ResponseEntity<TrainerDTO> selectOneTrnByTrnId(@PathVariable String trnId) {
+        TrainerDTO trainerDTO = trainerService.selectOneTrnByTrnId(trnId);
+        return ResponseEntity.ok(trainerDTO);
     }
 }

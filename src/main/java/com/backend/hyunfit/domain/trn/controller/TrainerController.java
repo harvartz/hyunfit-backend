@@ -32,4 +32,12 @@ public interface TrainerController {
     })
     ResponseEntity<List<TrainerFeedbackDTO>> findNoFeedbackBytrnSeq(String trnSeq);
 
+    @Operation(summary = "트레이너 조회", description = "trnId로 Trainer 조회.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "404", description = "NOT FOUND"),
+            @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
+    })
+    ResponseEntity<TrainerDTO> selectOneTrnByTrnId(@PathVariable String trnId);
+
 }
