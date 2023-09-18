@@ -23,7 +23,6 @@ public class ExerciseDTO {
     private Integer excSetCount;
     private Integer excRepCountPerSet;
     private Integer excTimePerSetInSec;
-    private String excUrl;
     private Timestamp excCreatedDate;
     private List<ExerciseInTargetDTO> exerciseTargets;
 }
