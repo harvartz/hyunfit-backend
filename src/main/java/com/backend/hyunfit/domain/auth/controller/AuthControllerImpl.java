@@ -29,7 +29,6 @@ public class AuthControllerImpl implements AuthController {
         authentication.setAuthenticated(authResponse.isAuthenticated());
         authResponse.setRole("member");
         String token = jwtProvider.createToken(authentication,authResponse);
-        System.out.println("token : " + token);
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", "Bearer " + token);
         return new ResponseEntity<>(authResponse, headers, HttpStatus.OK);
@@ -42,7 +41,6 @@ public class AuthControllerImpl implements AuthController {
         authentication.setAuthenticated(authResponse.isAuthenticated());
         authResponse.setRole("admin");
         String token = jwtProvider.createToken(authentication,authResponse);
-        System.out.println("token : " + token);
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", "Bearer " + token);
         return ResponseEntity.ok(authResponse);
@@ -55,7 +53,6 @@ public class AuthControllerImpl implements AuthController {
         authentication.setAuthenticated(authResponse.isAuthenticated());
         authResponse.setRole("trainer");
         String token = jwtProvider.createToken(authentication,authResponse);
-        System.out.println("token : " + token);
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", "Bearer " + token);
         return ResponseEntity.ok(authResponse);

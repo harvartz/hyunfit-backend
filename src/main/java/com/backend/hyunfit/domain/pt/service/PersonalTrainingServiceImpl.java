@@ -35,7 +35,7 @@ public class PersonalTrainingServiceImpl implements PersonalTrainingService {
 
     @Override
     public void createPtReview(PersonalTrainingDTO personalTrainingDTO) {
-        personalTrainingMapper.selectOnePtByPtrSeq(personalTrainingDTO.getPtSeq())
+        personalTrainingMapper.selectOnePtByPtSeq(personalTrainingDTO.getPtSeq())
                 .orElseThrow(() -> BusinessException.of(ErrorCode.RESERVATION_NOT_FOUND));
 
         int insertResult = personalTrainingMapper.insertOnePtReview(personalTrainingDTO);
@@ -45,11 +45,9 @@ public class PersonalTrainingServiceImpl implements PersonalTrainingService {
     }
 
     @Override
-    public PersonalTrainingDTO selectOnePtByPtrSeq(Long ptSeq) {
-        PersonalTrainingDTO personalTrainingDTO = personalTrainingMapper.selectOnePtByPtrSeq(ptSeq)
+    public PersonalTrainingDTO selectOnePtByPtSeq(Long ptSeq) {
+        return personalTrainingMapper.selectOnePtByPtSeq(ptSeq)
                 .orElseThrow(() -> BusinessException.of(ErrorCode.RESERVATION_NOT_FOUND));
-        personalTrainingDTO.setPtSeq(ptSeq);
-        return personalTrainingDTO;
     }
 
 }

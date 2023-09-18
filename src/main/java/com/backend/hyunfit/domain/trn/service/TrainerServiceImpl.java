@@ -22,10 +22,10 @@ public class TrainerServiceImpl implements TrainerService {
     private final PersonalTrainingMapper personalTrainingMapper;
     private final PtrMapper ptrMapper;
     @Override
-    public TrainerDTO selectAllPtBytrnSeq(String trnSeq){
+    public TrainerDTO selectAllPtByTrnSeq(String trnSeq){
         TrainerDTO trainerDTO = new TrainerDTO();
         long trnSeqL = Long.parseLong(trnSeq);
-        trainerDTO.setPtList(personalTrainingMapper.selectAllPtBytrnSeq(trnSeqL));
+        trainerDTO.setPtList(personalTrainingMapper.selectAllPtByTrnSeq(trnSeqL));
         if(trainerDTO.getPtList()==null){
             throw BusinessException.of(ErrorCode.RESERVATIONLIST_NOT_FOUND);
         }

@@ -23,7 +23,7 @@ public class TrainerControllerImpl implements TrainerController {
     @Override
     public ResponseEntity<List<PersonalTrainingDTO>> findAllPtBytrnSeq(@PathVariable String trnSeq){
         TrainerDTO trainerDTO = new TrainerDTO();
-        trainerDTO = trainerService.selectAllPtBytrnSeq(trnSeq);
+        trainerDTO = trainerService.selectAllPtByTrnSeq(trnSeq);
         List<PersonalTrainingDTO> ptList = trainerDTO.getPtList();
         return ResponseEntity.ok(ptList);
     }

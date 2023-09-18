@@ -35,12 +35,11 @@ public interface PersonalTrainingService {
 
 
     /**
-     * PtSeq를 통해서 예약이 있는지 확인하는 메서드입니다
+     * Pt 단일 조회 API입니다.
      *
-     * @param ptSeq Pt 예약 리뷰를 생성합니다.
-     * @throws BusinessException 예약이 생성되지 않을 때 발생하는 예외입니다.
-     *                          이 예외는ErrorCode.DB_QUERY_INSERT_EXCEPTION 에러 코드와 함께 발생합니다.
+     * @param ptSeq Pt 예약의 Seq입니다.
+     * @throws BusinessException Seq에 해당하는 pt가 없을 때 NotFound Exception이 발생합니다.
      */
-    PersonalTrainingDTO selectOnePtByPtrSeq(Long ptSeq);
+    PersonalTrainingDTO selectOnePtByPtSeq(Long ptSeq);
 
 }

@@ -23,42 +23,22 @@
         VALUES (#{ptSeq}, #{ptrContent}, #{ptrRating})
     </insert>
 
-    <select id="selectOnePtByPtrSeq">
+    <select id="selectOnePtByPtSeq">
         SELECT
             PT_SEQ,
-            TRN_SEQ,
             MBR_SEQ,
-            PT_CREATION_DATE,
+            TRN_SEQ,
             PT_RESERVATION_DATE,
             PT_LESSON_DURATION,
             PT_LESSON_START_DATE,
             PT_LESSON_END_DATE,
-            PT_RESERVATION_STATUS,
             PT_CANCELLATION_REASON,
-            PT_NOTES,
-            Reservation_Order
-        FROM (
-                 SELECT
-                     PT_SEQ,
-                     TRN_SEQ,
-                     MBR_SEQ,
-                     PT_CREATION_DATE,
-                     PT_RESERVATION_DATE,
-                     PT_LESSON_DURATION,
-                     PT_LESSON_START_DATE,
-                     PT_LESSON_END_DATE,
-                     PT_RESERVATION_STATUS,
-                     PT_CANCELLATION_REASON,
-                     PT_NOTES,
-                     ROW_NUMBER() OVER (PARTITION BY TRN_SEQ ORDER BY PT_RESERVATION_DATE DESC) AS Reservation_Order
-                 FROM FIREMEN.PERSONAL_TRAINING
-                 WHERE MBR_SEQ = 1
-             )
-        WHERE PT_SEQ = #{ptrSeq}
-
+            PT_NOTES
+        FROM PERSONAL_TRAINING
+        WHERE PT_SEQ = #{ptSeq}
     </select>
 
-    <select id="selectAllPtBytrnSeq" parameterType="long" resultType="PersonalTrainingDTO">
+    <select id="selectAllPtByTrnSeq" parameterType="long" resultType="PersonalTrainingDTO">
         SELECT PT_SEQ,PT_RESERVATION_DATE,PT_RESERVATION_STATUS,MBR_NAME
         FROM FIREMEN.PERSONAL_TRAINING JOIN FIREMEN.MEMBER ON MEMBER.MBR_SEQ = PERSONAL_TRAINING.MBR_SEQ
         WHERE TRN_SEQ = #{trnSeqL} AND TO_CHAR(PT_RESERVATION_DATE, 'YYYY-MM-DD') = TO_CHAR(SYSDATE, 'YYYY-MM-DD')
