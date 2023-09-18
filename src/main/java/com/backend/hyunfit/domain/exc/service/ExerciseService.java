@@ -14,4 +14,5 @@ public interface ExerciseService {
     int removeExercise(Long excSeq);
 
     ExerciseDTO selectOneExercise(Long excSeq);
+
 }

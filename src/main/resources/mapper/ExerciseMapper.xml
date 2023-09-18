@@ -27,12 +27,23 @@
                  )
     </insert>
 
-    <select id="selectAllExercises" resultType="ExerciseDTO">
-        SELECT * FROM EXERCISE
+    <select id="selectAllExercises" resultMap="ExerciseResultMap">
+        SELECT
+            E.*,
+            T.EXCTG_AREA,
+            T.EXCTG_WEIGHT
+        FROM EXERCISE E
+                 LEFT JOIN EXERCISE_TARGET T ON E.EXC_SEQ = T.EXC_SEQ
     </select>
 
-    <select id="selectOneExercise" resultType="ExerciseDTO">
-        SELECT * FROM EXERCISE WHERE EXC_SEQ = #{excSeq}
+    <select id="selectOneExercise" resultMap="ExerciseResultMap">
+        SELECT
+            E.*,
+            T.EXCTG_AREA,
+            T.EXCTG_WEIGHT
+        FROM EXERCISE E
+                 LEFT JOIN EXERCISE_TARGET T ON E.EXC_SEQ = T.EXC_SEQ
+        WHERE E.EXC_SEQ = #{excSeq}
     </select>
 
     <delete id="deleteExercise">
@@ -46,5 +57,28 @@
                  JOIN FIREMEN.EXERCISE E on ERM.EXC_SEQ = E.EXC_SEQ
         WHERE ERM.RTN_SEQ = #{rtnSeq}
     </select>
+
+    <resultMap id="ExerciseResultMap" type="ExerciseDTO">
+        <!-- 기존의 Exercise 필드 매핑 -->
+        <result column="EXC_SEQ" property="excSeq"/>
+        <result column="ADM_SEQ" property="admSeq"/>
+        <result column="EXC_NAME" property="excName"/>
+        <result column="EXC_TYPE" property="excType"/>
+        <result column="EXC_CONTENT" property="excContent"/>
+        <result column="EXC_DIFFICULTY" property="excDifficulty"/>
+        <result column="EXC_CALORIES_PER_REP" property="excCaloriesPerRep"/>
+        <result column="EXC_SET_COUNT" property="excSetCount"/>
+        <result column="EXC_REP_COUNT_PER_SET" property="excRepCountPerSet"/>
+        <result column="EXC_TIME_PER_SET_IN_SEC" property="excTimePerSetInSec"/>
+        <result column="EXC_CREATED_DATE" property="excCreatedDate"/>
+
+        <!-- exerciseTargets 리스트 매핑 -->
+        <collection property="exerciseTargets" ofType="ExerciseInTargetDTO">
+            <result column="EXC_SEQ" property="excSeq"/>
+            <result column="EXCTG_AREA" property="exctgArea"/>
+            <result column="EXCTG_WEIGHT" property="exctgWeight"/>
+        </collection>
+    </resultMap>
+
 
 </mapper>
