@@ -29,6 +29,8 @@ logging:
     org:
       hibernate:
         SQL: debug
+    jdbc:
+      sqlonly: debug
 
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
@@ -36,6 +38,8 @@ mybatis:
   configuration:
     jdbc-type-for-null: VARCHAR
     map-underscore-to-camel-case: true
+
+
 
 springdoc:
   packages-to-scan: com.backend.hyunfit.domain

@@ -23,11 +23,14 @@ public class TrainerDTO {
     private String trnTypeName;
     private String trnShortDescription;
     private String trnAbout;
+    private Integer trnGender;
     private int trnExperienceYear;
     private String trnAvailableTime;
     private String trnProfileUrl;
     private int trnPtCount;
     private double averageReviewRating;
+    private int reviewCount;
+    private double fireScore;
     private List<TrainerFeedbackDTO> noFeedbackList;
     private List<PersonalTrainingDTO> ptList;
     private List<PtrDTO> reviews;

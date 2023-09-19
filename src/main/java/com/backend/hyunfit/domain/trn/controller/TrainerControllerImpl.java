@@ -5,10 +5,14 @@ import com.backend.hyunfit.domain.mbr.dto.MemberDTO;
 import com.backend.hyunfit.domain.pt.dto.PersonalTrainingDTO;
 import com.backend.hyunfit.domain.pt.dto.TimeslotDTO;
 import com.backend.hyunfit.domain.trn.dto.TrainerDTO;
+import com.backend.hyunfit.domain.trn.dto.TrainerSearchDTO;
 import com.backend.hyunfit.domain.trn.service.TrainerService;
 import com.backend.hyunfit.domain.trnf.dto.TrainerFeedbackDTO;
 import com.backend.hyunfit.global.security.provider.JwtProvider;
 import com.backend.hyunfit.global.dto.SearchDTO;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
@@ -68,5 +72,12 @@ public class TrainerControllerImpl implements TrainerController {
                                                                                @RequestParam Timestamp endDate) {
         var searchDTO = SearchDTO.ofTrainerId(trnId, startDate, endDate);
         return ResponseEntity.ok(trainerService.selectAllReservedTimeslotsByDay(searchDTO));
+    }
+
+
+    @Override
+    @GetMapping("")
+    public ResponseEntity<List<TrainerDTO>> selectManyTrnFilteredWithOffset(TrainerSearchDTO trainerSearchDTO) {
+        return ResponseEntity.ok(trainerService.selectManyTrnFilteredWithOffset(trainerSearchDTO));
     }
 }

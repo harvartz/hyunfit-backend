@@ -5,15 +5,18 @@ import com.backend.hyunfit.domain.pt.mapper.PersonalTrainingMapper;
 import com.backend.hyunfit.domain.ptr.dto.PtrDTO;
 import com.backend.hyunfit.domain.ptr.mapper.PtrMapper;
 import com.backend.hyunfit.domain.trn.dto.TrainerDTO;
+import com.backend.hyunfit.domain.trn.dto.TrainerSearchDTO;
 import com.backend.hyunfit.domain.trn.mapper.TrainerMapper;
 import com.backend.hyunfit.domain.trnf.mapper.TrainerFeedbackMapper;
 import com.backend.hyunfit.global.common.Utils;
 import com.backend.hyunfit.global.dto.SearchDTO;
+import com.backend.hyunfit.global.dto.SearchOrder;
 import com.backend.hyunfit.global.exception.BusinessException;
 import com.backend.hyunfit.global.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -67,5 +70,14 @@ public class TrainerServiceImpl implements TrainerService {
     @Override
     public TimeslotDTO selectAllReservedTimeslotsByDay(SearchDTO searchDTO) {
         return personalTrainingMapper.selectAllReservedTimeslotsByDay(searchDTO);
+    }
+
+    @Override
+    public List<TrainerDTO> selectManyTrnFilteredWithOffset(TrainerSearchDTO searchDTO) {
+        if (searchDTO.getPage() < 1)  searchDTO.setPage(1);
+        if (searchDTO.getTrainerTypes() == null) searchDTO.setTrainerTypes(new ArrayList<>());
+        if (searchDTO.getOrder() == null) searchDTO.setOrder(SearchOrder.ANY);
+        if (searchDTO.getKeyword() == null) searchDTO.setKeyword("");
+        return trainerMapper.selectManyTrnFilteredWithOffset(searchDTO);
     }
 }

@@ -9,6 +9,7 @@
                trn_pw,
                trn_name,
                trn_type,
+               trn_gender,
                C.CODE_NAME as trn_type_name,
                trn_short_description,
                trn_about,
@@ -19,6 +20,76 @@
         FROM TRAINER T
                  JOIN COMMON_CODE C ON CATEGORY = 'TRAINER_TYPE' AND CODE_NUMBER = T.TRN_TYPE
         WHERE trn_id = #{trnId}
+    </select>
+
+    <select id="selectManyTrnFilteredWithOffset" parameterType="TrainerSearchDTO" resultType="TrainerDTO">
+        SELECT
+            T.TRN_SEQ,
+            T.TRN_ID,
+            T.TRN_NAME,
+            C.CODE_NAME as trn_type_name,
+            T.TRN_SHORT_DESCRIPTION,
+            T.TRN_PROFILE_URL,
+            T.TRN_GENDER,
+            R.AVERAGE_REVIEW_RATING,
+            R.REVIEW_COUNT,
+            R.STICKER_COUNT,
+            PTC.PT_COUNT,
+            base_trn_score(R.AVERAGE_REVIEW_RATING, R.STICKER_COUNT, PTC.PT_COUNT) as FIRE_SCORE
+        FROM TRAINER T
+        JOIN COMMON_CODE C ON CATEGORY = 'TRAINER_TYPE' AND CODE_NUMBER = TRN_TYPE
+        JOIN (
+            SELECT
+                TRN_SEQ,
+                AVG(R.PTR_RATING) as AVERAGE_REVIEW_RATING,
+                COUNT(R.PTR_SEQ) as REVIEW_COUNT,
+                SUM(REGEXP_COUNT(R.PTR_STICKERS, ',') + 1) as STICKER_COUNT
+            FROM PERSONAL_TRAINING_REVIEW R
+                     JOIN PERSONAL_TRAINING PT ON R.PT_SEQ = PT.PT_SEQ
+            WHERE PT.PT_SEQ = R.PT_SEQ
+            GROUP BY TRN_SEQ
+        ) R ON T.TRN_SEQ = R.TRN_SEQ
+        JOIN (
+            SELECT TRN_SEQ,
+                   COUNT(*) as PT_COUNT
+            FROM PERSONAL_TRAINING
+            WHERE PT_RESERVATION_STATUS = 3
+            GROUP BY TRN_SEQ
+        ) PTC ON PTC.TRN_SEQ = R.TRN_SEQ
+
+        <if test="trnGender != null or trainerTypes.size() > 0 or keyword">
+            WHERE
+            <if test="trainerTypes.size() > 0">
+                TRN_TYPE in
+                <foreach item="type" index="index" collection="trainerTypes"
+                         open="(" separator="," close=")" nullable="true">
+                    #{type}
+                </foreach>
+            </if>
+
+            <if test="trnGender != null">
+                <if test="trainerTypes.size() > 0">
+                    AND
+                </if>
+                TRN_GENDER = #{trnGender}
+            </if>
+
+            <if test="keyword">
+                <if test="trnGender != null or trainerTypes.size() > 0">
+                    AND
+                </if>
+                (TRN_NAME LIKE '%' || #{keyword} || '%' OR
+                TRN_SHORT_DESCRIPTION LIKE '%' || #{keyword} || '%' OR
+                C.CODE_NAME LIKE '%' || #{keyword} || '%')
+            </if>
+        </if>
+        ORDER BY
+            <if test="order.name() == 'FIRE_SCORE'"> FIRE_SCORE </if>
+            <if test="order.name() == 'RATING'">  AVERAGE_REVIEW_RATING </if>
+            <if test="order.name() == 'REVIEW_COUNT'"> REVIEW_COUNT </if>
+            <if test="order.name() == 'ANY'"> TRN_SEQ </if>
+        DESC
+        OFFSET (#{page}-1)*10 ROWS FETCH NEXT 10 ROWS ONLY
     </select>
 
 </mapper>

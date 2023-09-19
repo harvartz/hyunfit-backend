@@ -2,8 +2,10 @@ package com.backend.hyunfit.domain.trn.service;
 
 import com.backend.hyunfit.domain.pt.dto.TimeslotDTO;
 import com.backend.hyunfit.domain.trn.dto.TrainerDTO;
+import com.backend.hyunfit.domain.trn.dto.TrainerSearchDTO;
 import com.backend.hyunfit.global.dto.SearchDTO;
 import com.backend.hyunfit.global.exception.BusinessException;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -37,6 +39,9 @@ public interface TrainerService {
      */
     TrainerDTO selectOneTrnByTrnId(String trnId);
 
+
     TimeslotDTO selectFullyReservedDaysByMonth(SearchDTO searchDTO);
     TimeslotDTO selectAllReservedTimeslotsByDay(SearchDTO searchDTO);
+
+    List<TrainerDTO> selectManyTrnFilteredWithOffset(TrainerSearchDTO trainerSearchDTO);
 }

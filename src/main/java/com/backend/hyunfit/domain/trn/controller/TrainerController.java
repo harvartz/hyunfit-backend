@@ -3,6 +3,7 @@ package com.backend.hyunfit.domain.trn.controller;
 import com.backend.hyunfit.domain.pt.dto.PersonalTrainingDTO;
 import com.backend.hyunfit.domain.pt.dto.TimeslotDTO;
 import com.backend.hyunfit.domain.trn.dto.TrainerDTO;
+import com.backend.hyunfit.domain.trn.dto.TrainerSearchDTO;
 import com.backend.hyunfit.domain.trnf.dto.TrainerFeedbackDTO;
 import com.backend.hyunfit.global.dto.SearchDTO;
 import io.swagger.v3.oas.annotations.Operation;
@@ -63,4 +64,13 @@ public interface TrainerController {
     ResponseEntity<TimeslotDTO> selectAllReservedTimeslotsByDay(@PathVariable String trnId,
                                                                         @RequestParam Timestamp startDate,
                                                                         @RequestParam Timestamp endDate);
+
+    @Operation(summary = "트레이너 검색", description = "조건에 맞는 트레이너 전체조회")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "404", description = "NOT FOUND"),
+            @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
+    })
+    ResponseEntity<List<TrainerDTO>> selectManyTrnFilteredWithOffset(TrainerSearchDTO trainerSearchDTO);
+
 }
