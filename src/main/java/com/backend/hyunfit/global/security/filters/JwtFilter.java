@@ -56,7 +56,7 @@ public class JwtFilter extends BasicAuthenticationFilter {
     private String resolveToken(HttpServletRequest request){
         String bearerToken = request.getHeader(AUTHORIZATION_HEADER);
         if(StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")){
-            String token = bearerToken.substring(7);
+            String token = bearerToken.replace("Bearer ", "");
             System.out.println("token : " + token);
 
             return token;

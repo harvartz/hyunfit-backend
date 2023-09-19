@@ -48,6 +48,7 @@ public class JwtProvider implements InitializingBean {
         Date validity = new Date(now + this.tokenValidityInMilliseconds);
 
         Map<String, Object> claims = new HashMap<>();
+        claims.put("sub",authDTO.getUsername());
         claims.put("role", authDTO.getRole());
 
         Collection<? extends GrantedAuthority> authorities =
@@ -81,6 +82,18 @@ public class JwtProvider implements InitializingBean {
     public List<GrantedAuthority> authorityOf(String role) {
         if (role == null) return Collections.emptyList();
         return Stream.of(new SimpleGrantedAuthority(role)).collect(Collectors.toList());
+    }
+    public AuthDTO getUserInfo(String token) {
+        token = token.replace("Bearer ","");
+        Claims claims = Jwts.parser()
+                .setSigningKey(key)
+                .parseClaimsJws(token)
+                .getBody();
+
+        AuthDTO authDTO = new AuthDTO();
+        authDTO.setUsername(claims.get("sub").toString());
+        authDTO.setRole(claims.get("role").toString());
+        return authDTO;
     }
     public boolean validateToken(String token){//만료 체크
         System.out.println("validateToken");

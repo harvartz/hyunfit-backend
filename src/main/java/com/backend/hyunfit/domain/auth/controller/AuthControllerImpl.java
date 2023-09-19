@@ -10,11 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "${vue.url}")
 @Log4j2
 @RestController
 @RequiredArgsConstructor
@@ -22,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthControllerImpl implements AuthController {
     private final AuthService authService;
     private final JwtProvider jwtProvider;
+
     @PostMapping("/member")
     public ResponseEntity<AuthDTO> createMemberAuth(@RequestBody AuthDTO authDTO) {
         AuthDTO authResponse = authService.createMemberAuth(authDTO);
@@ -29,7 +28,7 @@ public class AuthControllerImpl implements AuthController {
         authentication.setAuthenticated(authResponse.isAuthenticated());
         authResponse.setRole("member");
         String token = jwtProvider.createToken(authentication,authResponse);
-        System.out.println("token : " + token);
+        System.out.println("Mbr-token : " + token);
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", "Bearer " + token);
         return new ResponseEntity<>(authResponse, headers, HttpStatus.OK);
@@ -42,10 +41,10 @@ public class AuthControllerImpl implements AuthController {
         authentication.setAuthenticated(authResponse.isAuthenticated());
         authResponse.setRole("admin");
         String token = jwtProvider.createToken(authentication,authResponse);
-        System.out.println("token : " + token);
+        System.out.println("Adm-token : " + token);
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", "Bearer " + token);
-        return ResponseEntity.ok(authResponse);
+        return new ResponseEntity<>(authResponse, headers, HttpStatus.OK);
     }
   
     @PostMapping("/trainer")
@@ -55,10 +54,10 @@ public class AuthControllerImpl implements AuthController {
         authentication.setAuthenticated(authResponse.isAuthenticated());
         authResponse.setRole("trainer");
         String token = jwtProvider.createToken(authentication,authResponse);
-        System.out.println("token : " + token);
+        System.out.println("Trn-token : " + token);
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", "Bearer " + token);
-        return ResponseEntity.ok(authResponse);
+        return new ResponseEntity<>(authResponse, headers, HttpStatus.OK);
     }
 
 }

@@ -1,13 +1,15 @@
 package com.backend.hyunfit.domain.mbr.controller;
 
+import com.backend.hyunfit.domain.auth.dto.AuthDTO;
 import com.backend.hyunfit.domain.mbr.dto.MemberDTO;
 import com.backend.hyunfit.domain.mbr.service.MemberService;
 import com.backend.hyunfit.global.dto.SearchDTO;
+import com.backend.hyunfit.global.security.provider.JwtProvider;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.sql.Timestamp;
 
 @CrossOrigin(origins = "${vue.url}")
@@ -17,6 +19,12 @@ import java.sql.Timestamp;
 @RequestMapping(value = "/members")
 public class MemberControllerImpl implements MemberController {
     private final MemberService memberService;
+    private final JwtProvider jwtProvider;
+    @GetMapping("/me")
+    public MemberDTO selectOneMemberByToken(@RequestHeader("authorization") String authorizationHeader){
+        AuthDTO authDTO = jwtProvider.getUserInfo(authorizationHeader);
+        return memberService.selectOneMemberById(authDTO.getUsername());
+    }
 
     @Override
     @PutMapping("/{mbrId}")
