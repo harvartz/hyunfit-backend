@@ -1,6 +1,8 @@
 package com.backend.hyunfit.domain.pt.mapper;
 
 import com.backend.hyunfit.domain.pt.dto.PersonalTrainingDTO;
+import com.backend.hyunfit.domain.pt.dto.TimeslotDTO;
+import com.backend.hyunfit.global.dto.SearchDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -11,6 +13,8 @@ public interface PersonalTrainingMapper {
     int insertOnePt(PersonalTrainingDTO personalTrainingDTO);
     int updateOnePt(PersonalTrainingDTO personalTrainingDTO);
     int insertOnePtReview(PersonalTrainingDTO personalTrainingDTO);
-    Optional<PersonalTrainingDTO> selectOnePtByPtrSeq(Long ptSeq);
-    List<PersonalTrainingDTO> selectAllPtBytrnSeq(long trnSeqL);
+    Optional<PersonalTrainingDTO> selectOnePtByPtSeq(Long ptSeq);
+    List<PersonalTrainingDTO> selectAllPtByTrnSeq(long trnSeqL);
+    TimeslotDTO selectFullyReservedDaysByMonth(SearchDTO searchDTO);
+    TimeslotDTO selectAllReservedTimeslotsByDay(SearchDTO searchDTO);
 }

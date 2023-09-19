@@ -4,8 +4,11 @@
 <mapper namespace="com.backend.hyunfit.domain.pt.mapper.PersonalTrainingMapper">
     <insert id="insertOnePt" parameterType="PersonalTrainingDTO">
         INSERT INTO FIREMEN.PERSONAL_TRAINING
-            (MBR_SEQ, TRN_SEQ, PT_RESERVATION_DATE, PT_RESERVATION_STATUS)
-        VALUES (#{mbrSeq}, #{trnSeq}, #{ptReservationDate}, #{ptReservationStatus})
+            (MBR_SEQ, TRN_SEQ, PT_RESERVATION_DATE, PT_NOTE_STICKERS, PT_RESERVATION_STATUS)
+        VALUES (#{mbrSeq}, #{trnSeq}, #{ptReservationDate}, #{ptNoteStickers}, default)
+        <selectKey keyProperty="ptSeq" resultType="long" order="AFTER">
+            SELECT PT_SEQ_PK.CURRVAL FROM DUAL
+        </selectKey>
     </insert>
 
     <update id="updateOnePt" parameterType="PersonalTrainingDTO">
@@ -23,45 +26,58 @@
         VALUES (#{ptSeq}, #{ptrContent}, #{ptrRating})
     </insert>
 
-    <select id="selectOnePtByPtrSeq">
+    <select id="selectOnePtByPtSeq">
         SELECT
             PT_SEQ,
-            TRN_SEQ,
             MBR_SEQ,
-            PT_CREATION_DATE,
+            TRN_SEQ,
             PT_RESERVATION_DATE,
             PT_LESSON_DURATION,
             PT_LESSON_START_DATE,
             PT_LESSON_END_DATE,
-            PT_RESERVATION_STATUS,
             PT_CANCELLATION_REASON,
-            PT_NOTES,
-            Reservation_Order
-        FROM (
-                 SELECT
-                     PT_SEQ,
-                     TRN_SEQ,
-                     MBR_SEQ,
-                     PT_CREATION_DATE,
-                     PT_RESERVATION_DATE,
-                     PT_LESSON_DURATION,
-                     PT_LESSON_START_DATE,
-                     PT_LESSON_END_DATE,
-                     PT_RESERVATION_STATUS,
-                     PT_CANCELLATION_REASON,
-                     PT_NOTES,
-                     ROW_NUMBER() OVER (PARTITION BY TRN_SEQ ORDER BY PT_RESERVATION_DATE DESC) AS Reservation_Order
-                 FROM FIREMEN.PERSONAL_TRAINING
-                 WHERE MBR_SEQ = 1
-             )
-        WHERE PT_SEQ = #{ptrSeq}
-
+            PT_NOTES
+        FROM PERSONAL_TRAINING
+        WHERE PT_SEQ = #{ptSeq}
     </select>
 
-    <select id="selectAllPtBytrnSeq" parameterType="long" resultType="PersonalTrainingDTO">
+    <select id="selectAllPtByTrnSeq" parameterType="long" resultType="PersonalTrainingDTO">
         SELECT PT_SEQ,PT_RESERVATION_DATE,PT_RESERVATION_STATUS,MBR_NAME
         FROM FIREMEN.PERSONAL_TRAINING JOIN FIREMEN.MEMBER ON MEMBER.MBR_SEQ = PERSONAL_TRAINING.MBR_SEQ
         WHERE TRN_SEQ = #{trnSeqL} AND TO_CHAR(PT_RESERVATION_DATE, 'YYYY-MM-DD') = TO_CHAR(SYSDATE, 'YYYY-MM-DD')
     </select>
 
+    <select id="selectFullyReservedDaysByMonth" parameterType="SearchDTO" resultMap="DaysResultMap">
+        SELECT max(T.TRN_ID) as TRN_ID, trunc(PT.PT_RESERVATION_DATE) days, count(*) as rsv_cnt
+        FROM PERSONAL_TRAINING PT
+        JOIN TRAINER T ON PT.TRN_SEQ = T.TRN_SEQ
+        WHERE T.TRN_ID = #{trnId}
+          AND PT.PT_RESERVATION_DATE > #{startDate}
+          AND PT.PT_RESERVATION_DATE &lt; #{endDate}
+        GROUP BY trunc(PT.PT_RESERVATION_DATE)
+        HAVING count(*) >= 15
+    </select>
+
+    <select id="selectAllReservedTimeslotsByDay" parameterType="SearchDTO" resultMap="TimeslotResultMap">
+        SELECT T.TRN_ID, PT.PT_RESERVATION_DATE as timeslots
+        FROM PERSONAL_TRAINING PT
+        JOIN TRAINER T ON PT.TRN_SEQ = T.TRN_SEQ
+        WHERE T.TRN_ID = #{trnId}
+          AND PT.PT_RESERVATION_DATE > #{startDate}
+          AND PT.PT_RESERVATION_DATE &lt; #{endDate}
+    </select>
+
+    <resultMap id="TimeslotResultMap" type="TimeslotDTO">
+        <result column="TRN_ID" property="trnId"/>
+        <collection property="timeslots" ofType="String">
+            <result column="timeslots"/>
+        </collection>
+    </resultMap>
+
+    <resultMap id="DaysResultMap" type="TimeslotDTO">
+        <result column="TRN_ID" property="trnId"/>
+        <collection property="days" ofType="String">
+            <result column="days"/>
+        </collection>
+    </resultMap>
 </mapper>
