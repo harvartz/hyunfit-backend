@@ -25,15 +25,15 @@ public class TrainerControllerImpl implements TrainerController {
     private final TrainerService trainerService;
     private final JwtProvider jwtProvider;
     @GetMapping("/me")
-    public TrainerDTO selectOneTrainerByToken(@RequestHeader("authorization") String authorizationHeader){
+    public TrainerDTO selectOneTrainerByToken(@RequestHeader("Authorization") String authorizationHeader){
         AuthDTO authDTO = jwtProvider.getUserInfo(authorizationHeader);
-        return trainerService.selectOneTrnByTrnId(authDTO.getUsername());
+        TrainerDTO trainerDTO = trainerService.selectOneTrnByTrnId(authDTO.getUsername());
+        return trainerDTO;
     }
     @GetMapping("{trnSeq}/personal-training")
     @Override
     public ResponseEntity<List<PersonalTrainingDTO>> findAllPtBytrnSeq(@PathVariable String trnSeq){
-        TrainerDTO trainerDTO = new TrainerDTO();
-        trainerDTO = trainerService.selectAllPtByTrnSeq(trnSeq);
+        TrainerDTO trainerDTO = trainerService.selectAllPtByTrnSeq(trnSeq);
         List<PersonalTrainingDTO> ptList = trainerDTO.getPtList();
         return ResponseEntity.ok(ptList);
     }
