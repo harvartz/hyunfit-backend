@@ -21,6 +21,13 @@ public class RoutineDTO {
     private Integer rtnTarget;
     private Integer rtnDuration;
     private Integer rtnExperienceLevel;
+    private Integer rtnGoal;
+    private Integer rtnKneeHealthConsidered;
+    private Integer rtnNoiseConsidered;
+    private Integer rtnLongSitter;
+    private Integer rtnNeckShoulderFocused;
+    private Integer rtnBackDiskConsidered;
+    private Integer rtnRewardPoint;
     private List<ExerciseDTO> exercises;
 
     public boolean hasMissingSearchCriteria() {
