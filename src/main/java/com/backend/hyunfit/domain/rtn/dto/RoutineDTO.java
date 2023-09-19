@@ -17,7 +17,6 @@ public class RoutineDTO {
     private String rtnName;
     private String rtnContent;
     private Timestamp rtnCreatedDate;
-    private String rtnThumbnailUrl;
     private Integer rtnTarget;
     private Integer rtnDuration;
     private Integer rtnExperienceLevel;
