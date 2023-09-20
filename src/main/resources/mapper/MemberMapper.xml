@@ -5,7 +5,8 @@
 <mapper namespace="com.backend.hyunfit.domain.mbr.mapper.MemberMapper">
 
     <select id="selectOneMemberById" parameterType="String" resultType="MemberDTO">
-        SELECT mbr_id,
+        SELECT mbr_seq,
+               mbr_id,
                mbr_pw,
                mbr_name,
                mbr_total_point,
