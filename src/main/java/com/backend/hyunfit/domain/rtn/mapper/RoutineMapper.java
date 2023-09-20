@@ -8,7 +8,7 @@ import java.util.Optional;
 
 @Mapper
 public interface RoutineMapper {
-    List<RoutineDTO> selectAllRoutineFilteredSearch(RoutineDTO routineDTO);
+    List<RoutineDTO> selectAllRoutineSearch(RoutineDTO routineDTO);
     int insertOneRoutine(RoutineDTO routineDTO);
     Optional<RoutineDTO> selectOneRoutineByRtnSeq(long rtnSeq);
     int deleteOneRoutineByRtnSeq(long rtnSeq);

@@ -18,10 +18,11 @@ import java.util.List;
 public class RoutineControllerImpl implements RoutineController {
     private final RoutineService routineService;
 
+
     @Override
-    @GetMapping("")
-    public ResponseEntity<List<RoutineDTO>> selectAllRoutineFilteredSearch(RoutineDTO routineDTO) {
-        List<RoutineDTO> routines = routineService.selectAllRoutineFilteredSearch(routineDTO);
+    @GetMapping("/all")
+    public ResponseEntity<List<RoutineDTO>> selectAllRoutineSearch(RoutineDTO routineDTO) {
+        List<RoutineDTO> routines = routineService.selectAllRoutineSearch(routineDTO);
         return ResponseEntity.ok(routines);
     }
 
