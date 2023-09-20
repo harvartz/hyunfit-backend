@@ -37,7 +37,6 @@ public class MemberServiceImpl implements MemberService {
         // 멤버 mbrId 조회 검증
         selectOneMemberById(memberDTO);
 
-
         int updateResult = memberMapper.updateOneMemberById(memberDTO);
         if (updateResult == 0) {
             throw BusinessException.of(ErrorCode.DB_QUERY_UPDATE_EXCEPTION);
