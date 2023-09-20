@@ -28,6 +28,8 @@ public class RoutineDTO {
     private Integer rtnBackDiskConsidered;
     private Integer rtnRewardPoint;
     private List<ExerciseDTO> exercises;
+    private Double rtnDurationInMin;
+    private Integer rtnCaloriesBurnt;
 
     public boolean hasMissingSearchCriteria() {
         return rtnTarget == null ||
