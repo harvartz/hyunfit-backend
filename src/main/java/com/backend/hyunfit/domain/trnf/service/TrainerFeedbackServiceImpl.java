@@ -21,6 +21,10 @@ public class TrainerFeedbackServiceImpl implements TrainerFeedbackService{
         return feedbackDTO;
     }
 
+    public TrainerFeedbackDTO updateFeedback(TrainerFeedbackDTO feedbackDTO){
+        trainerFeedbackMapper.updateFeedback(feedbackDTO);
+        return feedbackDTO;
+    }
     @Override
     public TrainerFeedbackDTO getGptFeedback(String content) {
 

@@ -20,8 +20,8 @@
         )
     </insert>
 
-    <update id="updateFeedback">
-        UPDATE TRAINER_FEEDBACK SET TRNF_CONTENT = #{content} WHERE TRNF_SEQ = #{trnfSeq}
+    <update id="updateFeedback" parameterType="TrainerFeedbackDTO">
+        UPDATE TRAINER_FEEDBACK SET TRNF_CONTENT = #{trnfContent},TRNF_WRITTEN_DATE = SYSDATE WHERE TRNF_SEQ = #{trnfSeq}
     </update>
 
     <select id="selectAllTrainerFeedbackByMbrSeq" parameterType="long" resultType="TrainerFeedbackDTO">
@@ -37,7 +37,7 @@
     </select>
 
     <select id="selectNoFeedbackBytrnSeq" parameterType="long" resultType="TrainerFeedbackDTO">
-        SELECT MBR_NAME , TRNF_SUBMISSION_DUE , TRNF_SEQ , TRNF_CREATION_DATE, TRNF_CONTENT
+        SELECT MBR_NAME , TRNF_SUBMISSION_DUE , TRNF_SEQ , TRNF_CREATION_DATE
         FROM MEMBER JOIN TRAINER_FEEDBACK ON MEMBER.MBR_SEQ = TRAINER_FEEDBACK.MBR_SEQ
         WHERE TRN_SEQ = #{trnSeq} AND TRNF_WRITTEN_DATE IS NULL
     </select>
