@@ -22,6 +22,12 @@ public class TrainerFeedbackControllerImpl implements TrainerFeedbackController{
         return trainerFeedbackService.insertFeedback(feedbackDTO);
     }
 
+    @PostMapping("/write-feedback")
+    public ResponseEntity<TrainerFeedbackDTO> updateFeedback(@RequestBody TrainerFeedbackDTO feedbackDTO){
+        trainerFeedbackService.updateFeedback(feedbackDTO);
+        return ResponseEntity.ok(feedbackDTO);
+    }
+
     @Override
     @PostMapping("/gpt")
     public ResponseEntity<TrainerFeedbackDTO> getGptFeedback(@RequestBody TrainerFeedbackDTO dto) {

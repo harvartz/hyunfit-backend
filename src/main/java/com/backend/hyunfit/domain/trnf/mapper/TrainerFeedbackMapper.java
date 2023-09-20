@@ -10,7 +10,7 @@ public interface TrainerFeedbackMapper {
   
     void insertFeedback(TrainerFeedbackDTO feedbackDTO);
 
-    void updateFeedback(String content);
+    void updateFeedback(TrainerFeedbackDTO feedbackDTO);
 
     List<TrainerFeedbackDTO> selectAllTrainerFeedbackByMbrSeq(long mbrSeq);
 
