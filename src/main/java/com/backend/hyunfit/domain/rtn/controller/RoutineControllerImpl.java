@@ -20,7 +20,7 @@ public class RoutineControllerImpl implements RoutineController {
 
 
     @Override
-    @GetMapping("/all")
+    @GetMapping("")
     public ResponseEntity<List<RoutineDTO>> selectAllRoutineSearch(RoutineDTO routineDTO) {
         List<RoutineDTO> routines = routineService.selectAllRoutineSearch(routineDTO);
         return ResponseEntity.ok(routines);

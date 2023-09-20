@@ -27,6 +27,20 @@ public class RoutineServiceImpl implements RoutineService {
         for (RoutineDTO routine : routines) {
             List<ExerciseDTO> exercises = exerciseMapper.selectAllExercisesOfRoutineByRtnSeq(routine.getRtnSeq());
             routine.setExercises(exercises);
+
+            // 새로운 필드를 계산
+            double rtnDurationInMin = 0.0;
+            int rtnCaloriesBurnt = 0;
+            for (ExerciseDTO exercise : exercises) {
+                rtnDurationInMin += exercise.getExcSetCount() * exercise.getExcTimePerSetInSec();
+                rtnCaloriesBurnt += (int) (exercise.getExcCaloriesPerRep() * exercise.getExcRepCountPerSet() * exercise.getExcSetCount());
+            }
+
+            rtnDurationInMin = Math.round((rtnDurationInMin / 60.0) * 10) / 10.0;
+            // 계산된 필드를 RoutineDTO에 세팅
+            routine.setRtnDurationInMin(rtnDurationInMin);
+            routine.setRtnCaloriesBurnt(rtnCaloriesBurnt);
+
         }
         return routines;
     }
