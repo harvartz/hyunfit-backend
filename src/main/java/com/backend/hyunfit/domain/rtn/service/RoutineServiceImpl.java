@@ -20,12 +20,15 @@ public class RoutineServiceImpl implements RoutineService {
     private final RoutineMapper routineMapper;
     private final ErmMapper ermMapper;
     private final ExerciseMapper exerciseMapper;
+
     @Override
-    public List<RoutineDTO> selectAllRoutineFilteredSearch(RoutineDTO routineDTO) {
-        if (routineDTO.hasMissingSearchCriteria()) {
-            throw BusinessException.of(ErrorCode.INVALID_INPUT_VALUE);
+    public List<RoutineDTO> selectAllRoutineSearch(RoutineDTO routineDTO) {
+        List<RoutineDTO> routines = routineMapper.selectAllRoutineSearch(routineDTO);
+        for (RoutineDTO routine : routines) {
+            List<ExerciseDTO> exercises = exerciseMapper.selectAllExercisesOfRoutineByRtnSeq(routine.getRtnSeq());
+            routine.setExercises(exercises);
         }
-        return routineMapper.selectAllRoutineFilteredSearch(routineDTO);
+        return routines;
     }
 
     @Override

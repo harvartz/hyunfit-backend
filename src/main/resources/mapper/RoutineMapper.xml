@@ -3,27 +3,47 @@
 
 
 <mapper namespace="com.backend.hyunfit.domain.rtn.mapper.RoutineMapper">
-    <select id="selectAllRoutineFilteredSearch" parameterType="RoutineDTO" resultType="RoutineDTO">
-        SELECT
-            RTN_SEQ,
-            ADM_SEQ,
-            RTN_NAME,
-            RTN_CONTENT,
-            RTN_CREATED_DATE,
-            RTN_THUMBNAIL_URL,
-            RTN_TARGET,
-            RTN_DURATION,
-            RTN_EXPERIENCE_LEVEL
+
+    <select id="selectAllRoutineSearch" parameterType="RoutineDTO" resultType="RoutineDTO">
+        SELECT RTN_SEQ,
+        ADM_SEQ,
+        RTN_NAME,
+        RTN_CONTENT,
+        RTN_CREATED_DATE,
+        RTN_TARGET,
+        RTN_DURATION,
+        RTN_EXPERIENCE_LEVEL
         FROM ROUTINE
-        WHERE RTN_TARGET = #{rtnTarget} AND RTN_DURATION = #{rtnDuration} AND RTN_EXPERIENCE_LEVEL = #{rtnExperienceLevel}
+        <where>
+            <if test="rtnTarget != null">
+                RTN_TARGET = #{rtnTarget}
+            </if>
+            <if test="rtnDuration != null">
+                AND RTN_DURATION = #{rtnDuration}
+            </if>
+            <if test="rtnExperienceLevel != null">
+                AND RTN_EXPERIENCE_LEVEL = #{rtnExperienceLevel}
+            </if>
+        </where>
     </select>
 
+    <resultMap id="RoutineResultMap" type="RoutineDTO">
+        <id property="rtnSeq" column="RTN_SEQ"/>
+        <result property="admSeq" column="ADM_SEQ"/>
+        <!-- 기타 RoutineDTO의 다른 필드 매핑 -->
+        <collection property="exercises" ofType="ExerciseDTO" javaType="java.util.ArrayList">
+            <id property="excSeq" column="EXC_SEQ"/>
+            <result property="admSeq" column="EXC_ADM_SEQ"/>
+            <!-- 기타 ExerciseDTO의 다른 필드 매핑 -->
+        </collection>
+    </resultMap>
+
     <insert id="insertOneRoutine" parameterType="RoutineDTO">
-        INSERT INTO ROUTINE (adm_seq, rtn_name, rtn_content, rtn_created_date, rtn_thumbnail_url, rtn_target,
+        INSERT INTO ROUTINE (adm_seq, rtn_name, rtn_content, rtn_created_date, rtn_target,
                              rtn_duration, rtn_experience_level, rtn_goal, rtn_knee_health_considered,
                              rtn_noise_considered, rtn_long_sitter,rtn_neck_shoulder_focused,rtn_back_disk_considered,
                              rtn_reward_point)
-        VALUES (#{admSeq}, #{rtnName}, #{rtnContent}, CURRENT_TIMESTAMP, 'routine', #{rtnTarget}, #{rtnDuration},
+        VALUES (#{admSeq}, #{rtnName}, #{rtnContent}, CURRENT_TIMESTAMP, #{rtnTarget}, #{rtnDuration},
                 #{rtnExperienceLevel}, #{rtnGoal}, #{rtnKneeHealthConsidered}, #{rtnNoiseConsidered},
                 #{rtnLongSitter}, #{rtnNeckShoulderFocused}, #{rtnBackDiskConsidered},#{rtnRewardPoint})
 
