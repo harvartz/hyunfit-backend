@@ -8,6 +8,7 @@ import com.backend.hyunfit.global.exception.BusinessException;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
+import java.util.Optional;
 
 
 public interface TrainerService {
@@ -40,7 +41,7 @@ public interface TrainerService {
     TrainerDTO selectOneTrnByTrnId(String trnId);
 
 
-    TimeslotDTO selectFullyReservedDaysByMonth(SearchDTO searchDTO);
+    Optional<TimeslotDTO> selectFullyReservedDaysByMonth(SearchDTO searchDTO);
     TimeslotDTO selectAllReservedTimeslotsByDay(SearchDTO searchDTO);
 
     List<TrainerDTO> selectManyTrnFilteredWithOffset(TrainerSearchDTO trainerSearchDTO);
