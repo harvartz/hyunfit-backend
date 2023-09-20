@@ -20,5 +20,5 @@ public interface MemberMapper {
                                                      @Param("offSet") int offSet,
                                                      @Param("limit") int limit);
 
-    Optional<MemberDTO> selectOneMemberBySeq(String mbrSeq);
+//    Optional<MemberDTO> selectOneMemberBySeq(String mbrSeq);
 }
