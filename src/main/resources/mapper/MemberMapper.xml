@@ -50,16 +50,20 @@
     <update id="updateOneMemberById" parameterType="MemberDTO">
         UPDATE MEMBER
         <set>
+            <if test="mbrName != null">mbr_name = #{mbrName},</if>
             <if test="mbrTotalPoint != null">mbr_total_point = #{mbrTotalPoint},</if>
             <if test="mbrTotalExp != null">mbr_total_exp = #{mbrTotalExp},</if>
+            <if test="mbrBirthdate != null">mbr_birthdate = #{mbrBirthdate},</if>
+            <if test="mbrHeight != null">mbr_height = #{mbrHeight},</if>
             <if test="mbrWeight != null">mbr_weight = #{mbrWeight},</if>
             <if test="mbrExerciseGoal != null">mbr_exercise_goal = #{mbrExerciseGoal},</if>
             <if test="mbrExerciseExperienceLevel != null">mbr_exercise_experience_level = #{mbrExerciseExperienceLevel},</if>
-            <if test="mbrExercisePreference != null">mbr_exercise_preference = #{mbrExercisePreference},</if>
-            <if test="mbrKneeHealth != null">mbr_knee_health = #{mbrKneeHealth},</if>
-            <if test="mbrNoiseConsideration != null">mbr_noise_consideration = #{mbrNoiseConsideration},</if>
-            <if test="mbrSittingDuration != null">mbr_sitting_duration = #{mbrSittingDuration},</if>
+            <if test="mbrExerciseTarget != null">mbr_exercise_target = #{mbrExerciseTarget},</if>
+            <if test="mbrKneeHealthConsidered != null">mbr_knee_health_considered = #{mbrKneeHealthConsidered},</if>
+            <if test="mbrNoiseConsidered != null">mbr_noise_considered = #{mbrNoiseConsidered},</if>
+            <if test="mbrLongSitter != null">mbr_long_sitter = #{mbrLongSitter},</if>
             <if test="mbrNeckShoulderFocused != null">mbr_neck_shoulder_focused = #{mbrNeckShoulderFocused},</if>
+            <if test="mbrBackDiskConsidered != null">mbr_back_disk_considered = #{mbrBackDiskConsidered},</if>
         </set>
         WHERE mbr_id = #{mbrId}
     </update>
