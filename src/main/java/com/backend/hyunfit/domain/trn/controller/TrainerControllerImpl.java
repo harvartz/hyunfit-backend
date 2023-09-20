@@ -62,7 +62,9 @@ public class TrainerControllerImpl implements TrainerController {
                                                                             @RequestParam Timestamp startDate,
                                                                             @RequestParam Timestamp endDate) {
         var searchDTO = SearchDTO.ofTrainerId(trnId, startDate, endDate);
-        return ResponseEntity.ok(trainerService.selectFullyReservedDaysByMonth(searchDTO));
+        var result = trainerService.selectFullyReservedDaysByMonth(searchDTO)
+                .orElse(TimeslotDTO.empty(trnId));
+        return ResponseEntity.ok(result);
     }
     @Override
     @GetMapping("/{trnId}/all-reserved-timeslots")

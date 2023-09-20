@@ -31,11 +31,11 @@
             T.TRN_SHORT_DESCRIPTION,
             T.TRN_PROFILE_URL,
             T.TRN_GENDER,
-            R.AVERAGE_REVIEW_RATING,
-            R.REVIEW_COUNT,
-            R.STICKER_COUNT,
-            PTC.PT_COUNT,
-            base_trn_score(R.AVERAGE_REVIEW_RATING, R.STICKER_COUNT, PTC.PT_COUNT) as FIRE_SCORE
+        NVL(R.AVERAGE_REVIEW_RATING, 0) as AVERAGE_REVIEW_RATING,
+        NVL(R.REVIEW_COUNT, 0) as REVIEW_COUNT,
+        NVL(R.STICKER_COUNT, 0) as STICKER_COUNT,
+        NVL(PTC.PT_COUNT, 0) as PT_COUNT,
+        base_trn_score(NVL(R.AVERAGE_REVIEW_RATING, 0), NVL(R.STICKER_COUNT, 0), NVL(PTC.PT_COUNT, 0), T.TRN_CREATION_DATE) as FIRE_SCORE
         FROM TRAINER T
         JOIN COMMON_CODE C ON CATEGORY = 'TRAINER_TYPE' AND CODE_NUMBER = TRN_TYPE
         LEFT JOIN (
@@ -57,8 +57,7 @@
             GROUP BY TRN_SEQ
         ) PTC ON PTC.TRN_SEQ = R.TRN_SEQ
 
-        <if test="trnGender != null or trainerTypes.size() > 0 or keyword">
-            WHERE
+        <where>
             <if test="trainerTypes.size() > 0">
                 TRN_TYPE in
                 <foreach item="type" index="index" collection="trainerTypes"
@@ -82,7 +81,7 @@
                 TRN_SHORT_DESCRIPTION LIKE '%' || #{keyword} || '%' OR
                 C.CODE_NAME LIKE '%' || #{keyword} || '%')
             </if>
-        </if>
+        </where>
         ORDER BY
             <if test="order.name() == 'FIRE_SCORE'"> FIRE_SCORE </if>
             <if test="order.name() == 'RATING'">  AVERAGE_REVIEW_RATING </if>
