@@ -36,7 +36,7 @@
             PT_LESSON_START_DATE,
             PT_LESSON_END_DATE,
             PT_CANCELLATION_REASON,
-            PT_NOTES
+            PT_NOTE_STICKERS
         FROM PERSONAL_TRAINING
         WHERE PT_SEQ = #{ptSeq}
     </select>
