@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -63,7 +64,7 @@ public class TrainerServiceImpl implements TrainerService {
     }
 
     @Override
-    public TimeslotDTO selectFullyReservedDaysByMonth(SearchDTO searchDTO) {
+    public Optional<TimeslotDTO> selectFullyReservedDaysByMonth(SearchDTO searchDTO) {
         return personalTrainingMapper.selectFullyReservedDaysByMonth(searchDTO);
     }
 
