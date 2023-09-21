@@ -8,6 +8,7 @@
         SELECT mbr_seq,
                mbr_id,
                mbr_pw,
+               mbr_seq,
                mbr_name,
                mbr_total_point,
                mbr_total_exp,
@@ -39,11 +40,12 @@
                mbr_weight,
                mbr_exercise_goal,
                mbr_exercise_experience_level,
-               mbr_exercise_preference,
-               mbr_knee_health,
-               mbr_noise_consideration,
-               mbr_sitting_duration,
-               mbr_neck_shoulder_focused
+               mbr_exercise_target,
+               mbr_knee_health_considered,
+               mbr_noise_considered,
+               mbr_long_sitter,
+               mbr_neck_shoulder_focused,
+                mbr_back_disk_considered
         FROM member
         WHERE mbr_seq = #{mbrSeq}
     </select>
@@ -70,20 +72,10 @@
     </update>
 
     <select id="selectAllMemberPtBySeq">
-        SELECT PT_SEQ,
-               tr.TRN_SEQ,
-               MBR_SEQ,
-               PT_RESERVATION_DATE,
-               PT_LESSON_DURATION,
-               PT_LESSON_START_DATE,
-               PT_LESSON_END_DATE,
-               PT_RESERVATION_STATUS,
-               PT_CANCELLATION_REASON,
-               PT_NOTES,
-               PT_COUNTS,
-               tr.TRN_NAME,
-               tr.TRN_TYPE,
-               PTR_RATING
+        SELECT PT_SEQ, tr.TRN_SEQ, MBR_SEQ, PT_RESERVATION_DATE,
+               PT_COUNTS, PT_LESSON_DURATION, PT_LESSON_START_DATE, PT_LESSON_END_DATE,
+               PT_RESERVATION_STATUS, PT_CANCELLATION_REASON, PT_NOTE_STICKERS,
+               tr.TRN_NAME, tr.TRN_TYPE, TRN_TYPE_NAME, TRN_PROFILE_URL, TRN_SHORT_DESCRIPTION,PTR_RATING, PTR_CONTENT
         FROM (SELECT PERSONAL_TRAINING.PT_SEQ,
                      TRN_SEQ,
                      MBR_SEQ,
@@ -94,15 +86,18 @@
                      PT_LESSON_END_DATE,
                      PT_RESERVATION_STATUS,
                      PT_CANCELLATION_REASON,
-                     PT_NOTES,
+                     PT_NOTE_STICKERS,
                      ROW_NUMBER() OVER (PARTITION BY TRN_SEQ ORDER BY PT_RESERVATION_DATE ASC) AS PT_COUNTS,
-                      PTR_RATING
+                      PTR_RATING,
+                     PTR_CONTENT
               FROM PERSONAL_TRAINING
-                       LEFT JOIN FIREMEN.PERSONAL_TRAINING_REVIEW ON PERSONAL_TRAINING.PT_SEQ = PERSONAL_TRAINING_REVIEW.PT_SEQ
-              WHERE MBR_SEQ = #{mbrSeq}) re
-                 LEFT JOIN TRAINER tr
-                           ON re.TRN_SEQ = tr.TRN_SEQ
-        ORDER BY PT_RESERVATION_DATE ASC -- 결과를 어떤 기준으로 정렬할지 지정
-        OFFSET #{offSet} ROWS FETCH NEXT #{limit} ROWS ONLY -- 시작 위치(offset)와 반환할 로우 수(fetch next)를 지정
+                       LEFT JOIN FIREMEN.PERSONAL_TRAINING_REVIEW
+                                 ON PERSONAL_TRAINING.PT_SEQ = PERSONAL_TRAINING_REVIEW.PT_SEQ WHERE MBR_SEQ = #{mbrSeq}) re
+                 JOIN (SELECT TRN_SEQ, TRN_NAME, TRN_TYPE, CODE_NAME AS TRN_TYPE_NAME, TRN_PROFILE_URL , TRN_SHORT_DESCRIPTION FROM TRAINER t
+                                                                                                                                        JOIN (SELECT * FROM COMMON_CODE WHERE CATEGORY = 'TRAINER_TYPE') a
+                                                                                                                                             ON t.TRN_TYPE = a.CODE_NUMBER) tr
+                      ON re.TRN_SEQ = tr.TRN_SEQ
+        ORDER BY PT_RESERVATION_DATE DESC -- 결과를 어떤 기준으로 정렬할지 지정
+--         OFFSET 5 ROWS FETCH NEXT 8 ROWS ONLY
     </select>
 </mapper>

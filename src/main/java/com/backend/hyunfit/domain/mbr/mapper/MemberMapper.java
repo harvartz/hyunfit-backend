@@ -16,9 +16,8 @@ public interface MemberMapper {
   
     int updateOneMemberById(MemberDTO memberDTO);
 
-    List<PersonalTrainingDTO> selectAllMemberPtBySeq(@Param("mbrSeq") String mbrSeq,
+    List<PersonalTrainingDTO> selectAllMemberPtBySeq(@Param("mbrSeq") long mbrSeq,
                                                      @Param("offSet") int offSet,
                                                      @Param("limit") int limit);
 
-    Optional<MemberDTO> selectOneMemberBySeq(String mbrSeq);
 }
