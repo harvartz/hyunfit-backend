@@ -36,7 +36,7 @@ public class RoutineServiceImpl implements RoutineService {
                 rtnCaloriesBurnt += (int) (exercise.getExcCaloriesPerRep() * exercise.getExcRepCountPerSet() * exercise.getExcSetCount());
             }
 
-            rtnDurationInMin = Math.round((rtnDurationInMin / 60.0) * 10) / 10.0;
+            rtnDurationInMin = Math.round((rtnDurationInMin / 60));
             // 계산된 필드를 RoutineDTO에 세팅
             routine.setRtnDurationInMin(rtnDurationInMin);
             routine.setRtnCaloriesBurnt(rtnCaloriesBurnt);

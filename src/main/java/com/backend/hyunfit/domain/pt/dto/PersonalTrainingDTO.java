@@ -28,4 +28,7 @@ public class PersonalTrainingDTO {
     private Double ptrRating;
     private String trnName;
     private String trnType;
+    private String trnTypeName;
+    private String trnProfileUrl;
+    private String trnShortDescription;
 }
