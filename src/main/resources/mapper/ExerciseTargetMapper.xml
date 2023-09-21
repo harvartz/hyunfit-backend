@@ -7,9 +7,17 @@
     <select id="selectAllExerciseTargetByMbrIdRanged" parameterType="SearchDTO" resultType="ExerciseTargetDTO">
         <![CDATA[
         SELECT ET.EXCTG_AREA as target_area,
-               SUM(EXCH_TOTAL_CALORIES * ET.EXCTG_WEIGHT) as total_calories
+               SUM(EXCH_TOTAL_CALORIES * ET.EXCTG_WEIGHT/modifier) as total_calories,
+               AVG(ET.EXCTG_WEIGHT) as exctg_weight
         FROM FIREMEN.EXERCISE_HISTORY EH
-                 JOIN FIREMEN.EXERCISE_TARGET ET on EH.EXC_SEQ = ET.EXC_SEQ
+        JOIN FIREMEN.EXERCISE_TARGET ET on EH.EXC_SEQ = ET.EXC_SEQ
+                 JOIN (
+            SELECT E.EXC_SEQ, SUM(EXCTG_WEIGHT) as modifier
+            FROM EXERCISE E
+                     JOIN EXERCISE_TARGET T ON E.EXC_SEQ = T.EXC_SEQ
+            GROUP BY E.EXC_SEQ
+        ) M
+        ON M.EXC_SEQ = EH.EXC_SEQ
         WHERE EH.MBR_SEQ = #{mbrSeq} AND EXCH_START_TIME >= #{startDate} AND EXCH_START_TIME < #{endDate}
         GROUP BY ET.EXCTG_AREA
         ]]>

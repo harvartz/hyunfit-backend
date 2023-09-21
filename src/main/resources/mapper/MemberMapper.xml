@@ -29,7 +29,8 @@
     </select>
 
     <select id="selectOneMemberBySeq" parameterType="_long" resultType="MemberDTO">
-        SELECT mbr_id,
+        SELECT mbr_seq,
+               mbr_id,
                mbr_pw,
                mbr_name,
                mbr_total_point,
@@ -45,7 +46,7 @@
                mbr_noise_considered,
                mbr_long_sitter,
                mbr_neck_shoulder_focused,
-                mbr_back_disk_considered
+               mbr_back_disk_considered
         FROM member
         WHERE mbr_seq = #{mbrSeq}
     </select>
