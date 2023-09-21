@@ -35,7 +35,7 @@ public interface MemberService {
      * @throws BusinessException 입력된 사용자 이름에 해당하는 회원 정보가 없을 경우 발생하는 예외입니다.
      *                          이 예외는 ErrorCode.USERID_NOT_FOUND 에러 코드와 함께 발생합니다.
      */
-    MemberDTO selectAllMemberPtBySeq(String mbrSeq, int offSet, int limit);
+    MemberDTO selectAllMemberPtBySeq(long mbrSeq, int offSet, int limit);
 
     /**
      * Member의 전체 예약 정보를 조회하는 메서드입니다.

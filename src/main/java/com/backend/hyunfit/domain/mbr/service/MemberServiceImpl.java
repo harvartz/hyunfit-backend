@@ -58,9 +58,9 @@ public class MemberServiceImpl implements MemberService {
 
 
     @Override
-    public MemberDTO selectAllMemberPtBySeq(String mbrSeq, int offSet, int limit) {
+    public MemberDTO selectAllMemberPtBySeq(long mbrSeq, int offSet, int limit) {
         log.info("=============== selectAllMemberPtBySeq : Service " + mbrSeq);
-        MemberDTO memberDTO = memberMapper.selectOneMemberBySeq(Long.parseLong(mbrSeq))
+        MemberDTO memberDTO = memberMapper.selectOneMemberBySeq(mbrSeq)
                 .orElseThrow(() -> BusinessException.of(ErrorCode.USERID_NOT_FOUND));
 
         log.info("=============== selectAllMemberPtBySeq : Service " + memberDTO);

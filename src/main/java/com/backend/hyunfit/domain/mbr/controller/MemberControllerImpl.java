@@ -51,7 +51,7 @@ public class MemberControllerImpl implements MemberController {
 
     @Override
     @GetMapping("/{mbrSeq}/personal-trainings")
-    public ResponseEntity<MemberDTO> selectAllMemberPtBySeq(@PathVariable String mbrSeq,
+    public ResponseEntity<MemberDTO> selectAllMemberPtBySeq(@PathVariable long mbrSeq,
                                                             @RequestParam int offset,
                                                             @RequestParam int limit) {
         log.info("=============== selectAllMemberPtBySeq : controller"  +  mbrSeq + offset + limit);

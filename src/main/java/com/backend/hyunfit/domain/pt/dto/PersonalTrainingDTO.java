@@ -30,4 +30,5 @@ public class PersonalTrainingDTO {
     private String trnType;
     private String trnTypeName;
     private String trnProfileUrl;
+    private String trnShortDescription;
 }
