@@ -9,9 +9,9 @@ import java.sql.Timestamp;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PeriodicRecordDTO {
-    private Timestamp statPeriod;
-    private double caloriesSum;
-    private int expSum;
+public class DailyRecordDTO {
+    private Timestamp day;
+    private double calories;
+    private int exp;
     private int cumulativeExpSum;
 }

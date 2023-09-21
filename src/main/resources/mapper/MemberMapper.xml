@@ -28,7 +28,8 @@
     </select>
 
     <select id="selectOneMemberBySeq" parameterType="_long" resultType="MemberDTO">
-        SELECT mbr_id,
+        SELECT mbr_seq,
+               mbr_id,
                mbr_pw,
                mbr_name,
                mbr_total_point,
@@ -39,11 +40,12 @@
                mbr_weight,
                mbr_exercise_goal,
                mbr_exercise_experience_level,
-               mbr_exercise_preference,
-               mbr_knee_health,
-               mbr_noise_consideration,
-               mbr_sitting_duration,
-               mbr_neck_shoulder_focused
+               mbr_exercise_target,
+               mbr_knee_health_considered,
+               mbr_noise_considered,
+               mbr_long_sitter,
+               mbr_neck_shoulder_focused,
+               mbr_back_disk_considered
         FROM member
         WHERE mbr_seq = #{mbrSeq}
     </select>
@@ -79,7 +81,7 @@
                PT_LESSON_END_DATE,
                PT_RESERVATION_STATUS,
                PT_CANCELLATION_REASON,
-               PT_NOTES,
+               PT_NOTE_STICKERS,
                PT_COUNTS,
                tr.TRN_NAME,
                tr.TRN_TYPE,
@@ -94,7 +96,7 @@
                      PT_LESSON_END_DATE,
                      PT_RESERVATION_STATUS,
                      PT_CANCELLATION_REASON,
-                     PT_NOTES,
+                     PT_NOTE_STICKERS,
                      ROW_NUMBER() OVER (PARTITION BY TRN_SEQ ORDER BY PT_RESERVATION_DATE ASC) AS PT_COUNTS,
                       PTR_RATING
               FROM PERSONAL_TRAINING

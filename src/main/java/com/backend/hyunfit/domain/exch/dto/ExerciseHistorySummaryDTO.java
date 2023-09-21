@@ -21,6 +21,6 @@ public class ExerciseHistorySummaryDTO {
     private int totalGoodCount;
     private int totalBadCount;
     private List<ExerciseTargetDTO> exerciseTargets;
-    private List<Timestamp> exercisedDays;
-    private List<PeriodicRecordDTO> periodicRecords;
+    private List<String> exercisedDays;
+    private List<DailyRecordDTO> dailyRecords;
 }

@@ -18,7 +18,7 @@
         ]]>
     </select>
 
-    <select id="selectAllPeriodicRecordsByMbrIdRanged" parameterType="SearchDTO" resultType="PeriodicRecordDTO">
+    <select id="selectAllPeriodicRecordsByMbrIdRanged" parameterType="SearchDTO" resultType="DailyRecordDTO">
         <![CDATA[
         WITH calories AS (
             SELECT TRUNC(EXCH_START_TIME, 'IW') AS stat_period,
@@ -42,12 +42,48 @@
                  JOIN experiences e ON c.stat_period = e.stat_period
         ORDER BY e.stat_period
         ]]>
-
     </select>
 
-    <select id="selectAllExercisedDaysByMbrIdRanged" parameterType="SearchDTO" resultType="Date">
+    <select id="selectAllDailyRecordsByMbrIdRanged" parameterType="SearchDTO" resultType="DailyRecordDTO">
+    <![CDATA[
+        WITH merged as (
+            SELECT
+                day, SUM(calories_sum) as calories, SUM(exp_sum) as exp
+            FROM (
+                     SELECT
+                         TRUNC(H.EXCH_END_TIME) as day,
+                         SUM(H.EXCH_TOTAL_CALORIES) AS calories_sum,
+                         0 AS exp_sum
+                     FROM EXERCISE_HISTORY H
+                     WHERE H.MBR_SEQ = #{mbrSeq} AND EXCH_END_TIME >= #{startDate} AND EXCH_END_TIME < #{endDate}
+                     GROUP BY TRUNC(H.EXCH_END_TIME)
+
+                     UNION ALL
+
+                     SELECT
+                         TRUNC(E.MEV_CREATION_DATE),
+                         0 AS calories_sum,
+                         SUM(MEV_AMOUNT) AS exp_sum
+                     FROM MEMBER_EVENT E
+                     WHERE E.MBR_SEQ = #{mbrSeq} AND MEV_CREATION_DATE >= #{startDate} AND MEV_CREATION_DATE < #{endDate}
+                       AND E.MEV_TYPE = 1
+                     GROUP BY TRUNC(E.MEV_CREATION_DATE)
+                 ) M
+            GROUP BY day
+            ORDER BY day
+        )
+        SELECT
+            day,
+            calories,
+            exp,
+            SUM(exp) OVER (ORDER BY day) AS cumulative_exp_sum
+        FROM merged
+    ]]>
+    </select>
+
+    <select id="selectAllExercisedDaysByMbrIdRanged" parameterType="SearchDTO" resultType="String">
         <![CDATA[
-        SELECT TRUNC(EXCH_START_TIME) AS exercised_days
+        SELECT TO_CHAR(TRUNC(EXCH_START_TIME), 'YYYY-MM-DD') AS exercised_days
         FROM EXERCISE_HISTORY EH
         WHERE EH.MBR_SEQ = #{mbrSeq} AND EXCH_START_TIME >= #{startDate} AND EXCH_START_TIME < #{endDate}
         GROUP BY TRUNC(EXCH_START_TIME)

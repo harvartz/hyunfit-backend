@@ -1,6 +1,6 @@
 package com.backend.hyunfit.domain.mbr.service;
 
-import com.backend.hyunfit.domain.exch.dto.PeriodicRecordDTO;
+import com.backend.hyunfit.domain.exch.dto.DailyRecordDTO;
 import com.backend.hyunfit.domain.exctg.dto.ExerciseTargetDTO;
 import com.backend.hyunfit.domain.exctg.mapper.ExerciseTargetMapper;
 import com.backend.hyunfit.domain.mbr.dto.MemberDTO;
@@ -18,9 +18,11 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import java.sql.Timestamp;
+import java.util.Optional;
 
 @Log4j2
 @Service
@@ -70,16 +72,22 @@ public class MemberServiceImpl implements MemberService {
     }
     @Override
     public MemberDTO selectOneMemberReportById(SearchDTO searchDTO) {
+
         MemberDTO memberDTO = memberMapper.selectOneMemberBySeq(searchDTO.getMbrSeq())
                 .orElseThrow(BusinessException.supplierOf(ErrorCode.USERSEQ_NOT_FOUND));
 
-        ExerciseHistorySummaryDTO exerciseHistorySummaryDTO = exerciseHistoryMapper.selectOneExchSummaryByMbrIdRanged(searchDTO);
-        List<Timestamp> exercisedDays = exerciseHistoryMapper.selectAllExercisedDaysByMbrIdRanged(searchDTO);
-        List<PeriodicRecordDTO> periodicRecords = exerciseHistoryMapper.selectAllPeriodicRecordsByMbrIdRanged(searchDTO);
+        //mbrSeq 검증과정이 필요함.
+
+        ExerciseHistorySummaryDTO exerciseHistorySummaryDTO =
+                exerciseHistoryMapper.selectOneExchSummaryByMbrIdRanged(searchDTO)
+                                     .orElse(new ExerciseHistorySummaryDTO());
+        List<String> exercisedDays = exerciseHistoryMapper.selectAllExercisedDaysByMbrIdRanged(searchDTO);
+        List<DailyRecordDTO> dailyRecords = exerciseHistoryMapper.selectAllDailyRecordsByMbrIdRanged(searchDTO);
+        System.out.println(dailyRecords);
         List<ExerciseTargetDTO> targets = exerciseTargetMapper.selectAllExerciseTargetByMbrIdRanged(searchDTO);
 
         exerciseHistorySummaryDTO.setExercisedDays(exercisedDays);
-        exerciseHistorySummaryDTO.setPeriodicRecords(periodicRecords);
+        exerciseHistorySummaryDTO.setDailyRecords(dailyRecords);
         exerciseHistorySummaryDTO.setExerciseTargets(targets);
 
         memberDTO.setExerciseHistory(exerciseHistorySummaryDTO);
