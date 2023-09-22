@@ -99,7 +99,7 @@
             </otherwise>
         </choose>
         ORDER BY PT_RESERVATION_DATE ${order}
-        OFFSET ${page}  ROWS FETCH NEXT 5 ROWS ONLY
+        OFFSET ${page-1} * 5  ROWS FETCH NEXT 5 ROWS ONLY
     </select>
 
     <select id="selectPastPtCountBySeq">
