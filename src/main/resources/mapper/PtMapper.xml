@@ -22,8 +22,8 @@
 
     <insert id="insertOnePtReview" parameterType="PersonalTrainingDTO">
         INSERT INTO FIREMEN.PERSONAL_TRAINING_REVIEW
-            (PT_SEQ, PTR_CONTENT, PTR_RATING)
-        VALUES (#{ptSeq}, #{ptrContent}, #{ptrRating})
+            (PT_SEQ, PTR_CONTENT, PTR_RATING, PTR_STICKERS )
+        VALUES (#{ptSeq}, #{ptrContent}, #{ptrRating}, #{ptrStickers})
     </insert>
 
     <select id="selectOnePtByPtSeq">

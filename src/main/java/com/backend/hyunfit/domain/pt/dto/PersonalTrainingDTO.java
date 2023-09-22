@@ -15,6 +15,7 @@ public class PersonalTrainingDTO {
     private Long ptSeq;
     private Long mbrSeq;
     private Long trnSeq;
+    private Long ptrSeq;
     private String mbrName;
     private Integer ptCounts;
     private Timestamp ptReservationDate;
@@ -24,6 +25,7 @@ public class PersonalTrainingDTO {
     private Integer ptReservationStatus;
     private String ptCancellationReason;
     private String ptNoteStickers;
+    private String ptrStickers;
     private String ptrContent;
     private Double ptrRating;
     private String trnName;

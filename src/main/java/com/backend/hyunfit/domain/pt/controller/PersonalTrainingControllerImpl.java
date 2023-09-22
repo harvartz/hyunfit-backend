@@ -36,6 +36,7 @@ public class PersonalTrainingControllerImpl implements PersonalTrainingControlle
     public ResponseEntity<PersonalTrainingDTO> createPtReview(long ptSeq, @RequestBody PersonalTrainingDTO personalTrainingDTO) {
         personalTrainingDTO.setPtSeq(ptSeq);
         personalTrainingService.createPtReview(personalTrainingDTO);
+        log.info("리뷰 등록 완료");
         return ResponseEntity.ok(personalTrainingDTO);
     }
 
