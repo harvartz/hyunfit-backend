@@ -31,14 +31,22 @@ public interface MemberController {
 
     ResponseEntity<MemberDTO> selectOneMemberById(String mbrId);
 
-    @Operation(summary="Member의 예약 데이터 조회", description = "Member의 전체 예약 데이터를 조회합니다.")
+    @Operation(summary="Member의 예약 데이터 조회", description = "Member의 전체 예약되어 있는 데이터를 조회합니다.")
 
     @ApiResponse(responseCode = "200", description = "OK")
     @ApiResponse(responseCode = "404", description = "NOT FOUND")
     @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
     ResponseEntity<MemberDTO> selectAllMemberPtBySeq(@PathVariable long mbrSeq,
-                                                     @RequestParam int offset,
-                                                     @RequestParam int limit);
+                                                     @RequestParam int page,
+                                                     @RequestParam String order,
+                                                     @RequestParam String ptReservationStatus);
+
+    @Operation(summary="Member의 예약 전체 갯수 리뷰 데이터 조회", description = "Member의 리뷰 데이터 전체 갯수 조회합니다.")
+
+    @ApiResponse(responseCode = "200", description = "OK")
+    @ApiResponse(responseCode = "404", description = "NOT FOUND")
+    @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
+    ResponseEntity<MemberDTO> selectPastPtCountBySeq(@PathVariable long mbrSeq);
 
     @Operation(summary="Member의 리포트 데이터 조회", description = "Member 하나의 Report를 조회합니다.")
 

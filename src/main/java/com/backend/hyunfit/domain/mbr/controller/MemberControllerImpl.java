@@ -45,11 +45,19 @@ public class MemberControllerImpl implements MemberController {
     @Override
     @GetMapping("/{mbrSeq}/personal-trainings")
     public ResponseEntity<MemberDTO> selectAllMemberPtBySeq(@PathVariable long mbrSeq,
-                                                            @RequestParam int offset,
-                                                            @RequestParam int limit) {
-        log.info("=============== selectAllMemberPtBySeq : controller"  +  mbrSeq + offset + limit);
-        return ResponseEntity.ok(memberService.selectAllMemberPtBySeq(mbrSeq, offset, limit));
+                                                            @RequestParam int page,
+                                                            @RequestParam String order,
+                                                            @RequestParam String ptReservationStatus) {
+        return ResponseEntity.ok(memberService.selectAllMemberPtBySeq(mbrSeq, page, order, ptReservationStatus));
     }
+
+    @Override
+    @GetMapping("/{mbrSeq}/personal-trainings/count")
+    public ResponseEntity<MemberDTO> selectPastPtCountBySeq(@PathVariable long mbrSeq) {
+        return ResponseEntity.ok(memberService.selectPastPtCountBySeq(mbrSeq));
+    }
+
+
     @Override
     @GetMapping("/{mbrSeq}/report")
     public ResponseEntity<MemberDTO> selectOneMemberReportById(@PathVariable long mbrSeq,
