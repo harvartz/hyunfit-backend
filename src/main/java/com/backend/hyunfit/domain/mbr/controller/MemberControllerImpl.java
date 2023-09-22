@@ -30,7 +30,6 @@ public class MemberControllerImpl implements MemberController {
     @PutMapping("/{mbrId}")
     public ResponseEntity<MemberDTO> updateOneMemberById(@PathVariable String mbrId,
                                                          @RequestBody MemberDTO memberDTO) {
-
         memberDTO.setMbrId(mbrId);
         memberService.updateOneMemberById(memberDTO);
 

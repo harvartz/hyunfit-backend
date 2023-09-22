@@ -23,7 +23,8 @@
                mbr_noise_considered,
                mbr_long_sitter,
                mbr_neck_shoulder_focused,
-               mbr_back_disk_considered
+               mbr_back_disk_considered,
+               mbr_profile_url
         FROM member
         WHERE mbr_id = #{mbrId}
     </select>
@@ -46,7 +47,8 @@
                mbr_noise_considered,
                mbr_long_sitter,
                mbr_neck_shoulder_focused,
-               mbr_back_disk_considered
+               mbr_back_disk_considered,
+               mbr_profile_url
         FROM member
         WHERE mbr_seq = #{mbrSeq}
     </select>

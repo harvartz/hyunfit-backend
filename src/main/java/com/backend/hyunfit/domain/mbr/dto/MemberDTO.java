@@ -36,6 +36,7 @@ public class MemberDTO {
     private int mbrLongSitter;
     private int mbrNeckShoulderFocused;
     private int mbrBackDiskConsidered;
+    private String mbrProfileUrl;
     private List<PersonalTrainingDTO> personalTrainingDTOList;
     private ExerciseHistorySummaryDTO exerciseHistory;
     private List<TrainerFeedbackDTO> trainerFeedbacks;
