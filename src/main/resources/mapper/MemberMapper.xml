@@ -102,7 +102,7 @@
         OFFSET ${page}  ROWS FETCH NEXT 5 ROWS ONLY
     </select>
 
-    <select id="selectAllMemberPtBySeqForPagination">
+    <select id="selectPastPtCountBySeq">
         SELECT COUNT(*) FROM MEMBER m
                     JOIN PERSONAL_TRAINING pt ON m.MBR_SEQ = pt.MBR_SEQ AND m.MBR_SEQ = #{mbrSeq}
                     WHERE pt.PT_RESERVATION_STATUS = 2 OR pt.PT_RESERVATION_STATUS = 3

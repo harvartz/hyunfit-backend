@@ -53,7 +53,7 @@ public class MemberControllerImpl implements MemberController {
     }
 
     @Override
-    @GetMapping("/{mbrSeq}/personal-trainings")
+    @GetMapping("/{mbrSeq}/personal-trainings/count")
     public ResponseEntity<MemberDTO> selectPastPtCountBySeq(@PathVariable long mbrSeq) {
         return ResponseEntity.ok(memberService.selectPastPtCountBySeq(mbrSeq));
     }
