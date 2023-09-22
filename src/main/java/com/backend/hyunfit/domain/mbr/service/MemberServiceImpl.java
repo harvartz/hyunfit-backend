@@ -58,18 +58,26 @@ public class MemberServiceImpl implements MemberService {
         return memberDTO;
     }
 
-
     @Override
-    public MemberDTO selectAllMemberPtBySeq(long mbrSeq, int offSet, int limit) {
-        log.info("=============== selectAllMemberPtBySeq : Service " + mbrSeq);
+    public MemberDTO selectAllMemberPtBySeq(long mbrSeq, int page, String order, String ptReservationStatus) {
         MemberDTO memberDTO = memberMapper.selectOneMemberBySeq(mbrSeq)
                 .orElseThrow(() -> BusinessException.of(ErrorCode.USERID_NOT_FOUND));
 
-        log.info("=============== selectAllMemberPtBySeq : Service " + memberDTO);
-        List<PersonalTrainingDTO> personalTrainingDTO = memberMapper.selectAllMemberPtBySeq(mbrSeq, offSet, limit);
+        List<PersonalTrainingDTO> personalTrainingDTO = memberMapper.selectAllMemberPtBySeq(mbrSeq, page, order, ptReservationStatus);
         memberDTO.setPersonalTrainingDTOList(personalTrainingDTO);
         return memberDTO;
     }
+
+    @Override
+    public MemberDTO selectPastPtCountBySeq(long mbrSeq) {
+        MemberDTO memberDTO = memberMapper.selectOneMemberBySeq(mbrSeq)
+                .orElseThrow(() -> BusinessException.of(ErrorCode.USERID_NOT_FOUND));
+
+        int pastPtCount = memberMapper.selectPastPtCountBySeq(mbrSeq);
+        memberDTO.setMbrPastPtCount(pastPtCount);
+        return memberDTO;
+    }
+
     @Override
     public MemberDTO selectOneMemberReportById(SearchDTO searchDTO) {
 

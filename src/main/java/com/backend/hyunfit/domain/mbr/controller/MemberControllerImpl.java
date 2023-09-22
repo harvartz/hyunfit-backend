@@ -30,16 +30,10 @@ public class MemberControllerImpl implements MemberController {
     @PutMapping("/{mbrId}")
     public ResponseEntity<MemberDTO> updateOneMemberById(@PathVariable String mbrId,
                                                          @RequestBody MemberDTO memberDTO) {
-        log.info("memberController : " +  mbrId);
-        log.info("memberDTO : " +  memberDTO);
 
         memberDTO.setMbrId(mbrId);
         memberService.updateOneMemberById(memberDTO);
-        MemberDTO member = new MemberDTO();
-        MemberDTO newMember;
 
-        newMember = member;
-        newMember.setMbrId("11");
         return ResponseEntity.ok(memberDTO);
     }
 
@@ -52,11 +46,19 @@ public class MemberControllerImpl implements MemberController {
     @Override
     @GetMapping("/{mbrSeq}/personal-trainings")
     public ResponseEntity<MemberDTO> selectAllMemberPtBySeq(@PathVariable long mbrSeq,
-                                                            @RequestParam int offset,
-                                                            @RequestParam int limit) {
-        log.info("=============== selectAllMemberPtBySeq : controller"  +  mbrSeq + offset + limit);
-        return ResponseEntity.ok(memberService.selectAllMemberPtBySeq(mbrSeq, offset, limit));
+                                                            @RequestParam int page,
+                                                            @RequestParam String order,
+                                                            @RequestParam String ptReservationStatus) {
+        return ResponseEntity.ok(memberService.selectAllMemberPtBySeq(mbrSeq, page, order, ptReservationStatus));
     }
+
+    @Override
+    @GetMapping("/{mbrSeq}/personal-trainings")
+    public ResponseEntity<MemberDTO> selectPastPtCountBySeq(@PathVariable long mbrSeq) {
+        return ResponseEntity.ok(memberService.selectPastPtCountBySeq(mbrSeq));
+    }
+
+
     @Override
     @GetMapping("/{mbrSeq}/report")
     public ResponseEntity<MemberDTO> selectOneMemberReportById(@PathVariable long mbrSeq,

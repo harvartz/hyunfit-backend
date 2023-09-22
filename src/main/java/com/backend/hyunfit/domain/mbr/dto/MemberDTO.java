@@ -23,6 +23,7 @@ public class MemberDTO {
     private String mbrName;
     private int mbrTotalPoint;
     private int mbrTotalExp;
+    private int mbrPastPtCount;
     private Timestamp mbrBirthdate;
     private String mbrGender;
     private double mbrHeight;

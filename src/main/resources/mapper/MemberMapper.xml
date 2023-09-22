@@ -73,32 +73,38 @@
     </update>
 
     <select id="selectAllMemberPtBySeq">
-        SELECT PT_SEQ, tr.TRN_SEQ, MBR_SEQ, PT_RESERVATION_DATE,
-               PT_COUNTS, PT_LESSON_DURATION, PT_LESSON_START_DATE, PT_LESSON_END_DATE,
-               PT_RESERVATION_STATUS, PT_CANCELLATION_REASON, PT_NOTE_STICKERS,
-               tr.TRN_NAME, tr.TRN_TYPE, TRN_TYPE_NAME, TRN_PROFILE_URL, TRN_SHORT_DESCRIPTION,PTR_RATING, PTR_CONTENT
-        FROM (SELECT PERSONAL_TRAINING.PT_SEQ,
-                     TRN_SEQ,
-                     MBR_SEQ,
-                     PT_CREATION_DATE,
-                     PT_RESERVATION_DATE,
-                     PT_LESSON_DURATION,
-                     PT_LESSON_START_DATE,
-                     PT_LESSON_END_DATE,
-                     PT_RESERVATION_STATUS,
-                     PT_CANCELLATION_REASON,
-                     PT_NOTE_STICKERS,
-                     ROW_NUMBER() OVER (PARTITION BY TRN_SEQ ORDER BY PT_RESERVATION_DATE ASC) AS PT_COUNTS,
-                      PTR_RATING,
-                     PTR_CONTENT
-              FROM PERSONAL_TRAINING
-                       LEFT JOIN FIREMEN.PERSONAL_TRAINING_REVIEW
-                                 ON PERSONAL_TRAINING.PT_SEQ = PERSONAL_TRAINING_REVIEW.PT_SEQ WHERE MBR_SEQ = #{mbrSeq}) re
-                 JOIN (SELECT TRN_SEQ, TRN_NAME, TRN_TYPE, CODE_NAME AS TRN_TYPE_NAME, TRN_PROFILE_URL , TRN_SHORT_DESCRIPTION FROM TRAINER t
-                                                                                                                                        JOIN (SELECT * FROM COMMON_CODE WHERE CATEGORY = 'TRAINER_TYPE') a
-                                                                                                                                             ON t.TRN_TYPE = a.CODE_NUMBER) tr
-                      ON re.TRN_SEQ = tr.TRN_SEQ
-        ORDER BY PT_RESERVATION_DATE DESC -- 결과를 어떤 기준으로 정렬할지 지정
---         OFFSET 5 ROWS FETCH NEXT 8 ROWS ONLY
+        SELECT pt.PT_SEQ, pt.TRN_SEQ, MBR_SEQ,
+        ROW_NUMBER() OVER (PARTITION BY pt.TRN_SEQ ORDER BY PT_RESERVATION_DATE ASC) AS PT_COUNTS,
+               PT_RESERVATION_STATUS,PT_CANCELLATION_REASON,
+                PT_CREATION_DATE, PT_RESERVATION_DATE,
+               PT_LESSON_DURATION, PT_LESSON_START_DATE, PT_LESSON_END_DATE,
+               PT_NOTE_STICKERS,
+               -- REVIEW
+               PTR_SEQ, PTR_CONTENT, PTR_CREATION_DATE, PTR_STICKERS, PTR_RATING,
+               -- Trainer
+               t.TRN_ID, TRN_NAME, TRN_TYPE, TRN_TYPE_NAME ,TRN_SHORT_DESCRIPTION, TRN_PROFILE_URL
+        FROM PERSONAL_TRAINING pt
+                 JOIN (SELECT TRN_ID,TRN_SEQ, TRN_NAME, TRN_TYPE, CODE_NAME AS TRN_TYPE_NAME, TRN_PROFILE_URL, TRN_SHORT_DESCRIPTION
+                       FROM TRAINER JOIN COMMON_CODE ON CODE_NUMBER = TRN_TYPE) t
+                      ON t.TRN_SEQ = pt.TRN_SEQ
+                 LEFT JOIN PERSONAL_TRAINING_REVIEW ptr
+                           ON pt.PT_SEQ = ptr.PT_SEQ
+        WHERE MBR_SEQ = #{mbrSeq}
+        <choose>
+            <when test="ptReservationStatus == 1">
+                AND PT_RESERVATION_STATUS = 1
+            </when>
+            <otherwise>
+                AND PT_RESERVATION_STATUS IN (2, 3)
+            </otherwise>
+        </choose>
+        ORDER BY PT_RESERVATION_DATE ${order}
+        OFFSET ${page}  ROWS FETCH NEXT 5 ROWS ONLY
+    </select>
+
+    <select id="selectAllMemberPtBySeqForPagination">
+        SELECT COUNT(*) FROM MEMBER m
+                    JOIN PERSONAL_TRAINING pt ON m.MBR_SEQ = pt.MBR_SEQ AND m.MBR_SEQ = #{mbrSeq}
+                    WHERE pt.PT_RESERVATION_STATUS = 2 OR pt.PT_RESERVATION_STATUS = 3
     </select>
 </mapper>
