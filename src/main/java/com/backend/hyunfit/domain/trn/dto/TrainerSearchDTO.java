@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 public class TrainerSearchDTO {
     private List<Integer> trainerTypes;
-    private int trnGender;
+    private Integer trnGender;
     private String keyword;
     private SearchOrder order;
     private int page;
