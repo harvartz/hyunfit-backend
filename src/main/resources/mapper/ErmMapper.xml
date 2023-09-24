@@ -19,4 +19,10 @@
             VALUES (default, #{rtnSeq}, #{excSeq})
         </insert>
 
+
+        <delete id="deleteAllErmsByRtnSeq" parameterType="_long">
+            DELETE FROM EXERCISE_ROUTINE_MAPPING
+            WHERE RTN_SEQ = #{rtnSeq}
+        </delete>
+
 </mapper>

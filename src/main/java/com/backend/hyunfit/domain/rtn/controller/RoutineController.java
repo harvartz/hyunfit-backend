@@ -35,4 +35,9 @@ public interface RoutineController {
     @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
     ResponseEntity<RoutineDTO> deleteOneRoutineByRtnSeq(@PathVariable long rtnSeq);
 
+    @Operation(summary = "단일 Routine 수정 API입니다", description = "루틴을 수정합니다.")
+    @ApiResponse(responseCode = "204", description = "OK, 정상적으로 수정됨")
+    @ApiResponse(responseCode = "404", description = "NOT FOUND, 수정 대상 루틴이 없음")
+    @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
+    ResponseEntity<RoutineDTO> updateRoutine(@PathVariable long rtnSeq, @RequestBody RoutineDTO routineDTO);
 }

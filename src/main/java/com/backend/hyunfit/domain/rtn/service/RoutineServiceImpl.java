@@ -74,6 +74,7 @@ public class RoutineServiceImpl implements RoutineService {
                 .orElseThrow(BusinessException.supplierOf(ErrorCode.ROUTINE_NOT_FOUND));
         List<ExerciseDTO> exercises = exerciseMapper.selectAllExercisesOfRoutineByRtnSeq(rtnSeq);
         routine.setExercises(exercises);
+
         return routine;
     }
 
@@ -85,4 +86,31 @@ public class RoutineServiceImpl implements RoutineService {
 
         return routineMapper.deleteOneRoutineByRtnSeq(rtnSeq);
     }
+
+    @Transactional
+    @Override
+    public int updateRoutine(long rtnSeq, RoutineDTO routineDTO) {
+        // 수정가능여부 체크
+        routineMapper.selectOneRoutineByRtnSeq(rtnSeq)
+                .orElseThrow(BusinessException.supplierOf(ErrorCode.ROUTINE_NOT_FOUND));
+
+        // Routine 정보 업데이트
+        int updateResult = routineMapper.updateOneRoutine(rtnSeq, routineDTO);
+        if (updateResult == 0) {
+            throw BusinessException.of(ErrorCode.DB_QUERY_UPDATE_EXCEPTION);
+        }
+
+        ermMapper.deleteAllErmsByRtnSeq(rtnSeq); // 기존 운동들 삭제
+
+        List<ErmDTO> erms = ErmDTO.listFrom(
+                routineDTO.getRtnSeq(),
+                routineDTO.getExercises()
+        );
+        for (ErmDTO erm : erms) {
+            ermMapper.insertOneErm(erm); // 새로운 운동들 삽입
+        }
+
+        return updateResult;
+    }
+
 }

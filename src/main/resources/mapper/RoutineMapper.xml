@@ -63,4 +63,20 @@
         WHERE RTN_SEQ = #{rtnSeq}
     </delete>
 
+    <update id="updateOneRoutine" parameterType="RoutineDTO">
+        UPDATE ROUTINE SET
+            rtn_name = #{rtnName},
+            rtn_content = #{rtnContent},
+            rtn_target = #{rtnTarget},
+            rtn_duration = #{rtnDuration},
+            rtn_experience_level = #{rtnExperienceLevel},
+            rtn_goal = #{rtnGoal},
+            rtn_knee_health_considered = #{rtnKneeHealthConsidered},
+            rtn_noise_considered = #{rtnNoiseConsidered},
+            rtn_long_sitter = #{rtnLongSitter},
+            rtn_neck_shoulder_focused = #{rtnNeckShoulderFocused},
+            rtn_back_disk_considered = #{rtnBackDiskConsidered},
+            rtn_reward_point = #{rtnRewardPoint}
+        WHERE RTN_SEQ = #{rtnSeq}
+    </update>
 </mapper>

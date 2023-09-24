@@ -8,4 +8,8 @@
         VALUES (#{mbrSeq}, #{mevType}, #{mevAmount})
     </insert>
 
+    <select id="selectMemberPoint">
+        select MEV_AMOUNT, MEV_CREATION_DATE from MEMBER_EVENT where Mbr_SEQ=#{mbrSeq};
+    </select>
+
 </mapper>

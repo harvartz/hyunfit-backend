@@ -6,4 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface ErmMapper {
     int insertOneErm(ErmDTO erm);
+
+    void deleteAllErmsByRtnSeq(long rtnSeq);
 }

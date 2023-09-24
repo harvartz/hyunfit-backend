@@ -49,5 +49,15 @@ public class RoutineControllerImpl implements RoutineController {
 
     }
 
+    @Override
+    @PutMapping("/{rtnSeq}")
+    public ResponseEntity<RoutineDTO> updateRoutine(@PathVariable long rtnSeq, @RequestBody RoutineDTO routineDTO) {
+        System.out.println(rtnSeq);
+        System.out.println(routineDTO);
+        routineService.updateRoutine(rtnSeq, routineDTO);
+        return ResponseEntity.ok(routineDTO);
+    }
+
+
 
 }
