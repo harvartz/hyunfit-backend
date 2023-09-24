@@ -8,4 +8,8 @@
         VALUES (#{mbrSeq}, #{mevType}, #{mevAmount})
     </insert>
 
+    <select id="selectMemberEvent" resultType="MemberEventDTO">
+        SELECT MEV_AMOUNT, MEV_CREATION_DATE FROM MEMBER_EVENT WHERE MBR_SEQ=#{mbrSeq}
+    </select>
+
 </mapper>

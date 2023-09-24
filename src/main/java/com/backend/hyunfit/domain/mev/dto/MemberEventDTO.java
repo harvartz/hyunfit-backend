@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Timestamp;
+
 
 @Data
 @AllArgsConstructor
@@ -14,4 +16,5 @@ public class MemberEventDTO {
     private Integer mbrSeq;
     private Integer mevType;
     private Integer mevAmount;
+    private Timestamp mevCreationDate;
 }

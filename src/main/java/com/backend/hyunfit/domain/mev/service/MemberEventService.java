@@ -3,6 +3,8 @@ package com.backend.hyunfit.domain.mev.service;
 import com.backend.hyunfit.domain.mev.dto.MemberEventDTO;
 import com.backend.hyunfit.global.exception.BusinessException;
 
+import java.util.List;
+
 public interface MemberEventService {
     /**
      * Member의 Event정보를 생성하는 메서드입니다.
@@ -12,4 +14,7 @@ public interface MemberEventService {
      *      *                    이 예외는ErrorCode.DB_QUERY_INSERT_EXCEPTION 에러 코드와 함께 발생합니다.
      */
     void createEventBymbrSeq(MemberEventDTO memberEventDTO);
+
+
+    List<MemberEventDTO> selectMemberEvent(Integer mbrSeq);
 }
