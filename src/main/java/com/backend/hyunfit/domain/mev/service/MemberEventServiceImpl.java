@@ -1,6 +1,5 @@
 package com.backend.hyunfit.domain.mev.service;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
 import com.backend.hyunfit.domain.mev.dto.MemberEventDTO;
 import com.backend.hyunfit.domain.mev.mapper.MemberEventMapper;
 import com.backend.hyunfit.global.exception.BusinessException;
