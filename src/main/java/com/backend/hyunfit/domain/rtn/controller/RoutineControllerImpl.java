@@ -18,7 +18,6 @@ import java.util.List;
 public class RoutineControllerImpl implements RoutineController {
     private final RoutineService routineService;
 
-
     @Override
     @GetMapping("")
     public ResponseEntity<List<RoutineDTO>> selectAllRoutineSearch(RoutineDTO routineDTO) {
@@ -34,20 +33,25 @@ public class RoutineControllerImpl implements RoutineController {
                 .status(HttpStatus.CREATED)
                 .body(routineDTO);
     }
+    
     @Override
     @GetMapping("/{rtnSeq}")
     public ResponseEntity<RoutineDTO> getOneRoutineByRtnSeqWithExercise(@PathVariable long rtnSeq) {
         RoutineDTO routine = routineService.getOneRoutineByRtnSeqWithExercise(rtnSeq);
         return ResponseEntity.ok(routine);
     }
+    
     @Override
     @DeleteMapping("/{rtnSeq}")
     public ResponseEntity<RoutineDTO> deleteOneRoutineByRtnSeq(@PathVariable long rtnSeq) {
-
         routineService.deleteOneRoutineByRtnSeq(rtnSeq);
         return ResponseEntity.noContent().build();
-
     }
 
-
+    @Override
+    @PutMapping("/{rtnSeq}")
+    public ResponseEntity<RoutineDTO> updateRoutine(@PathVariable long rtnSeq, @RequestBody RoutineDTO routineDTO) {
+        routineService.updateRoutine(rtnSeq, routineDTO);
+        return ResponseEntity.ok(routineDTO);
+    }
 }

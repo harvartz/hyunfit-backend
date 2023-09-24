@@ -39,4 +39,12 @@ public interface RoutineService {
      * @throws BusinessException 삭제할 대상 루틴이 없을 때 ROUTINE_NOT_FOUND 예외가 발생합니다.
      */
     int deleteOneRoutineByRtnSeq(long rtnSeq);
+
+    /**
+     * 루틴 수정 메서드입니다.
+     *
+     * @param rtnSeq 루틴의 고유 Seq값입니다.
+     * @throws BusinessException 수정할 대상 루틴이 없을 때 ROUTINE_NOT_FOUND 예외가 발생합니다.
+     */
+    int updateRoutine(long rtnSeq, RoutineDTO routineDTO);
 }
