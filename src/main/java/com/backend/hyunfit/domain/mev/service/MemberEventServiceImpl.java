@@ -7,6 +7,8 @@ import com.backend.hyunfit.global.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class MemberEventServiceImpl implements MemberEventService {
@@ -16,6 +18,15 @@ public class MemberEventServiceImpl implements MemberEventService {
         int insertMemberEvent = memberEventMapper.insertMemberEvent(memberEventDTO);
         if(insertMemberEvent==0){
             throw BusinessException.of(ErrorCode.DB_QUERY_INSERT_EXCEPTION);
+        }
+    }
+
+    @Override
+    public List<MemberEventDTO> selectMemberEvent(Integer mbrSeq) {
+        try {
+            return memberEventMapper.selectMemberEvent(mbrSeq);
+        } catch (Exception e) {
+            throw BusinessException.of(ErrorCode.EVENT_NOT_FOUND);
         }
     }
 }
