@@ -24,9 +24,9 @@ public class MemberEventControllerImpl implements MemberEventController{
     }
 
     @Override
-    @GetMapping("/{mbrSeq}")
-    public ResponseEntity<List<MemberEventDTO>> selectMemberEvent(@PathVariable Integer mbrSeq) {
-        List<MemberEventDTO> memberEvents = memberEventService.selectMemberEvent(mbrSeq);
+    @GetMapping("/{mbrSeq}/{mevType}")
+    public ResponseEntity<List<MemberEventDTO>> selectMemberEvent(@PathVariable Integer mbrSeq, @PathVariable Integer mevType) {
+        List<MemberEventDTO> memberEvents = memberEventService.selectMemberEvent(mbrSeq, mevType);
         return ResponseEntity.ok(memberEvents);
     }
 

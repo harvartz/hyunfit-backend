@@ -19,9 +19,9 @@ public interface MemberEventController {
     @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
     ResponseEntity<MemberEventDTO> createEventBymbrSeq(@RequestBody MemberEventDTO memberEventDTO);
 
-    @Operation(summary="MemberEvent 조회", description = "Member의 경험치,포인트 획득내역 조회")
+    @Operation(summary="MemberEvent 조회", description = "Member의 경험치,포인트 획득내역 조회 1: 경험치, 2:포인트")
     @ApiResponse(responseCode = "200", description = "OK")
     @ApiResponse(responseCode = "404", description = "NOT FOUND")
     @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
-    ResponseEntity<List<MemberEventDTO>> selectMemberEvent(@PathVariable Integer mbrSeq);
+    ResponseEntity<List<MemberEventDTO>> selectMemberEvent(@PathVariable Integer mbrSeq,  @PathVariable Integer mevType);
 }

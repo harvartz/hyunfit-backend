@@ -16,5 +16,5 @@ public interface MemberEventService {
     void createEventBymbrSeq(MemberEventDTO memberEventDTO);
 
 
-    List<MemberEventDTO> selectMemberEvent(Integer mbrSeq);
+    List<MemberEventDTO> selectMemberEvent(Integer mbrSeq, Integer mevType);
 }

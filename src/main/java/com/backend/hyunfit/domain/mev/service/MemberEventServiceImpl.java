@@ -22,9 +22,9 @@ public class MemberEventServiceImpl implements MemberEventService {
     }
 
     @Override
-    public List<MemberEventDTO> selectMemberEvent(Integer mbrSeq) {
+    public List<MemberEventDTO> selectMemberEvent(Integer mbrSeq, Integer mevType) {
         try {
-            return memberEventMapper.selectMemberEvent(mbrSeq);
+            return memberEventMapper.selectMemberEvent(mbrSeq, mevType);
         } catch (Exception e) {
             throw BusinessException.of(ErrorCode.EVENT_NOT_FOUND);
         }

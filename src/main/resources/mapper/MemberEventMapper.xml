@@ -9,7 +9,7 @@
     </insert>
 
     <select id="selectMemberEvent" resultType="MemberEventDTO">
-        SELECT MEV_AMOUNT, MEV_CREATION_DATE FROM MEMBER_EVENT WHERE MBR_SEQ=#{mbrSeq}
+        SELECT MEV_AMOUNT, MEV_CREATION_DATE FROM MEMBER_EVENT WHERE MBR_SEQ=#{mbrSeq} and MEV_TYPE=#{mevType}
     </select>
 
 </mapper>
