@@ -28,6 +28,7 @@ public enum ErrorCode {
     ROUTINE_NOT_FOUND(HttpStatus.NOT_FOUND, "조건에 맞는 루틴을 찾을 수 없습니다."),
     RESERVATIONLIST_NOT_FOUND(HttpStatus.NOT_FOUND, "예약현황이 존재하지않습니다."),
     NO_FEEDBACK_NOT_FOUND(HttpStatus.NOT_FOUND, "작성할 피드백을 찾을 수 없습니다."),
+    EVENT_NOT_FOUND(HttpStatus.NOT_FOUND, "멤버 이벤트가 존재허지 않습니다."),
 
     // 405 Method Not Allowed
     METHOD_NOT_ALLOWED(HttpStatus.METHOD_NOT_ALLOWED, "유효하지 않은 HTTP method입니다."),
