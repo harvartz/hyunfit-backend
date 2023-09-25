@@ -4,8 +4,11 @@
 <mapper namespace="com.backend.hyunfit.domain.mev.mapper.MemberEventMapper">
 
     <insert id="insertMemberEvent" parameterType="MemberEventDTO">
-        INSERT INTO MEMBER_EVENT (MBR_SEQ, MEV_TYPE, MEV_AMOUNT)
-        VALUES (#{mbrSeq}, #{mevType}, #{mevAmount})
+        {call INSERT_MBREVENT_PROCEDURE(
+                #{mbrSeq, mode=IN, jdbcType=NUMERIC},
+                #{mevType, mode=IN, jdbcType=NUMERIC},
+                #{mevAmount, mode=IN, jdbcType=NUMERIC}
+        )}
     </insert>
 
     <select id="selectMemberEvent" resultType="MemberEventDTO">
