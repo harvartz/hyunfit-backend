@@ -16,6 +16,7 @@
         <set>
             <if test="ptReservationDate != null">PT_RESERVATION_DATE = #{ptReservationDate},</if>
             <if test="ptReservationStatus != null">PT_RESERVATION_STATUS = #{ptReservationStatus},</if>
+            PT_CANCELLATION_REASON = #{ptCancellationReason}
         </set>
         WHERE PT_SEQ = #{ptSeq}
     </update>
