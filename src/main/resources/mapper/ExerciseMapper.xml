@@ -39,6 +39,7 @@
             E.EXC_SET_COUNT,
             E.EXC_REP_COUNT_PER_SET,
             E.EXC_TIME_PER_SET_IN_SEC,
+            E.EXC_CREATED_DATE,
             T.EXCTG_AREA,
             T.EXCTG_WEIGHT
         FROM EXERCISE E
@@ -57,6 +58,7 @@
             E.EXC_SET_COUNT,
             E.EXC_REP_COUNT_PER_SET,
             E.EXC_TIME_PER_SET_IN_SEC,
+            E.EXC_CREATED_DATE,
             T.EXCTG_AREA,
             T.EXCTG_WEIGHT
         FROM EXERCISE E
