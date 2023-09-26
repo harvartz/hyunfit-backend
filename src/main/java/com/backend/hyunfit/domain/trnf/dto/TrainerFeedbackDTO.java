@@ -1,11 +1,15 @@
 package com.backend.hyunfit.domain.trnf.dto;
 
+import com.backend.hyunfit.domain.exc.dto.ExerciseInTargetDTO;
+import com.backend.hyunfit.domain.mbr.dto.MemberDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
+import java.util.List;
+import java.util.Map;
 
 @Data
 @AllArgsConstructor
@@ -23,4 +27,5 @@ public class TrainerFeedbackDTO {
     private Timestamp trnfSubmissionDue;
     private String targetMonth;
     private String content;
+    private MemberDTO gptData;
 }
