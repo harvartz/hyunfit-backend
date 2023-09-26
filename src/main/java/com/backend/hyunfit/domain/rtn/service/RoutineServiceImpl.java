@@ -33,7 +33,7 @@ public class RoutineServiceImpl implements RoutineService {
             int rtnCaloriesBurnt = 0;
             for (ExerciseDTO exercise : exercises) {
                 rtnDurationInMin += exercise.getExcSetCount() * exercise.getExcTimePerSetInSec();
-                rtnCaloriesBurnt += (int) (exercise.getExcCaloriesPerRep() * exercise.getExcRepCountPerSet() * exercise.getExcSetCount());
+                rtnCaloriesBurnt += (int) (exercise.getExcCaloriesPerRep() * exercise.getExcSetCount());
             }
 
             rtnDurationInMin = Math.round((rtnDurationInMin / 60));
