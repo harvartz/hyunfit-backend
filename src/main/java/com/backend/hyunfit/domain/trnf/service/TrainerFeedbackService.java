@@ -1,5 +1,6 @@
 package com.backend.hyunfit.domain.trnf.service;
 
+import com.backend.hyunfit.domain.mbr.dto.MemberDTO;
 import com.backend.hyunfit.domain.trnf.dto.TrainerFeedbackDTO;
 
 public interface TrainerFeedbackService {
@@ -7,5 +8,5 @@ public interface TrainerFeedbackService {
 
     TrainerFeedbackDTO updateFeedback(TrainerFeedbackDTO feedbackDTO);
 
-    TrainerFeedbackDTO getGptFeedback(String content);
+    TrainerFeedbackDTO getGptFeedback(MemberDTO memberDTO);
 }

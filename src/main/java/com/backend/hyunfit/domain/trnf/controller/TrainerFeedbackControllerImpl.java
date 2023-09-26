@@ -1,5 +1,6 @@
 package com.backend.hyunfit.domain.trnf.controller;
 
+import com.backend.hyunfit.domain.mbr.dto.MemberDTO;
 import com.backend.hyunfit.domain.trnf.dto.TrainerFeedbackDTO;
 import com.backend.hyunfit.domain.trnf.service.TrainerFeedbackService;
 import lombok.RequiredArgsConstructor;
@@ -30,8 +31,8 @@ public class TrainerFeedbackControllerImpl implements TrainerFeedbackController{
 
     @Override
     @PostMapping("/gpt")
-    public ResponseEntity<TrainerFeedbackDTO> getGptFeedback(@RequestBody TrainerFeedbackDTO dto) {
-        TrainerFeedbackDTO gptResult = trainerFeedbackService.getGptFeedback(dto.getContent());
+    public ResponseEntity<TrainerFeedbackDTO> getGptFeedback(@RequestBody MemberDTO memberDTO) {
+        TrainerFeedbackDTO gptResult = trainerFeedbackService.getGptFeedback(memberDTO);
         return ResponseEntity.ok(gptResult);
     }
 
