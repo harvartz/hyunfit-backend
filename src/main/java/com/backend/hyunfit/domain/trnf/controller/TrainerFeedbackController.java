@@ -1,5 +1,6 @@
 package com.backend.hyunfit.domain.trnf.controller;
 
+import com.backend.hyunfit.domain.mbr.dto.MemberDTO;
 import com.backend.hyunfit.domain.trnf.dto.TrainerFeedbackDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -22,5 +23,5 @@ public interface TrainerFeedbackController {
     @ApiResponse(responseCode = "400", description = "BAD REQUEST")
     @ApiResponse(responseCode = "404", description = "NOT FOUND")
     @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
-    ResponseEntity<TrainerFeedbackDTO> getGptFeedback(@RequestBody TrainerFeedbackDTO dto);
+    ResponseEntity<TrainerFeedbackDTO> getGptFeedback(@RequestBody MemberDTO memberDTO);
 }
