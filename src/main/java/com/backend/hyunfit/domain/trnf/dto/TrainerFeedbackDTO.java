@@ -16,7 +16,6 @@ import java.util.Map;
 @NoArgsConstructor
 @Builder
 public class TrainerFeedbackDTO {
-    private Long trnfSeq;
     private Long trnSeq;
     private Long mbrSeq;
     private String mbrName;
@@ -28,4 +27,5 @@ public class TrainerFeedbackDTO {
     private String targetMonth;
     private String content;
     private MemberDTO gptData;
+    private String trnName;
 }
