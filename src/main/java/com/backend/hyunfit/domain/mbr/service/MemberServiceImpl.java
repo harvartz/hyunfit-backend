@@ -118,7 +118,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public String selectOneMemberTrnfByMbrSeq(long mbrSeq, String date) {
+    public TrainerFeedbackDTO selectOneMemberTrnfByMbrSeq(long mbrSeq, String date) {
         TrainerFeedbackDTO trnfDTO = new TrainerFeedbackDTO();
         trnfDTO.setMbrSeq(mbrSeq);
         trnfDTO.setTargetMonth(date);
