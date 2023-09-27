@@ -1,6 +1,7 @@
 package com.backend.hyunfit.domain.mbr.controller;
 
 import com.backend.hyunfit.domain.mbr.dto.MemberDTO;
+import com.backend.hyunfit.domain.trnf.dto.TrainerFeedbackDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Tag(name = "Member Controller", description = "멤버관련 컨트롤러")
 public interface MemberController {
@@ -71,5 +73,5 @@ public interface MemberController {
     @ApiResponse(responseCode = "404", description = "NOT FOUND")
     @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
 
-    ResponseEntity<String> selectOneMemberTrnfByMbrSeq(@PathVariable long mbrSeq, @RequestParam String date);
+    ResponseEntity<TrainerFeedbackDTO> selectOneMemberTrnfByMbrSeq(@PathVariable long mbrSeq, @RequestParam String date);
 }

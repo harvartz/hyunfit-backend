@@ -3,6 +3,7 @@ package com.backend.hyunfit.domain.mbr.controller;
 import com.backend.hyunfit.domain.auth.dto.AuthDTO;
 import com.backend.hyunfit.domain.mbr.dto.MemberDTO;
 import com.backend.hyunfit.domain.mbr.service.MemberService;
+import com.backend.hyunfit.domain.trnf.dto.TrainerFeedbackDTO;
 import com.backend.hyunfit.global.dto.SearchDTO;
 import com.backend.hyunfit.global.security.provider.JwtProvider;
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,6 +12,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.sql.Timestamp;
+import java.util.List;
 
 @CrossOrigin(origins = "${vue.url}")
 @Log4j2
@@ -77,7 +79,7 @@ public class MemberControllerImpl implements MemberController {
 
     @Override
     @GetMapping("/{mbrSeq}/feedback")
-    public ResponseEntity<String> selectOneMemberTrnfByMbrSeq(@PathVariable long mbrSeq, @RequestParam String date) {
+    public ResponseEntity<TrainerFeedbackDTO> selectOneMemberTrnfByMbrSeq(@PathVariable long mbrSeq, @RequestParam String date) {
         return ResponseEntity.ok(memberService.selectOneMemberTrnfByMbrSeq(mbrSeq,date));
     }
 
