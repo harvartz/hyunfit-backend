@@ -1,6 +1,9 @@
 # Use a base image with Java 8
 FROM openjdk:17-jdk-alpine
 
+RUN apk --no-cache add tzdata
+ENV TZ=Asia/Seoul
+
 # Set the working directory
 WORKDIR /app
 
