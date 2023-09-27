@@ -4,6 +4,7 @@ import com.backend.hyunfit.domain.mbr.dto.MemberDTO;
 import com.backend.hyunfit.domain.trnf.dto.TrainerFeedbackDTO;
 import com.backend.hyunfit.domain.trnf.mapper.TrainerFeedbackMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -18,7 +19,8 @@ import java.util.Map;
 public class TrainerFeedbackServiceImpl implements TrainerFeedbackService{
 
     private final TrainerFeedbackMapper trainerFeedbackMapper;
-
+    @Value("${ai-url}")
+    private String aiUrl;
     @Override
     public TrainerFeedbackDTO insertFeedback(TrainerFeedbackDTO feedbackDTO) {
         trainerFeedbackMapper.insertFeedback(feedbackDTO);
@@ -33,7 +35,7 @@ public class TrainerFeedbackServiceImpl implements TrainerFeedbackService{
     public TrainerFeedbackDTO getGptFeedback(MemberDTO memberDTO) {
 
         RestTemplate restTemplate = new RestTemplate();
-        String fastApiUrl = "http://127.0.0.1:8000/generate_fitness_report/";
+        String fastApiUrl = aiUrl + "/generate_fitness_report/";
 
         // HttpHeaders 객체 생성 및 Content-Type 설정
         HttpHeaders headers = new HttpHeaders();
