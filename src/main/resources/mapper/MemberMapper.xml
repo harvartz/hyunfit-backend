@@ -97,7 +97,7 @@
                 AND PT_RESERVATION_STATUS = 1
             </when>
             <otherwise>
-                AND PT_RESERVATION_STATUS IN (2, 3)
+                AND PT_RESERVATION_STATUS IN (2, 3, 4)
             </otherwise>
         </choose>
         ORDER BY PT_RESERVATION_DATE ${order}
