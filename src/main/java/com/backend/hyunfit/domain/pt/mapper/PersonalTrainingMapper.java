@@ -14,7 +14,7 @@ public interface PersonalTrainingMapper {
     int updateOnePt(PersonalTrainingDTO personalTrainingDTO);
     int insertOnePtReview(PersonalTrainingDTO personalTrainingDTO);
     Optional<PersonalTrainingDTO> selectOnePtByPtSeq(Long ptSeq);
-    List<PersonalTrainingDTO> selectAllPtByTrnSeq(long trnSeqL);
+    List<PersonalTrainingDTO> selectAllPtByTrnSeq(SearchDTO searchDTO);
     Optional<TimeslotDTO> selectFullyReservedDaysByMonth(SearchDTO searchDTO);
     TimeslotDTO selectAllReservedTimeslotsByDay(SearchDTO searchDTO);
 }

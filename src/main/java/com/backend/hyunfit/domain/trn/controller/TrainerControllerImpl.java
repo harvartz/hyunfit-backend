@@ -18,6 +18,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -36,16 +37,24 @@ public class TrainerControllerImpl implements TrainerController {
     }
     @GetMapping("{trnSeq}/personal-training")
     @Override
-    public ResponseEntity<List<PersonalTrainingDTO>> findAllPtBytrnSeq(@PathVariable String trnSeq){
-        TrainerDTO trainerDTO = trainerService.selectAllPtByTrnSeq(trnSeq);
+    public ResponseEntity<List<PersonalTrainingDTO>> findAllPtBytrnSeq(@PathVariable String trnSeq,
+                                                                       @RequestParam Timestamp startDate,
+                                                                       @RequestParam Timestamp endDate){
+        Long trnSeqL = Long.parseLong(trnSeq);
+        SearchDTO searchDTO = SearchDTO.ofTrainerSeq(trnSeqL,startDate,endDate);
+        TrainerDTO trainerDTO = trainerService.selectAllPtByTrnSeq(searchDTO);
         List<PersonalTrainingDTO> ptList = trainerDTO.getPtList();
         return ResponseEntity.ok(ptList);
     }
 
     @GetMapping("{trnSeq}/nofeedback")
     @Override
-    public ResponseEntity<List<TrainerFeedbackDTO>> findNoFeedbackBytrnSeq(@PathVariable String trnSeq){
-        TrainerDTO trainerDTO = trainerService.selectNoFeedbackBytrnSeq(trnSeq);
+    public ResponseEntity<List<TrainerFeedbackDTO>> findNoFeedbackBytrnSeq(@PathVariable String trnSeq,
+                                                                           @RequestParam Timestamp startDate,
+                                                                           @RequestParam Timestamp endDate){
+        Long trnSeqL = Long.parseLong(trnSeq);
+        SearchDTO searchDTO = SearchDTO.ofTrainerSeq(trnSeqL,startDate,endDate);
+        TrainerDTO trainerDTO = trainerService.selectNoFeedbackBytrnSeq(searchDTO);
         List<TrainerFeedbackDTO> nfbList = trainerDTO.getNoFeedbackList();
         return ResponseEntity.ok(nfbList);
     }

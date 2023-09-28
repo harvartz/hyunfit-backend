@@ -1,6 +1,7 @@
 package com.backend.hyunfit.domain.trnf.mapper;
 
 import com.backend.hyunfit.domain.trnf.dto.TrainerFeedbackDTO;
+import com.backend.hyunfit.global.dto.SearchDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -16,5 +17,5 @@ public interface TrainerFeedbackMapper {
 
     TrainerFeedbackDTO selectOneTrainerFeedbackByMbrSeq(TrainerFeedbackDTO feedbackDTO);
 
-    List<TrainerFeedbackDTO> selectNoFeedbackBytrnSeq(long trnSeqL);
+    List<TrainerFeedbackDTO> selectNoFeedbackBytrnSeq(SearchDTO searchDTO);
 }

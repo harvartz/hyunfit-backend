@@ -20,7 +20,7 @@ public interface TrainerService {
      * @throws BusinessException 입력된 trnSeq에 해당하는 Pt 정보가 없을 경우 발생하는 예외입니다.
      *                          이 예외는 // 에러 코드와 함께 발생합니다.
      */
-    TrainerDTO selectAllPtByTrnSeq(String trnSeq);
+    TrainerDTO selectAllPtByTrnSeq(SearchDTO searchDTO);
     /**
      * 피드백 중 작성되지않은 피드백현황을 가져오는 메서드입니다.
      *
@@ -29,7 +29,7 @@ public interface TrainerService {
      * @throws BusinessException 입력된 trnSeq의 피드백이 전부 작성되어있을 경우 발생하는 예외입니다.
      *                          이 예외는 // 에러 코드와 함께 발생합니다.
      */
-    TrainerDTO selectNoFeedbackBytrnSeq(String trnSeq);
+    TrainerDTO selectNoFeedbackBytrnSeq(SearchDTO searchDTO);
 
     /**
      * 피드백 중 작성되지않은 피드백현황을 가져오는 메서드입니다.
