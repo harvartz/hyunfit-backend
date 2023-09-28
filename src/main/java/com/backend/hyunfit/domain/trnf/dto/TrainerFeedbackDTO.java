@@ -17,6 +17,7 @@ import java.util.Map;
 @Builder
 public class TrainerFeedbackDTO {
     private Long trnSeq;
+    private Long trnfSeq;
     private Long mbrSeq;
     private String mbrName;
     private String trnfContent;
