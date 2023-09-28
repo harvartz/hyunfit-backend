@@ -42,10 +42,11 @@
         WHERE PT_SEQ = #{ptSeq}
     </select>
 
-    <select id="selectAllPtByTrnSeq" parameterType="long" resultType="PersonalTrainingDTO">
+    <select id="selectAllPtByTrnSeq" parameterType="SearchDTO" resultType="PersonalTrainingDTO">
         SELECT PT_SEQ,PT_RESERVATION_DATE,PT_RESERVATION_STATUS,MBR_NAME,TRN_SEQ,PERSONAL_TRAINING.MBR_SEQ
         FROM FIREMEN.PERSONAL_TRAINING JOIN FIREMEN.MEMBER ON MEMBER.MBR_SEQ = PERSONAL_TRAINING.MBR_SEQ
-        WHERE TRN_SEQ = #{trnSeqL} AND TO_CHAR(PT_RESERVATION_DATE, 'YYYY-MM-DD') = TO_CHAR(SYSDATE, 'YYYY-MM-DD')
+        WHERE TRN_SEQ = #{trnSeq} AND PT_RESERVATION_DATE > #{startDate}
+          AND PT_RESERVATION_DATE &lt; #{endDate}
         ORDER BY PT_RESERVATION_DATE ASC
     </select>
 

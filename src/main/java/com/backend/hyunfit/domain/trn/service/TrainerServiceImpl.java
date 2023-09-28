@@ -28,19 +28,17 @@ public class TrainerServiceImpl implements TrainerService {
     private final PersonalTrainingMapper personalTrainingMapper;
     private final PtrMapper ptrMapper;
     @Override
-    public TrainerDTO selectAllPtByTrnSeq(String trnSeq){
+    public TrainerDTO selectAllPtByTrnSeq(SearchDTO searchDTO){
         TrainerDTO trainerDTO = new TrainerDTO();
-        long trnSeqL = Long.parseLong(trnSeq);
-        trainerDTO.setPtList(personalTrainingMapper.selectAllPtByTrnSeq(trnSeqL));
+        trainerDTO.setPtList(personalTrainingMapper.selectAllPtByTrnSeq(searchDTO));
         if(trainerDTO.getPtList()==null){
             throw BusinessException.of(ErrorCode.RESERVATIONLIST_NOT_FOUND);
         }
         return trainerDTO;
     }
-    public TrainerDTO selectNoFeedbackBytrnSeq(String trnSeq) {
+    public TrainerDTO selectNoFeedbackBytrnSeq(SearchDTO searchDTO) {
         TrainerDTO trainerDTO = new TrainerDTO();
-        long trnSeqL = Long.parseLong(trnSeq);
-        trainerDTO.setNoFeedbackList(trainerFeedbackMapper.selectNoFeedbackBytrnSeq(trnSeqL));
+        trainerDTO.setNoFeedbackList(trainerFeedbackMapper.selectNoFeedbackBytrnSeq(searchDTO));
         if (trainerDTO.getNoFeedbackList() == null) {
             throw BusinessException.of(ErrorCode.NO_FEEDBACK_NOT_FOUND);
         }

@@ -37,10 +37,11 @@
           AND TRNF_WRITTEN_DATE IS NOT NULL
         </select>
 
-    <select id="selectNoFeedbackBytrnSeq" parameterType="long" resultType="TrainerFeedbackDTO">
-        SELECT MEMBER.MBR_SEQ, MBR_NAME , TRNF_SUBMISSION_DUE , TRNF_SEQ , TRNF_CREATION_DATE
+    <select id="selectNoFeedbackBytrnSeq" parameterType="SearchDTO" resultType="TrainerFeedbackDTO">
+        SELECT MEMBER.MBR_SEQ, MBR_NAME , TRNF_SUBMISSION_DUE , TRNF_SEQ , TRNF_CREATION_DATE , TRNF_CONTENT
         FROM MEMBER JOIN TRAINER_FEEDBACK ON MEMBER.MBR_SEQ = TRAINER_FEEDBACK.MBR_SEQ
-        WHERE TRN_SEQ = #{trnSeq} AND TRNF_WRITTEN_DATE IS NULL
+        WHERE TRN_SEQ = #{trnSeq} AND TRNF_SUBMISSION_DUE > #{startDate}
+          AND TRNF_SUBMISSION_DUE &lt; #{endDate}
         ORDER BY TRNF_CREATION_DATE DESC
     </select>
 

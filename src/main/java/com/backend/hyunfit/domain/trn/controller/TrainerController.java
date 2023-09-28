@@ -27,7 +27,7 @@ public interface TrainerController {
             @ApiResponse(responseCode = "404", description = "NOT FOUND"),
             @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
     })
-    ResponseEntity<List<PersonalTrainingDTO>> findAllPtBytrnSeq(String trnSeq);
+    ResponseEntity<List<PersonalTrainingDTO>> findAllPtBytrnSeq(String trnSeq, Timestamp startDate, Timestamp endDate);
 
     @Operation(summary = "트레이너의 작성되지않은 피드백 전체조회", description = "trnSeq를 확인 후 해당 trainer의 피드백 중 작성되지않은 피드백을 반환합니다.")
     @ApiResponses({
@@ -35,7 +35,7 @@ public interface TrainerController {
             @ApiResponse(responseCode = "404", description = "NOT FOUND"),
             @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
     })
-    ResponseEntity<List<TrainerFeedbackDTO>> findNoFeedbackBytrnSeq(String trnSeq);
+    ResponseEntity<List<TrainerFeedbackDTO>> findNoFeedbackBytrnSeq(String trnSeq, Timestamp startDate, Timestamp endDate);
 
     @Operation(summary = "트레이너 조회", description = "trnId로 Trainer 조회.")
     @ApiResponses({
