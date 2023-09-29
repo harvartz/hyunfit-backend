@@ -1,6 +1,7 @@
 package com.backend.hyunfit.domain.rtn.controller;
 
 import com.backend.hyunfit.domain.rtn.dto.RoutineDTO;
+import com.backend.hyunfit.domain.rtn.dto.RoutineSearchDTO;
 import com.backend.hyunfit.domain.rtn.service.RoutineService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -20,7 +21,7 @@ public class RoutineControllerImpl implements RoutineController {
 
     @Override
     @GetMapping("")
-    public ResponseEntity<List<RoutineDTO>> selectAllRoutineSearch(RoutineDTO routineDTO) {
+    public ResponseEntity<List<RoutineDTO>> selectAllRoutineSearch(RoutineSearchDTO routineDTO) {
         List<RoutineDTO> routines = routineService.selectAllRoutineSearch(routineDTO);
         return ResponseEntity.ok(routines);
     }

@@ -5,6 +5,7 @@ import com.backend.hyunfit.domain.erm.mapper.ErmMapper;
 import com.backend.hyunfit.domain.exc.dto.ExerciseDTO;
 import com.backend.hyunfit.domain.exc.mapper.ExerciseMapper;
 import com.backend.hyunfit.domain.rtn.dto.RoutineDTO;
+import com.backend.hyunfit.domain.rtn.dto.RoutineSearchDTO;
 import com.backend.hyunfit.domain.rtn.mapper.RoutineMapper;
 import com.backend.hyunfit.global.exception.BusinessException;
 import com.backend.hyunfit.global.exception.ErrorCode;
@@ -22,8 +23,12 @@ public class RoutineServiceImpl implements RoutineService {
     private final ExerciseMapper exerciseMapper;
 
     @Override
-    public List<RoutineDTO> selectAllRoutineSearch(RoutineDTO routineDTO) {
+    public List<RoutineDTO> selectAllRoutineSearch(RoutineSearchDTO routineDTO) {
+        if (routineDTO.getFindExercises() == null) routineDTO.setFindExercises(true);
         List<RoutineDTO> routines = routineMapper.selectAllRoutineSearch(routineDTO);
+
+        if (!routineDTO.getFindExercises()) return routines;
+
         for (RoutineDTO routine : routines) {
             List<ExerciseDTO> exercises = exerciseMapper.selectAllExercisesOfRoutineByRtnSeq(routine.getRtnSeq());
             routine.setExercises(exercises);
@@ -42,6 +47,7 @@ public class RoutineServiceImpl implements RoutineService {
             routine.setRtnCaloriesBurnt(rtnCaloriesBurnt);
 
         }
+
         return routines;
     }
 

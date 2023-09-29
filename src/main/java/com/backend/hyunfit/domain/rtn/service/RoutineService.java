@@ -1,6 +1,7 @@
 package com.backend.hyunfit.domain.rtn.service;
 
 import com.backend.hyunfit.domain.rtn.dto.RoutineDTO;
+import com.backend.hyunfit.domain.rtn.dto.RoutineSearchDTO;
 import com.backend.hyunfit.global.exception.BusinessException;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public interface RoutineService {
      * @throws BusinessException 루틴 검색 조건이 하나라도 없을 때 INVALID_INPUT_VALUE 예외가 발생합니다.
      * 변동 사항 : 검색 조건이 모두 null 일 경우 모든 루틴을 반환 합니다.
      */
-    List<RoutineDTO> selectAllRoutineSearch(RoutineDTO routineDTO);
+    List<RoutineDTO> selectAllRoutineSearch(RoutineSearchDTO routineDTO);
 
     /**
      * 루틴을 추가하는 메서드입니다.

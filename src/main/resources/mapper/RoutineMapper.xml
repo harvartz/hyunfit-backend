@@ -4,7 +4,7 @@
 
 <mapper namespace="com.backend.hyunfit.domain.rtn.mapper.RoutineMapper">
 
-    <select id="selectAllRoutineSearch" parameterType="RoutineDTO" resultType="RoutineDTO">
+    <select id="selectAllRoutineSearch" parameterType="RoutineSearchDTO" resultType="RoutineDTO">
         SELECT RTN_SEQ,
         ADM_SEQ,
         RTN_NAME,
