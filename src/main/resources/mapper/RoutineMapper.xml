@@ -13,7 +13,12 @@
         RTN_TARGET,
         RTN_DURATION,
         RTN_EXPERIENCE_LEVEL,
-        RTN_REWARD_POINT
+        RTN_REWARD_POINT,
+        RTN_KNEE_HEALTH_CONSIDERED,
+        RTN_NOISE_CONSIDERED,
+        RTN_LONG_SITTER,
+        RTN_NECK_SHOULDER_FOCUSED,
+        RTN_BACK_DISK_CONSIDERED
         FROM ROUTINE
         <where>
             <if test="rtnTarget != null">
