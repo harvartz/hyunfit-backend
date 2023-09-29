@@ -1,6 +1,7 @@
 package com.backend.hyunfit.domain.mbr.service;
 
 import com.backend.hyunfit.domain.mbr.dto.MemberDTO;
+import com.backend.hyunfit.domain.mev.dto.MemberEventDTO;
 import com.backend.hyunfit.domain.trnf.dto.TrainerFeedbackDTO;
 import com.backend.hyunfit.global.dto.SearchDTO;
 import com.backend.hyunfit.global.exception.BusinessException;
@@ -70,6 +71,17 @@ public interface MemberService {
      *
      * @param mbrSeq Member의 Seq 값.
      * @return 피드백 정보를 MemberDTO 객체에 담아 반환합니다.
+     * @throws BusinessException 입력된 사용자 이름에 해당하는 회원 정보가 없을 경우 발생하는 예외입니다.
+     *                          이 예외는 ErrorCode.USERID_NOT_FOUND 에러 코드와 함께 발생합니다.
+     */
+
+     List<MemberEventDTO> selectAllMemberEventBySeq(SearchDTO searchDTO);
+
+    /**
+     * Member의 월 별 이벤트, 경험치를 조회하는 메서드입니다.
+     *
+     * @param mbrSeq Member의 Seq 값.
+     * @return 피드백 정보를 MemberEventDTO 객체에 담아 반환합니다.
      * @throws BusinessException 입력된 사용자 이름에 해당하는 회원 정보가 없을 경우 발생하는 예외입니다.
      *                          이 예외는 ErrorCode.USERID_NOT_FOUND 에러 코드와 함께 발생합니다.
      */

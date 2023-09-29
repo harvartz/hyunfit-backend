@@ -5,6 +5,8 @@ import com.backend.hyunfit.domain.exctg.dto.ExerciseTargetDTO;
 import com.backend.hyunfit.domain.exctg.mapper.ExerciseTargetMapper;
 import com.backend.hyunfit.domain.mbr.dto.MemberDTO;
 import com.backend.hyunfit.domain.mbr.mapper.MemberMapper;
+import com.backend.hyunfit.domain.mev.dto.MemberEventDTO;
+import com.backend.hyunfit.domain.mev.mapper.MemberEventMapper;
 import com.backend.hyunfit.domain.pt.dto.PersonalTrainingDTO;
 import com.backend.hyunfit.domain.exch.dto.ExerciseHistorySummaryDTO;
 import com.backend.hyunfit.domain.exch.mapper.ExerciseHistoryMapper;
@@ -32,6 +34,7 @@ public class MemberServiceImpl implements MemberService {
     private final ExerciseHistoryMapper exerciseHistoryMapper;
     private final ExerciseTargetMapper exerciseTargetMapper;
     private final TrainerFeedbackMapper trainerFeedbackMapper;
+    private final MemberEventMapper memberEventMapper;
 
     @Transactional
     @Override
@@ -85,7 +88,6 @@ public class MemberServiceImpl implements MemberService {
                 .orElseThrow(BusinessException.supplierOf(ErrorCode.USERSEQ_NOT_FOUND));
 
         //mbrSeq 검증과정이 필요함.
-
         ExerciseHistorySummaryDTO exerciseHistorySummaryDTO =
                 exerciseHistoryMapper.selectOneExchSummaryByMbrIdRanged(searchDTO)
                                      .orElse(new ExerciseHistorySummaryDTO());
@@ -103,6 +105,14 @@ public class MemberServiceImpl implements MemberService {
         // 사용자 암호 null 처리
         memberDTO.setMbrPw(null);
         return memberDTO;
+    }
+
+    @Override
+    public List<MemberEventDTO> selectAllMemberEventBySeq(SearchDTO searchDTO) {
+        MemberDTO memberDTO = memberMapper.selectOneMemberBySeq(searchDTO.getMbrSeq())
+                .orElseThrow(BusinessException.supplierOf(ErrorCode.USERSEQ_NOT_FOUND));
+
+        return memberEventMapper.selectAllMemberEventBySeq(searchDTO);
     }
 
     @Override
