@@ -10,6 +10,7 @@
         RTN_NAME,
         RTN_CONTENT,
         RTN_CREATED_DATE,
+        RTN_GOAL,
         RTN_TARGET,
         RTN_DURATION,
         RTN_EXPERIENCE_LEVEL,
