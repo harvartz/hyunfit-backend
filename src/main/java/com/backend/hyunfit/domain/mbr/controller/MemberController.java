@@ -1,6 +1,7 @@
 package com.backend.hyunfit.domain.mbr.controller;
 
 import com.backend.hyunfit.domain.mbr.dto.MemberDTO;
+import com.backend.hyunfit.domain.mev.dto.MemberEventDTO;
 import com.backend.hyunfit.domain.trnf.dto.TrainerFeedbackDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -56,6 +57,15 @@ public interface MemberController {
     @ApiResponse(responseCode = "404", description = "NOT FOUND")
     @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
     ResponseEntity<MemberDTO> selectOneMemberReportById(@PathVariable long mbrSeq,
+                                                        @RequestParam Timestamp startDate,
+                                                        @RequestParam Timestamp endDate);
+
+    @Operation(summary="Member의 이벤트 데이터 조회", description = "Member 하나의 월 별 경험치, 포인트를 조회합니다.")
+
+    @ApiResponse(responseCode = "200", description = "OK")
+    @ApiResponse(responseCode = "404", description = "NOT FOUND")
+    @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
+    ResponseEntity<List<MemberEventDTO>> selectAllMemberEventBySeq(@PathVariable long mbrSeq,
                                                         @RequestParam Timestamp startDate,
                                                         @RequestParam Timestamp endDate);
 

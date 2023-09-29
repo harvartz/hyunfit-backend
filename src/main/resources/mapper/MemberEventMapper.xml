@@ -15,4 +15,18 @@
         SELECT MEV_AMOUNT, MEV_CREATION_DATE FROM MEMBER_EVENT WHERE MBR_SEQ=#{mbrSeq} and MEV_TYPE=#{mevType}
     </select>
 
+    <select id="selectAllMemberEventBySeq" parameterType="SearchDTO" resultType="MemberEventDTO">
+        <![CDATA[
+SELECT
+             MEV_TYPE, SUM(MEV_AMOUNT) AS MEV_AMOUNT
+        FROM MEMBER_EVENT
+        WHERE MBR_SEQ = #{mbrSeq}
+          and MEV_CREATION_DATE >= #{startDate}
+          and MEV_CREATION_DATE < #{endDate}
+        GROUP BY MEV_TYPE
+                     ]]>
+    </select>
+
+
+
 </mapper>

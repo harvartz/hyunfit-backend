@@ -3,6 +3,7 @@ package com.backend.hyunfit.domain.mbr.controller;
 import com.backend.hyunfit.domain.auth.dto.AuthDTO;
 import com.backend.hyunfit.domain.mbr.dto.MemberDTO;
 import com.backend.hyunfit.domain.mbr.service.MemberService;
+import com.backend.hyunfit.domain.mev.dto.MemberEventDTO;
 import com.backend.hyunfit.domain.trnf.dto.TrainerFeedbackDTO;
 import com.backend.hyunfit.global.dto.SearchDTO;
 import com.backend.hyunfit.global.security.provider.JwtProvider;
@@ -66,8 +67,18 @@ public class MemberControllerImpl implements MemberController {
                                                                @RequestParam Timestamp startDate,
                                                                @RequestParam Timestamp endDate) {
         SearchDTO searchDTO = SearchDTO.of(mbrSeq, startDate, endDate);
-        MemberDTO memberDTO = memberService.selectOneMemberReportById(searchDTO);
+       MemberDTO memberDTO = memberService.selectOneMemberReportById(searchDTO);
         return ResponseEntity.ok(memberDTO);
+    }
+
+    @Override
+    @GetMapping("/{mbrSeq}/report/event")
+    public ResponseEntity<List<MemberEventDTO>> selectAllMemberEventBySeq(@PathVariable long mbrSeq,
+                                                               @RequestParam Timestamp startDate,
+                                                               @RequestParam Timestamp endDate) {
+        SearchDTO searchDTO = SearchDTO.of(mbrSeq, startDate, endDate);
+        List<MemberEventDTO> memberEventDTO = memberService.selectAllMemberEventBySeq(searchDTO);
+        return ResponseEntity.ok(memberEventDTO);
     }
 
     @Override
