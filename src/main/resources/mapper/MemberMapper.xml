@@ -94,7 +94,7 @@
         WHERE MBR_SEQ = #{mbrSeq}
         <choose>
             <when test="ptReservationStatus == 1">
-                AND PT_RESERVATION_STATUS = 1
+                AND PT_RESERVATION_STATUS = IN (1,2)
             </when>
             <otherwise>
                 AND PT_RESERVATION_STATUS IN (2, 3, 4)
