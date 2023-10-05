@@ -4,6 +4,7 @@ import com.backend.hyunfit.domain.auth.dto.AuthDTO;
 import com.backend.hyunfit.domain.mbr.dto.MemberDTO;
 import com.backend.hyunfit.domain.mbr.service.MemberService;
 import com.backend.hyunfit.domain.mev.dto.MemberEventDTO;
+import com.backend.hyunfit.domain.pt.dto.PersonalTrainingDTO;
 import com.backend.hyunfit.domain.trnf.dto.TrainerFeedbackDTO;
 import com.backend.hyunfit.global.dto.SearchDTO;
 import com.backend.hyunfit.global.security.provider.JwtProvider;
@@ -37,6 +38,14 @@ public class MemberControllerImpl implements MemberController {
         memberService.updateOneMemberById(memberDTO);
 
         return ResponseEntity.ok(memberDTO);
+    }
+
+    @Override
+    @GetMapping("/by/{mbrSeq}")
+    public ResponseEntity<MemberDTO> selectOneMemberBymbrSeq(@PathVariable String mbrSeq) {
+        System.out.println("input "+ mbrSeq);
+        long mbrSeqL = Long.parseLong(mbrSeq);
+        return ResponseEntity.ok(memberService.selectOneMemberBymbrSeq(mbrSeqL));
     }
 
     @Override

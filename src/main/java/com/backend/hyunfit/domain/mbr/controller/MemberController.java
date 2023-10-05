@@ -2,6 +2,7 @@ package com.backend.hyunfit.domain.mbr.controller;
 
 import com.backend.hyunfit.domain.mbr.dto.MemberDTO;
 import com.backend.hyunfit.domain.mev.dto.MemberEventDTO;
+import com.backend.hyunfit.domain.pt.dto.PersonalTrainingDTO;
 import com.backend.hyunfit.domain.trnf.dto.TrainerFeedbackDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -33,6 +34,7 @@ public interface MemberController {
     @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR")
 
     ResponseEntity<MemberDTO> selectOneMemberById(String mbrId);
+    ResponseEntity<MemberDTO> selectOneMemberBymbrSeq(String mbrSeq);
 
     @Operation(summary="Member의 예약 데이터 조회", description = "Member의 전체 예약되어 있는 데이터를 조회합니다.")
 
