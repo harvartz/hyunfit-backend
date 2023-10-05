@@ -28,6 +28,7 @@ public interface MemberService {
      *                          이 예외는 ErrorCode.USERID_NOT_FOUND 에러 코드와 함께 발생합니다.
      */
     MemberDTO selectOneMemberById(String mbrId);
+    MemberDTO selectOneMemberBymbrSeq(long mbrSeq);
 
     /**
      * Member의 전체 예약 정보를 조회하는 메서드입니다.

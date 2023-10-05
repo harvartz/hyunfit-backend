@@ -20,11 +20,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import java.sql.Timestamp;
-import java.util.Optional;
 
 @Log4j2
 @Service
@@ -55,6 +51,14 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public MemberDTO selectOneMemberById(String mbrId) {
         MemberDTO memberDTO = memberMapper.selectOneMemberById(mbrId)
+                .orElseThrow(BusinessException.supplierOf(ErrorCode.USERID_NOT_FOUND));
+        // 사용자 암호 null 처리
+        memberDTO.setMbrPw(null);
+        return memberDTO;
+    }
+    @Override
+    public MemberDTO selectOneMemberBymbrSeq(long mbrSeq) {
+        MemberDTO memberDTO = memberMapper.selectOneMemberBySeq(mbrSeq)
                 .orElseThrow(BusinessException.supplierOf(ErrorCode.USERID_NOT_FOUND));
         // 사용자 암호 null 처리
         memberDTO.setMbrPw(null);

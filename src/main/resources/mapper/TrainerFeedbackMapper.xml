@@ -6,18 +6,25 @@
     <insert id="insertFeedback" parameterType="TrainerFeedbackDTO">
         INSERT INTO TRAINER_FEEDBACK
             (TRN_SEQ, MBR_SEQ, TRNF_SUBMISSION_DUE)
-        SELECT
-            #{trnSeq} as TRN_SEQ,
-            #{mbrSeq} as MBR_SEQ,
-            TRUNC(PT_LESSON_END_DATE, 'MONTH') as TRNF_SUBMISSION_DUE
-        FROM PERSONAL_TRAINING
-        WHERE TRN_SEQ = #{trnSeq} AND MBR_SEQ = #{mbrSeq}
-          AND NOT EXISTS (
-            SELECT 1 FROM TRAINER_FEEDBACK
-            WHERE TRN_SEQ = #{trnSeq}
-              AND MBR_SEQ = #{mbrSeq}
-              AND TRUNC(TRNF_SUBMISSION_DUE, 'MONTH') = TRUNC(PT_LESSON_END_DATE, 'MONTH')
-        )
+        SELECT TRN_SEQ,
+               MBR_SEQ,
+               TRNF_SUBMISSION_DUE
+        FROM (
+             SELECT
+                 ROW_NUMBER() over (ORDER BY PT.PT_SEQ) AS rn,
+                     #{trnSeq} as TRN_SEQ,
+                     #{mbrSeq} as MBR_SEQ,
+                     SYSDATE as TRNF_SUBMISSION_DUE
+             FROM PERSONAL_TRAINING PT
+             WHERE TRN_SEQ = #{trnSeq} AND MBR_SEQ = #{mbrSeq} AND PT_RESERVATION_STATUS = 3
+               AND NOT EXISTS (
+                 SELECT 1 FROM TRAINER_FEEDBACK TF
+                 WHERE TF.TRN_SEQ = #{trnSeq}
+                   AND TF.MBR_SEQ = #{mbrSeq}
+                   AND TRUNC(TF.TRNF_SUBMISSION_DUE, 'MONTH') = TRUNC(SYSDATE, 'MONTH')
+             )
+         ) sub
+        where rn = 1
     </insert>
 
     <update id="updateFeedback" parameterType="TrainerFeedbackDTO">
