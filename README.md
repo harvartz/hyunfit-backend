@@ -91,9 +91,6 @@ Project -> Maven -> Update Project
   * 생성한 QR 코드를 소비자가 스캔해 가게에 대한 리뷰 등록 가능
   * 리뷰 등록시 가게 정보를 등록한 사장님에게 알림
 
-![단어검색](https://github.com/kinopioB/EatGo-Frontend/assets/55628887/96705eb1-a273-4d37-90ce-87bbb4b05b5e)
-![가게등록위치설정](https://github.com/kinopioB/EatGo-Frontend/assets/55628887/778cfe4a-e7c5-4394-8cf4-bf6479d88918)
-
 
 ### 3-2) 서브 기능
 * 로그인, 회원가입
@@ -106,9 +103,6 @@ Project -> Maven -> Update Project
 * 가게 영업 관리
   * 사장님 유저가 등록한 가게에 대해 영업 시작, 영업 종료를 통해 영업 상태 관리 가능
   * 영업 시작전 영업 위치 수정 가능
-
-![마커클릭및페이지이동](https://github.com/kinopioB/EatGo-Frontend/assets/55628887/7227832a-1fc2-4a16-9566-a9307c3628a9)
-![영업시작위치설정](https://github.com/kinopioB/EatGo-Frontend/assets/55628887/36c7b06c-e954-4093-9a51-1da9b38e5671)
 
 ### 3-3) 관련 문서
 - 와이어프레임
